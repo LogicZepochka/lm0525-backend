@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "lastOnline" DROP NOT NULL,
+ALTER COLUMN "shopId" DROP NOT NULL;

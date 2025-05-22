@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Remain" ALTER COLUMN "shop" SET DEFAULT 25;

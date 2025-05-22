@@ -1,0 +1,128 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             Int                   @id @default(autoincrement())
+  name           String                @unique
+  password       String
+  lastOnline     DateTime?
+  role           Role                  @default(NOTAPROVED)
+  shopId         Int?
+  departamentId  Int?
+  phone          String                @unique
+  notifications  Notification[]
+  passwordResets PasswordResetRequest[]
+  refreshToken   RefreshToken?
+  createdRemains Remain[]
+  toolRequests   ToolRequest[]
+
+  ActivationRejection ActivationRejection?
+
+  telegramChat     String?
+  telegramSettings Json?
+}
+
+model PasswordResetRequest {
+  id        Int      @id @default(autoincrement())
+  ip        String
+  key       String
+  created   DateTime @default(now())
+  expiredAt DateTime  // @default(dbgenerated("(now() + interval '5 minutes')")) - почему бл не работает?
+  isUsed    Boolean  @default(false)
+  userId    Int      
+  forUser   User     @relation(fields: [userId], references: [id])
+}
+
+model RefreshToken {
+  id      Int    @id @default(autoincrement())
+  token   String
+  userId  Int    @unique
+  forUser User   @relation(fields: [userId], references: [id])
+}
+
+model Item {
+  code          String   @id
+  name          String
+  type          ItemType
+  departamentId Int?
+  remains       Remain[]
+}
+
+model Remain {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt     DateTime  @default(now())
+  metadata      Json
+  shop          Int
+  userId        Int
+  itemId        String
+  SellDate      DateTime?
+  PrintedDate   DateTime?
+  DepartamentId Int?
+  item          Item      @relation(fields: [itemId], references: [code])
+  createdBy     User      @relation(fields: [userId], references: [id])
+  IsDeleted     Boolean @default(false)
+}
+
+model Notification {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  userId    Int
+  Readed    Boolean   @default(false)
+  message   String
+  showed    DateTime? @db.Timestamp(6)
+  ForUser   User      @relation(fields: [userId], references: [id])
+  IsDeleted Boolean @default(false)
+}
+
+model ToolRequest {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  toolName  String
+  description String
+  howToContact String?
+  status    RequestStatus @default(CREATED)
+  userId    Int
+  ForUser   User      @relation(fields: [userId], references: [id])
+  departamentId Int
+  RejectionReason String?
+  IsDeleted Boolean @default(false)
+}
+
+model ActivationRejection {
+    id Int @id @default(autoincrement())
+    userId Int @unique
+    user User @relation(fields: [userId], references: [id])
+    reason String
+}
+
+enum Role {
+  BLOCKED
+  NOTAPROVED
+  USER
+  ADMIN
+  MANAGER
+}
+
+enum RequestStatus {
+  CREATED
+  APPROVED
+  DEVELOPING
+  FINISHED
+  REJECTED
+}
+
+enum ItemType {
+  Linoleym
+  Kovrolin
+  Dorozhka
+  Rezina
+  Trava
+  Rope
+}
