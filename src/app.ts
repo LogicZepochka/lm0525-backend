@@ -17,7 +17,14 @@ const app = express();
 const apiPath: string = config.defaultApiPath;
 console.log("[Express] Default API path: "+config.defaultApiPath)
 
-app.use(cors());
+const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true  // если нужны куки
+}));
 app.use(express.json());
 
 app.use(apiPath+"/admin",AdminRouter);
