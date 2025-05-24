@@ -36,7 +36,7 @@ export default new class LinPDFBuilder implements PDFRemainVariant {
             
             PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-regular.ttf");
             PDF.text("Наименование",120,100,{});
-            PDF.text(ConvertTypeToName(remain.type),250,100,{});
+            PDF.text(ConvertTypeToName(remain.type),250,100,{lineBreak: false});
             PDF.fontSize(10);
             
             PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-bold.ttf");
@@ -59,7 +59,7 @@ export default new class LinPDFBuilder implements PDFRemainVariant {
             PDF.text(remain.metadata.sizeX.toFixed(2),77,200,{width: 250, align: "right"})
             PDF.text("м ",350,200)
             PDF.text("Длина: ",77,250)
-            PDF.text(remain.metadata.sizeX.toFixed(2),77,250, {width: 250, align: "right"})
+            PDF.text(remain.metadata.sizeY.toFixed(2),77,250, {width: 250, align: "right"})
             PDF.text("м ",350,250)
             PDF.moveTo(40,250).lineTo(400,250).stroke();
             PDF.moveTo(77,300).lineTo(400,300).stroke();
@@ -86,7 +86,7 @@ export default new class LinPDFBuilder implements PDFRemainVariant {
             PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-bold.ttf");
             
             PDF.text(remain.price.toFixed(2),85,350, {width: 250, align: "right"})
-            PDF.text((remain.price*remain.metadata.area).toFixed(2),85,390, {width: 250, align: "right"})
+            PDF.text((remain.price*(remain.metadata.sizeX * remain.metadata.sizeY)).toFixed(2),85,390, {width: 250, align: "right"})
             PDF.text(S,85,320, {width: 250, align: "right"})
             PDF.fontSize(22);
             PDF.text("Итого со скидкой".toUpperCase(),20,439)
