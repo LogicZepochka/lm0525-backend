@@ -17,11 +17,11 @@ const app = express();
 const apiPath: string = config.defaultApiPath;
 console.log("[Express] Default API path: "+config.defaultApiPath)
 
-const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app'];
+const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app', 'http://localhost:3001'];
 
 app.use(cors({
   origin: allowedOrigins,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', "PATCH"],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true  // если нужны куки
 }));
