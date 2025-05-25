@@ -149,10 +149,13 @@ export default new class AuthController {
     }
 
     async Refresh(req: any, res: any) {
+        
+        console.log("ara",req.body) 
         if(!req.body) {
             return res.status(400).json(new ApiAnswer(400).SetError(ErrorCode.WrongData,"Введеный невалидные данные"));
         }
         const { token } = req.body;
+        
         if(!token) {
             return res.status(401).json(new ApiAnswer(401).SetError(ErrorCode.WrongData,"Введеный невалидные данные"));
         }

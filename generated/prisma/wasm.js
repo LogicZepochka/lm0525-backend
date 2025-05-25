@@ -195,6 +195,24 @@ exports.Prisma.ActivationRejectionScalarFieldEnum = {
   reason: 'reason'
 };
 
+exports.Prisma.PaternosterScalarFieldEnum = {
+  id: 'id',
+  Name: 'Name',
+  MaxSize: 'MaxSize',
+  ShopId: 'ShopId'
+};
+
+exports.Prisma.PaternosterAxisScalarFieldEnum = {
+  id: 'id',
+  PaternosterId: 'PaternosterId'
+};
+
+exports.Prisma.RollPlacementScalarFieldEnum = {
+  id: 'id',
+  AxisId: 'AxisId',
+  Itemcode: 'Itemcode'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -257,7 +275,10 @@ exports.Prisma.ModelName = {
   Remain: 'Remain',
   Notification: 'Notification',
   ToolRequest: 'ToolRequest',
-  ActivationRejection: 'ActivationRejection'
+  ActivationRejection: 'ActivationRejection',
+  Paternoster: 'Paternoster',
+  PaternosterAxis: 'PaternosterAxis',
+  RollPlacement: 'RollPlacement'
 };
 
 /**

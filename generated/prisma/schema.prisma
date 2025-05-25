@@ -1,7 +1,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "../generated/prisma"
-  binaryTargets = "debian-openssl-3.0.x"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -49,11 +49,12 @@ model RefreshToken {
 }
 
 model Item {
-  code          String   @id
+  code          String          @id
   name          String
   type          ItemType
   departamentId Int?
   remains       Remain[]
+  RollPlacement RollPlacement[]
 }
 
 model Remain {
@@ -101,6 +102,29 @@ model ActivationRejection {
   userId Int    @unique
   user   User   @relation(fields: [userId], references: [id])
   reason String
+}
+
+model Paternoster {
+  id      Int               @id @default(autoincrement())
+  Name    String
+  MaxSize Float
+  ShopId  Int
+  Axises  PaternosterAxis[]
+}
+
+model PaternosterAxis {
+  id            Int             @id @default(autoincrement())
+  Paternoster   Paternoster     @relation(fields: [PaternosterId], references: [id], onDelete: Cascade)
+  PaternosterId Int
+  Placements    RollPlacement[]
+}
+
+model RollPlacement {
+  id              Int             @id @default(autoincrement())
+  PaternosterAxis PaternosterAxis @relation(fields: [AxisId], references: [id], onDelete: Cascade)
+  AxisId          Int
+  Item            Item            @relation(fields: [Itemcode], references: [code])
+  Itemcode        String
 }
 
 enum Role {

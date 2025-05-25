@@ -6,7 +6,7 @@ interface APIDataInfo {
 }
 
 const SystemController = new class SystemController {
-
+    
     async ApiManifest(req: any, res: any) {
         const result: APIDataInfo = {
             version: version

@@ -53,6 +53,21 @@ export type ToolRequest = $Result.DefaultSelection<Prisma.$ToolRequestPayload>
  * 
  */
 export type ActivationRejection = $Result.DefaultSelection<Prisma.$ActivationRejectionPayload>
+/**
+ * Model Paternoster
+ * 
+ */
+export type Paternoster = $Result.DefaultSelection<Prisma.$PaternosterPayload>
+/**
+ * Model PaternosterAxis
+ * 
+ */
+export type PaternosterAxis = $Result.DefaultSelection<Prisma.$PaternosterAxisPayload>
+/**
+ * Model RollPlacement
+ * 
+ */
+export type RollPlacement = $Result.DefaultSelection<Prisma.$RollPlacementPayload>
 
 /**
  * Enums
@@ -309,6 +324,36 @@ export class PrismaClient<
     * ```
     */
   get activationRejection(): Prisma.ActivationRejectionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paternoster`: Exposes CRUD operations for the **Paternoster** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Paternosters
+    * const paternosters = await prisma.paternoster.findMany()
+    * ```
+    */
+  get paternoster(): Prisma.PaternosterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.paternosterAxis`: Exposes CRUD operations for the **PaternosterAxis** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PaternosterAxes
+    * const paternosterAxes = await prisma.paternosterAxis.findMany()
+    * ```
+    */
+  get paternosterAxis(): Prisma.PaternosterAxisDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rollPlacement`: Exposes CRUD operations for the **RollPlacement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RollPlacements
+    * const rollPlacements = await prisma.rollPlacement.findMany()
+    * ```
+    */
+  get rollPlacement(): Prisma.RollPlacementDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -756,7 +801,10 @@ export namespace Prisma {
     Remain: 'Remain',
     Notification: 'Notification',
     ToolRequest: 'ToolRequest',
-    ActivationRejection: 'ActivationRejection'
+    ActivationRejection: 'ActivationRejection',
+    Paternoster: 'Paternoster',
+    PaternosterAxis: 'PaternosterAxis',
+    RollPlacement: 'RollPlacement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -775,7 +823,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "passwordResetRequest" | "refreshToken" | "item" | "remain" | "notification" | "toolRequest" | "activationRejection"
+      modelProps: "user" | "passwordResetRequest" | "refreshToken" | "item" | "remain" | "notification" | "toolRequest" | "activationRejection" | "paternoster" | "paternosterAxis" | "rollPlacement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1371,6 +1419,228 @@ export namespace Prisma {
           }
         }
       }
+      Paternoster: {
+        payload: Prisma.$PaternosterPayload<ExtArgs>
+        fields: Prisma.PaternosterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaternosterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaternosterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          findFirst: {
+            args: Prisma.PaternosterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaternosterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          findMany: {
+            args: Prisma.PaternosterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>[]
+          }
+          create: {
+            args: Prisma.PaternosterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          createMany: {
+            args: Prisma.PaternosterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaternosterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>[]
+          }
+          delete: {
+            args: Prisma.PaternosterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          update: {
+            args: Prisma.PaternosterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaternosterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaternosterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaternosterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaternosterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterPayload>
+          }
+          aggregate: {
+            args: Prisma.PaternosterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaternoster>
+          }
+          groupBy: {
+            args: Prisma.PaternosterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaternosterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaternosterCountArgs<ExtArgs>
+            result: $Utils.Optional<PaternosterCountAggregateOutputType> | number
+          }
+        }
+      }
+      PaternosterAxis: {
+        payload: Prisma.$PaternosterAxisPayload<ExtArgs>
+        fields: Prisma.PaternosterAxisFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaternosterAxisFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaternosterAxisFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          findFirst: {
+            args: Prisma.PaternosterAxisFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaternosterAxisFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          findMany: {
+            args: Prisma.PaternosterAxisFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>[]
+          }
+          create: {
+            args: Prisma.PaternosterAxisCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          createMany: {
+            args: Prisma.PaternosterAxisCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PaternosterAxisCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>[]
+          }
+          delete: {
+            args: Prisma.PaternosterAxisDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          update: {
+            args: Prisma.PaternosterAxisUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaternosterAxisDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaternosterAxisUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PaternosterAxisUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>[]
+          }
+          upsert: {
+            args: Prisma.PaternosterAxisUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaternosterAxisPayload>
+          }
+          aggregate: {
+            args: Prisma.PaternosterAxisAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePaternosterAxis>
+          }
+          groupBy: {
+            args: Prisma.PaternosterAxisGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaternosterAxisGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaternosterAxisCountArgs<ExtArgs>
+            result: $Utils.Optional<PaternosterAxisCountAggregateOutputType> | number
+          }
+        }
+      }
+      RollPlacement: {
+        payload: Prisma.$RollPlacementPayload<ExtArgs>
+        fields: Prisma.RollPlacementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RollPlacementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RollPlacementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          findFirst: {
+            args: Prisma.RollPlacementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RollPlacementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          findMany: {
+            args: Prisma.RollPlacementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>[]
+          }
+          create: {
+            args: Prisma.RollPlacementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          createMany: {
+            args: Prisma.RollPlacementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RollPlacementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>[]
+          }
+          delete: {
+            args: Prisma.RollPlacementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          update: {
+            args: Prisma.RollPlacementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          deleteMany: {
+            args: Prisma.RollPlacementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RollPlacementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RollPlacementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>[]
+          }
+          upsert: {
+            args: Prisma.RollPlacementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RollPlacementPayload>
+          }
+          aggregate: {
+            args: Prisma.RollPlacementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRollPlacement>
+          }
+          groupBy: {
+            args: Prisma.RollPlacementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RollPlacementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RollPlacementCountArgs<ExtArgs>
+            result: $Utils.Optional<RollPlacementCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1463,6 +1733,9 @@ export namespace Prisma {
     notification?: NotificationOmit
     toolRequest?: ToolRequestOmit
     activationRejection?: ActivationRejectionOmit
+    paternoster?: PaternosterOmit
+    paternosterAxis?: PaternosterAxisOmit
+    rollPlacement?: RollPlacementOmit
   }
 
   /* Types for Logging */
@@ -1616,10 +1889,12 @@ export namespace Prisma {
 
   export type ItemCountOutputType = {
     remains: number
+    RollPlacement: number
   }
 
   export type ItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     remains?: boolean | ItemCountOutputTypeCountRemainsArgs
+    RollPlacement?: boolean | ItemCountOutputTypeCountRollPlacementArgs
   }
 
   // Custom InputTypes
@@ -1638,6 +1913,75 @@ export namespace Prisma {
    */
   export type ItemCountOutputTypeCountRemainsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: RemainWhereInput
+  }
+
+  /**
+   * ItemCountOutputType without action
+   */
+  export type ItemCountOutputTypeCountRollPlacementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RollPlacementWhereInput
+  }
+
+
+  /**
+   * Count Type PaternosterCountOutputType
+   */
+
+  export type PaternosterCountOutputType = {
+    Axises: number
+  }
+
+  export type PaternosterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Axises?: boolean | PaternosterCountOutputTypeCountAxisesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaternosterCountOutputType without action
+   */
+  export type PaternosterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterCountOutputType
+     */
+    select?: PaternosterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaternosterCountOutputType without action
+   */
+  export type PaternosterCountOutputTypeCountAxisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaternosterAxisWhereInput
+  }
+
+
+  /**
+   * Count Type PaternosterAxisCountOutputType
+   */
+
+  export type PaternosterAxisCountOutputType = {
+    Placements: number
+  }
+
+  export type PaternosterAxisCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Placements?: boolean | PaternosterAxisCountOutputTypeCountPlacementsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PaternosterAxisCountOutputType without action
+   */
+  export type PaternosterAxisCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxisCountOutputType
+     */
+    select?: PaternosterAxisCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PaternosterAxisCountOutputType without action
+   */
+  export type PaternosterAxisCountOutputTypeCountPlacementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RollPlacementWhereInput
   }
 
 
@@ -5331,6 +5675,7 @@ export namespace Prisma {
     type?: boolean
     departamentId?: boolean
     remains?: boolean | Item$remainsArgs<ExtArgs>
+    RollPlacement?: boolean | Item$RollPlacementArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["item"]>
 
@@ -5358,6 +5703,7 @@ export namespace Prisma {
   export type ItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"code" | "name" | "type" | "departamentId", ExtArgs["result"]["item"]>
   export type ItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     remains?: boolean | Item$remainsArgs<ExtArgs>
+    RollPlacement?: boolean | Item$RollPlacementArgs<ExtArgs>
     _count?: boolean | ItemCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5367,6 +5713,7 @@ export namespace Prisma {
     name: "Item"
     objects: {
       remains: Prisma.$RemainPayload<ExtArgs>[]
+      RollPlacement: Prisma.$RollPlacementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       code: string
@@ -5768,6 +6115,7 @@ export namespace Prisma {
   export interface Prisma__ItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     remains<T extends Item$remainsArgs<ExtArgs> = {}>(args?: Subset<T, Item$remainsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RemainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    RollPlacement<T extends Item$RollPlacementArgs<ExtArgs> = {}>(args?: Subset<T, Item$RollPlacementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6210,6 +6558,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: RemainScalarFieldEnum | RemainScalarFieldEnum[]
+  }
+
+  /**
+   * Item.RollPlacement
+   */
+  export type Item$RollPlacementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    where?: RollPlacementWhereInput
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    cursor?: RollPlacementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RollPlacementScalarFieldEnum | RollPlacementScalarFieldEnum[]
   }
 
   /**
@@ -10758,6 +11130,3270 @@ export namespace Prisma {
 
 
   /**
+   * Model Paternoster
+   */
+
+  export type AggregatePaternoster = {
+    _count: PaternosterCountAggregateOutputType | null
+    _avg: PaternosterAvgAggregateOutputType | null
+    _sum: PaternosterSumAggregateOutputType | null
+    _min: PaternosterMinAggregateOutputType | null
+    _max: PaternosterMaxAggregateOutputType | null
+  }
+
+  export type PaternosterAvgAggregateOutputType = {
+    id: number | null
+    MaxSize: number | null
+    ShopId: number | null
+  }
+
+  export type PaternosterSumAggregateOutputType = {
+    id: number | null
+    MaxSize: number | null
+    ShopId: number | null
+  }
+
+  export type PaternosterMinAggregateOutputType = {
+    id: number | null
+    Name: string | null
+    MaxSize: number | null
+    ShopId: number | null
+  }
+
+  export type PaternosterMaxAggregateOutputType = {
+    id: number | null
+    Name: string | null
+    MaxSize: number | null
+    ShopId: number | null
+  }
+
+  export type PaternosterCountAggregateOutputType = {
+    id: number
+    Name: number
+    MaxSize: number
+    ShopId: number
+    _all: number
+  }
+
+
+  export type PaternosterAvgAggregateInputType = {
+    id?: true
+    MaxSize?: true
+    ShopId?: true
+  }
+
+  export type PaternosterSumAggregateInputType = {
+    id?: true
+    MaxSize?: true
+    ShopId?: true
+  }
+
+  export type PaternosterMinAggregateInputType = {
+    id?: true
+    Name?: true
+    MaxSize?: true
+    ShopId?: true
+  }
+
+  export type PaternosterMaxAggregateInputType = {
+    id?: true
+    Name?: true
+    MaxSize?: true
+    ShopId?: true
+  }
+
+  export type PaternosterCountAggregateInputType = {
+    id?: true
+    Name?: true
+    MaxSize?: true
+    ShopId?: true
+    _all?: true
+  }
+
+  export type PaternosterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Paternoster to aggregate.
+     */
+    where?: PaternosterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paternosters to fetch.
+     */
+    orderBy?: PaternosterOrderByWithRelationInput | PaternosterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaternosterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paternosters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paternosters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Paternosters
+    **/
+    _count?: true | PaternosterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaternosterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaternosterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaternosterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaternosterMaxAggregateInputType
+  }
+
+  export type GetPaternosterAggregateType<T extends PaternosterAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaternoster]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaternoster[P]>
+      : GetScalarType<T[P], AggregatePaternoster[P]>
+  }
+
+
+
+
+  export type PaternosterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaternosterWhereInput
+    orderBy?: PaternosterOrderByWithAggregationInput | PaternosterOrderByWithAggregationInput[]
+    by: PaternosterScalarFieldEnum[] | PaternosterScalarFieldEnum
+    having?: PaternosterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaternosterCountAggregateInputType | true
+    _avg?: PaternosterAvgAggregateInputType
+    _sum?: PaternosterSumAggregateInputType
+    _min?: PaternosterMinAggregateInputType
+    _max?: PaternosterMaxAggregateInputType
+  }
+
+  export type PaternosterGroupByOutputType = {
+    id: number
+    Name: string
+    MaxSize: number
+    ShopId: number
+    _count: PaternosterCountAggregateOutputType | null
+    _avg: PaternosterAvgAggregateOutputType | null
+    _sum: PaternosterSumAggregateOutputType | null
+    _min: PaternosterMinAggregateOutputType | null
+    _max: PaternosterMaxAggregateOutputType | null
+  }
+
+  type GetPaternosterGroupByPayload<T extends PaternosterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaternosterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaternosterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaternosterGroupByOutputType[P]>
+            : GetScalarType<T[P], PaternosterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaternosterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    Name?: boolean
+    MaxSize?: boolean
+    ShopId?: boolean
+    Axises?: boolean | Paternoster$AxisesArgs<ExtArgs>
+    _count?: boolean | PaternosterCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paternoster"]>
+
+  export type PaternosterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    Name?: boolean
+    MaxSize?: boolean
+    ShopId?: boolean
+  }, ExtArgs["result"]["paternoster"]>
+
+  export type PaternosterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    Name?: boolean
+    MaxSize?: boolean
+    ShopId?: boolean
+  }, ExtArgs["result"]["paternoster"]>
+
+  export type PaternosterSelectScalar = {
+    id?: boolean
+    Name?: boolean
+    MaxSize?: boolean
+    ShopId?: boolean
+  }
+
+  export type PaternosterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "Name" | "MaxSize" | "ShopId", ExtArgs["result"]["paternoster"]>
+  export type PaternosterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Axises?: boolean | Paternoster$AxisesArgs<ExtArgs>
+    _count?: boolean | PaternosterCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PaternosterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type PaternosterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $PaternosterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Paternoster"
+    objects: {
+      Axises: Prisma.$PaternosterAxisPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      Name: string
+      MaxSize: number
+      ShopId: number
+    }, ExtArgs["result"]["paternoster"]>
+    composites: {}
+  }
+
+  type PaternosterGetPayload<S extends boolean | null | undefined | PaternosterDefaultArgs> = $Result.GetResult<Prisma.$PaternosterPayload, S>
+
+  type PaternosterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaternosterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaternosterCountAggregateInputType | true
+    }
+
+  export interface PaternosterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Paternoster'], meta: { name: 'Paternoster' } }
+    /**
+     * Find zero or one Paternoster that matches the filter.
+     * @param {PaternosterFindUniqueArgs} args - Arguments to find a Paternoster
+     * @example
+     * // Get one Paternoster
+     * const paternoster = await prisma.paternoster.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaternosterFindUniqueArgs>(args: SelectSubset<T, PaternosterFindUniqueArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Paternoster that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaternosterFindUniqueOrThrowArgs} args - Arguments to find a Paternoster
+     * @example
+     * // Get one Paternoster
+     * const paternoster = await prisma.paternoster.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaternosterFindUniqueOrThrowArgs>(args: SelectSubset<T, PaternosterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Paternoster that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterFindFirstArgs} args - Arguments to find a Paternoster
+     * @example
+     * // Get one Paternoster
+     * const paternoster = await prisma.paternoster.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaternosterFindFirstArgs>(args?: SelectSubset<T, PaternosterFindFirstArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Paternoster that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterFindFirstOrThrowArgs} args - Arguments to find a Paternoster
+     * @example
+     * // Get one Paternoster
+     * const paternoster = await prisma.paternoster.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaternosterFindFirstOrThrowArgs>(args?: SelectSubset<T, PaternosterFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Paternosters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Paternosters
+     * const paternosters = await prisma.paternoster.findMany()
+     * 
+     * // Get first 10 Paternosters
+     * const paternosters = await prisma.paternoster.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paternosterWithIdOnly = await prisma.paternoster.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaternosterFindManyArgs>(args?: SelectSubset<T, PaternosterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Paternoster.
+     * @param {PaternosterCreateArgs} args - Arguments to create a Paternoster.
+     * @example
+     * // Create one Paternoster
+     * const Paternoster = await prisma.paternoster.create({
+     *   data: {
+     *     // ... data to create a Paternoster
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaternosterCreateArgs>(args: SelectSubset<T, PaternosterCreateArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Paternosters.
+     * @param {PaternosterCreateManyArgs} args - Arguments to create many Paternosters.
+     * @example
+     * // Create many Paternosters
+     * const paternoster = await prisma.paternoster.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaternosterCreateManyArgs>(args?: SelectSubset<T, PaternosterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Paternosters and returns the data saved in the database.
+     * @param {PaternosterCreateManyAndReturnArgs} args - Arguments to create many Paternosters.
+     * @example
+     * // Create many Paternosters
+     * const paternoster = await prisma.paternoster.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Paternosters and only return the `id`
+     * const paternosterWithIdOnly = await prisma.paternoster.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaternosterCreateManyAndReturnArgs>(args?: SelectSubset<T, PaternosterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Paternoster.
+     * @param {PaternosterDeleteArgs} args - Arguments to delete one Paternoster.
+     * @example
+     * // Delete one Paternoster
+     * const Paternoster = await prisma.paternoster.delete({
+     *   where: {
+     *     // ... filter to delete one Paternoster
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaternosterDeleteArgs>(args: SelectSubset<T, PaternosterDeleteArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Paternoster.
+     * @param {PaternosterUpdateArgs} args - Arguments to update one Paternoster.
+     * @example
+     * // Update one Paternoster
+     * const paternoster = await prisma.paternoster.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaternosterUpdateArgs>(args: SelectSubset<T, PaternosterUpdateArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Paternosters.
+     * @param {PaternosterDeleteManyArgs} args - Arguments to filter Paternosters to delete.
+     * @example
+     * // Delete a few Paternosters
+     * const { count } = await prisma.paternoster.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaternosterDeleteManyArgs>(args?: SelectSubset<T, PaternosterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Paternosters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Paternosters
+     * const paternoster = await prisma.paternoster.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaternosterUpdateManyArgs>(args: SelectSubset<T, PaternosterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Paternosters and returns the data updated in the database.
+     * @param {PaternosterUpdateManyAndReturnArgs} args - Arguments to update many Paternosters.
+     * @example
+     * // Update many Paternosters
+     * const paternoster = await prisma.paternoster.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Paternosters and only return the `id`
+     * const paternosterWithIdOnly = await prisma.paternoster.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaternosterUpdateManyAndReturnArgs>(args: SelectSubset<T, PaternosterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Paternoster.
+     * @param {PaternosterUpsertArgs} args - Arguments to update or create a Paternoster.
+     * @example
+     * // Update or create a Paternoster
+     * const paternoster = await prisma.paternoster.upsert({
+     *   create: {
+     *     // ... data to create a Paternoster
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Paternoster we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaternosterUpsertArgs>(args: SelectSubset<T, PaternosterUpsertArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Paternosters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterCountArgs} args - Arguments to filter Paternosters to count.
+     * @example
+     * // Count the number of Paternosters
+     * const count = await prisma.paternoster.count({
+     *   where: {
+     *     // ... the filter for the Paternosters we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaternosterCountArgs>(
+      args?: Subset<T, PaternosterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaternosterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Paternoster.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaternosterAggregateArgs>(args: Subset<T, PaternosterAggregateArgs>): Prisma.PrismaPromise<GetPaternosterAggregateType<T>>
+
+    /**
+     * Group by Paternoster.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaternosterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaternosterGroupByArgs['orderBy'] }
+        : { orderBy?: PaternosterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaternosterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaternosterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Paternoster model
+   */
+  readonly fields: PaternosterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Paternoster.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaternosterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Axises<T extends Paternoster$AxisesArgs<ExtArgs> = {}>(args?: Subset<T, Paternoster$AxisesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Paternoster model
+   */ 
+  interface PaternosterFieldRefs {
+    readonly id: FieldRef<"Paternoster", 'Int'>
+    readonly Name: FieldRef<"Paternoster", 'String'>
+    readonly MaxSize: FieldRef<"Paternoster", 'Float'>
+    readonly ShopId: FieldRef<"Paternoster", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Paternoster findUnique
+   */
+  export type PaternosterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter, which Paternoster to fetch.
+     */
+    where: PaternosterWhereUniqueInput
+  }
+
+  /**
+   * Paternoster findUniqueOrThrow
+   */
+  export type PaternosterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter, which Paternoster to fetch.
+     */
+    where: PaternosterWhereUniqueInput
+  }
+
+  /**
+   * Paternoster findFirst
+   */
+  export type PaternosterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter, which Paternoster to fetch.
+     */
+    where?: PaternosterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paternosters to fetch.
+     */
+    orderBy?: PaternosterOrderByWithRelationInput | PaternosterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Paternosters.
+     */
+    cursor?: PaternosterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paternosters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paternosters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Paternosters.
+     */
+    distinct?: PaternosterScalarFieldEnum | PaternosterScalarFieldEnum[]
+  }
+
+  /**
+   * Paternoster findFirstOrThrow
+   */
+  export type PaternosterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter, which Paternoster to fetch.
+     */
+    where?: PaternosterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paternosters to fetch.
+     */
+    orderBy?: PaternosterOrderByWithRelationInput | PaternosterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Paternosters.
+     */
+    cursor?: PaternosterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paternosters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paternosters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Paternosters.
+     */
+    distinct?: PaternosterScalarFieldEnum | PaternosterScalarFieldEnum[]
+  }
+
+  /**
+   * Paternoster findMany
+   */
+  export type PaternosterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter, which Paternosters to fetch.
+     */
+    where?: PaternosterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Paternosters to fetch.
+     */
+    orderBy?: PaternosterOrderByWithRelationInput | PaternosterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Paternosters.
+     */
+    cursor?: PaternosterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Paternosters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Paternosters.
+     */
+    skip?: number
+    distinct?: PaternosterScalarFieldEnum | PaternosterScalarFieldEnum[]
+  }
+
+  /**
+   * Paternoster create
+   */
+  export type PaternosterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Paternoster.
+     */
+    data: XOR<PaternosterCreateInput, PaternosterUncheckedCreateInput>
+  }
+
+  /**
+   * Paternoster createMany
+   */
+  export type PaternosterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Paternosters.
+     */
+    data: PaternosterCreateManyInput | PaternosterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Paternoster createManyAndReturn
+   */
+  export type PaternosterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * The data used to create many Paternosters.
+     */
+    data: PaternosterCreateManyInput | PaternosterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Paternoster update
+   */
+  export type PaternosterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Paternoster.
+     */
+    data: XOR<PaternosterUpdateInput, PaternosterUncheckedUpdateInput>
+    /**
+     * Choose, which Paternoster to update.
+     */
+    where: PaternosterWhereUniqueInput
+  }
+
+  /**
+   * Paternoster updateMany
+   */
+  export type PaternosterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Paternosters.
+     */
+    data: XOR<PaternosterUpdateManyMutationInput, PaternosterUncheckedUpdateManyInput>
+    /**
+     * Filter which Paternosters to update
+     */
+    where?: PaternosterWhereInput
+    /**
+     * Limit how many Paternosters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Paternoster updateManyAndReturn
+   */
+  export type PaternosterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * The data used to update Paternosters.
+     */
+    data: XOR<PaternosterUpdateManyMutationInput, PaternosterUncheckedUpdateManyInput>
+    /**
+     * Filter which Paternosters to update
+     */
+    where?: PaternosterWhereInput
+    /**
+     * Limit how many Paternosters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Paternoster upsert
+   */
+  export type PaternosterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Paternoster to update in case it exists.
+     */
+    where: PaternosterWhereUniqueInput
+    /**
+     * In case the Paternoster found by the `where` argument doesn't exist, create a new Paternoster with this data.
+     */
+    create: XOR<PaternosterCreateInput, PaternosterUncheckedCreateInput>
+    /**
+     * In case the Paternoster was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaternosterUpdateInput, PaternosterUncheckedUpdateInput>
+  }
+
+  /**
+   * Paternoster delete
+   */
+  export type PaternosterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+    /**
+     * Filter which Paternoster to delete.
+     */
+    where: PaternosterWhereUniqueInput
+  }
+
+  /**
+   * Paternoster deleteMany
+   */
+  export type PaternosterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Paternosters to delete
+     */
+    where?: PaternosterWhereInput
+    /**
+     * Limit how many Paternosters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Paternoster.Axises
+   */
+  export type Paternoster$AxisesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    where?: PaternosterAxisWhereInput
+    orderBy?: PaternosterAxisOrderByWithRelationInput | PaternosterAxisOrderByWithRelationInput[]
+    cursor?: PaternosterAxisWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaternosterAxisScalarFieldEnum | PaternosterAxisScalarFieldEnum[]
+  }
+
+  /**
+   * Paternoster without action
+   */
+  export type PaternosterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Paternoster
+     */
+    select?: PaternosterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Paternoster
+     */
+    omit?: PaternosterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PaternosterAxis
+   */
+
+  export type AggregatePaternosterAxis = {
+    _count: PaternosterAxisCountAggregateOutputType | null
+    _avg: PaternosterAxisAvgAggregateOutputType | null
+    _sum: PaternosterAxisSumAggregateOutputType | null
+    _min: PaternosterAxisMinAggregateOutputType | null
+    _max: PaternosterAxisMaxAggregateOutputType | null
+  }
+
+  export type PaternosterAxisAvgAggregateOutputType = {
+    id: number | null
+    PaternosterId: number | null
+  }
+
+  export type PaternosterAxisSumAggregateOutputType = {
+    id: number | null
+    PaternosterId: number | null
+  }
+
+  export type PaternosterAxisMinAggregateOutputType = {
+    id: number | null
+    PaternosterId: number | null
+  }
+
+  export type PaternosterAxisMaxAggregateOutputType = {
+    id: number | null
+    PaternosterId: number | null
+  }
+
+  export type PaternosterAxisCountAggregateOutputType = {
+    id: number
+    PaternosterId: number
+    _all: number
+  }
+
+
+  export type PaternosterAxisAvgAggregateInputType = {
+    id?: true
+    PaternosterId?: true
+  }
+
+  export type PaternosterAxisSumAggregateInputType = {
+    id?: true
+    PaternosterId?: true
+  }
+
+  export type PaternosterAxisMinAggregateInputType = {
+    id?: true
+    PaternosterId?: true
+  }
+
+  export type PaternosterAxisMaxAggregateInputType = {
+    id?: true
+    PaternosterId?: true
+  }
+
+  export type PaternosterAxisCountAggregateInputType = {
+    id?: true
+    PaternosterId?: true
+    _all?: true
+  }
+
+  export type PaternosterAxisAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaternosterAxis to aggregate.
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaternosterAxes to fetch.
+     */
+    orderBy?: PaternosterAxisOrderByWithRelationInput | PaternosterAxisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaternosterAxisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaternosterAxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaternosterAxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PaternosterAxes
+    **/
+    _count?: true | PaternosterAxisCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaternosterAxisAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaternosterAxisSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaternosterAxisMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaternosterAxisMaxAggregateInputType
+  }
+
+  export type GetPaternosterAxisAggregateType<T extends PaternosterAxisAggregateArgs> = {
+        [P in keyof T & keyof AggregatePaternosterAxis]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePaternosterAxis[P]>
+      : GetScalarType<T[P], AggregatePaternosterAxis[P]>
+  }
+
+
+
+
+  export type PaternosterAxisGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaternosterAxisWhereInput
+    orderBy?: PaternosterAxisOrderByWithAggregationInput | PaternosterAxisOrderByWithAggregationInput[]
+    by: PaternosterAxisScalarFieldEnum[] | PaternosterAxisScalarFieldEnum
+    having?: PaternosterAxisScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaternosterAxisCountAggregateInputType | true
+    _avg?: PaternosterAxisAvgAggregateInputType
+    _sum?: PaternosterAxisSumAggregateInputType
+    _min?: PaternosterAxisMinAggregateInputType
+    _max?: PaternosterAxisMaxAggregateInputType
+  }
+
+  export type PaternosterAxisGroupByOutputType = {
+    id: number
+    PaternosterId: number
+    _count: PaternosterAxisCountAggregateOutputType | null
+    _avg: PaternosterAxisAvgAggregateOutputType | null
+    _sum: PaternosterAxisSumAggregateOutputType | null
+    _min: PaternosterAxisMinAggregateOutputType | null
+    _max: PaternosterAxisMaxAggregateOutputType | null
+  }
+
+  type GetPaternosterAxisGroupByPayload<T extends PaternosterAxisGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaternosterAxisGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaternosterAxisGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaternosterAxisGroupByOutputType[P]>
+            : GetScalarType<T[P], PaternosterAxisGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaternosterAxisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    PaternosterId?: boolean
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+    Placements?: boolean | PaternosterAxis$PlacementsArgs<ExtArgs>
+    _count?: boolean | PaternosterAxisCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paternosterAxis"]>
+
+  export type PaternosterAxisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    PaternosterId?: boolean
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paternosterAxis"]>
+
+  export type PaternosterAxisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    PaternosterId?: boolean
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["paternosterAxis"]>
+
+  export type PaternosterAxisSelectScalar = {
+    id?: boolean
+    PaternosterId?: boolean
+  }
+
+  export type PaternosterAxisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "PaternosterId", ExtArgs["result"]["paternosterAxis"]>
+  export type PaternosterAxisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+    Placements?: boolean | PaternosterAxis$PlacementsArgs<ExtArgs>
+    _count?: boolean | PaternosterAxisCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PaternosterAxisIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+  }
+  export type PaternosterAxisIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
+  }
+
+  export type $PaternosterAxisPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PaternosterAxis"
+    objects: {
+      Paternoster: Prisma.$PaternosterPayload<ExtArgs>
+      Placements: Prisma.$RollPlacementPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      PaternosterId: number
+    }, ExtArgs["result"]["paternosterAxis"]>
+    composites: {}
+  }
+
+  type PaternosterAxisGetPayload<S extends boolean | null | undefined | PaternosterAxisDefaultArgs> = $Result.GetResult<Prisma.$PaternosterAxisPayload, S>
+
+  type PaternosterAxisCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaternosterAxisFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaternosterAxisCountAggregateInputType | true
+    }
+
+  export interface PaternosterAxisDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PaternosterAxis'], meta: { name: 'PaternosterAxis' } }
+    /**
+     * Find zero or one PaternosterAxis that matches the filter.
+     * @param {PaternosterAxisFindUniqueArgs} args - Arguments to find a PaternosterAxis
+     * @example
+     * // Get one PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaternosterAxisFindUniqueArgs>(args: SelectSubset<T, PaternosterAxisFindUniqueArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PaternosterAxis that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaternosterAxisFindUniqueOrThrowArgs} args - Arguments to find a PaternosterAxis
+     * @example
+     * // Get one PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaternosterAxisFindUniqueOrThrowArgs>(args: SelectSubset<T, PaternosterAxisFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaternosterAxis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisFindFirstArgs} args - Arguments to find a PaternosterAxis
+     * @example
+     * // Get one PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaternosterAxisFindFirstArgs>(args?: SelectSubset<T, PaternosterAxisFindFirstArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PaternosterAxis that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisFindFirstOrThrowArgs} args - Arguments to find a PaternosterAxis
+     * @example
+     * // Get one PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaternosterAxisFindFirstOrThrowArgs>(args?: SelectSubset<T, PaternosterAxisFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PaternosterAxes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PaternosterAxes
+     * const paternosterAxes = await prisma.paternosterAxis.findMany()
+     * 
+     * // Get first 10 PaternosterAxes
+     * const paternosterAxes = await prisma.paternosterAxis.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paternosterAxisWithIdOnly = await prisma.paternosterAxis.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaternosterAxisFindManyArgs>(args?: SelectSubset<T, PaternosterAxisFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PaternosterAxis.
+     * @param {PaternosterAxisCreateArgs} args - Arguments to create a PaternosterAxis.
+     * @example
+     * // Create one PaternosterAxis
+     * const PaternosterAxis = await prisma.paternosterAxis.create({
+     *   data: {
+     *     // ... data to create a PaternosterAxis
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaternosterAxisCreateArgs>(args: SelectSubset<T, PaternosterAxisCreateArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PaternosterAxes.
+     * @param {PaternosterAxisCreateManyArgs} args - Arguments to create many PaternosterAxes.
+     * @example
+     * // Create many PaternosterAxes
+     * const paternosterAxis = await prisma.paternosterAxis.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaternosterAxisCreateManyArgs>(args?: SelectSubset<T, PaternosterAxisCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PaternosterAxes and returns the data saved in the database.
+     * @param {PaternosterAxisCreateManyAndReturnArgs} args - Arguments to create many PaternosterAxes.
+     * @example
+     * // Create many PaternosterAxes
+     * const paternosterAxis = await prisma.paternosterAxis.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PaternosterAxes and only return the `id`
+     * const paternosterAxisWithIdOnly = await prisma.paternosterAxis.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PaternosterAxisCreateManyAndReturnArgs>(args?: SelectSubset<T, PaternosterAxisCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PaternosterAxis.
+     * @param {PaternosterAxisDeleteArgs} args - Arguments to delete one PaternosterAxis.
+     * @example
+     * // Delete one PaternosterAxis
+     * const PaternosterAxis = await prisma.paternosterAxis.delete({
+     *   where: {
+     *     // ... filter to delete one PaternosterAxis
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaternosterAxisDeleteArgs>(args: SelectSubset<T, PaternosterAxisDeleteArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PaternosterAxis.
+     * @param {PaternosterAxisUpdateArgs} args - Arguments to update one PaternosterAxis.
+     * @example
+     * // Update one PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaternosterAxisUpdateArgs>(args: SelectSubset<T, PaternosterAxisUpdateArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PaternosterAxes.
+     * @param {PaternosterAxisDeleteManyArgs} args - Arguments to filter PaternosterAxes to delete.
+     * @example
+     * // Delete a few PaternosterAxes
+     * const { count } = await prisma.paternosterAxis.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaternosterAxisDeleteManyArgs>(args?: SelectSubset<T, PaternosterAxisDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaternosterAxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PaternosterAxes
+     * const paternosterAxis = await prisma.paternosterAxis.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaternosterAxisUpdateManyArgs>(args: SelectSubset<T, PaternosterAxisUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PaternosterAxes and returns the data updated in the database.
+     * @param {PaternosterAxisUpdateManyAndReturnArgs} args - Arguments to update many PaternosterAxes.
+     * @example
+     * // Update many PaternosterAxes
+     * const paternosterAxis = await prisma.paternosterAxis.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PaternosterAxes and only return the `id`
+     * const paternosterAxisWithIdOnly = await prisma.paternosterAxis.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PaternosterAxisUpdateManyAndReturnArgs>(args: SelectSubset<T, PaternosterAxisUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PaternosterAxis.
+     * @param {PaternosterAxisUpsertArgs} args - Arguments to update or create a PaternosterAxis.
+     * @example
+     * // Update or create a PaternosterAxis
+     * const paternosterAxis = await prisma.paternosterAxis.upsert({
+     *   create: {
+     *     // ... data to create a PaternosterAxis
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PaternosterAxis we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaternosterAxisUpsertArgs>(args: SelectSubset<T, PaternosterAxisUpsertArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PaternosterAxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisCountArgs} args - Arguments to filter PaternosterAxes to count.
+     * @example
+     * // Count the number of PaternosterAxes
+     * const count = await prisma.paternosterAxis.count({
+     *   where: {
+     *     // ... the filter for the PaternosterAxes we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaternosterAxisCountArgs>(
+      args?: Subset<T, PaternosterAxisCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaternosterAxisCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PaternosterAxis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaternosterAxisAggregateArgs>(args: Subset<T, PaternosterAxisAggregateArgs>): Prisma.PrismaPromise<GetPaternosterAxisAggregateType<T>>
+
+    /**
+     * Group by PaternosterAxis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaternosterAxisGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaternosterAxisGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaternosterAxisGroupByArgs['orderBy'] }
+        : { orderBy?: PaternosterAxisGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaternosterAxisGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaternosterAxisGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PaternosterAxis model
+   */
+  readonly fields: PaternosterAxisFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PaternosterAxis.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaternosterAxisClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    Paternoster<T extends PaternosterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaternosterDefaultArgs<ExtArgs>>): Prisma__PaternosterClient<$Result.GetResult<Prisma.$PaternosterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Placements<T extends PaternosterAxis$PlacementsArgs<ExtArgs> = {}>(args?: Subset<T, PaternosterAxis$PlacementsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PaternosterAxis model
+   */ 
+  interface PaternosterAxisFieldRefs {
+    readonly id: FieldRef<"PaternosterAxis", 'Int'>
+    readonly PaternosterId: FieldRef<"PaternosterAxis", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PaternosterAxis findUnique
+   */
+  export type PaternosterAxisFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter, which PaternosterAxis to fetch.
+     */
+    where: PaternosterAxisWhereUniqueInput
+  }
+
+  /**
+   * PaternosterAxis findUniqueOrThrow
+   */
+  export type PaternosterAxisFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter, which PaternosterAxis to fetch.
+     */
+    where: PaternosterAxisWhereUniqueInput
+  }
+
+  /**
+   * PaternosterAxis findFirst
+   */
+  export type PaternosterAxisFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter, which PaternosterAxis to fetch.
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaternosterAxes to fetch.
+     */
+    orderBy?: PaternosterAxisOrderByWithRelationInput | PaternosterAxisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaternosterAxes.
+     */
+    cursor?: PaternosterAxisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaternosterAxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaternosterAxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaternosterAxes.
+     */
+    distinct?: PaternosterAxisScalarFieldEnum | PaternosterAxisScalarFieldEnum[]
+  }
+
+  /**
+   * PaternosterAxis findFirstOrThrow
+   */
+  export type PaternosterAxisFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter, which PaternosterAxis to fetch.
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaternosterAxes to fetch.
+     */
+    orderBy?: PaternosterAxisOrderByWithRelationInput | PaternosterAxisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PaternosterAxes.
+     */
+    cursor?: PaternosterAxisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaternosterAxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaternosterAxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PaternosterAxes.
+     */
+    distinct?: PaternosterAxisScalarFieldEnum | PaternosterAxisScalarFieldEnum[]
+  }
+
+  /**
+   * PaternosterAxis findMany
+   */
+  export type PaternosterAxisFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter, which PaternosterAxes to fetch.
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PaternosterAxes to fetch.
+     */
+    orderBy?: PaternosterAxisOrderByWithRelationInput | PaternosterAxisOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PaternosterAxes.
+     */
+    cursor?: PaternosterAxisWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PaternosterAxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PaternosterAxes.
+     */
+    skip?: number
+    distinct?: PaternosterAxisScalarFieldEnum | PaternosterAxisScalarFieldEnum[]
+  }
+
+  /**
+   * PaternosterAxis create
+   */
+  export type PaternosterAxisCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PaternosterAxis.
+     */
+    data: XOR<PaternosterAxisCreateInput, PaternosterAxisUncheckedCreateInput>
+  }
+
+  /**
+   * PaternosterAxis createMany
+   */
+  export type PaternosterAxisCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PaternosterAxes.
+     */
+    data: PaternosterAxisCreateManyInput | PaternosterAxisCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PaternosterAxis createManyAndReturn
+   */
+  export type PaternosterAxisCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * The data used to create many PaternosterAxes.
+     */
+    data: PaternosterAxisCreateManyInput | PaternosterAxisCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaternosterAxis update
+   */
+  export type PaternosterAxisUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PaternosterAxis.
+     */
+    data: XOR<PaternosterAxisUpdateInput, PaternosterAxisUncheckedUpdateInput>
+    /**
+     * Choose, which PaternosterAxis to update.
+     */
+    where: PaternosterAxisWhereUniqueInput
+  }
+
+  /**
+   * PaternosterAxis updateMany
+   */
+  export type PaternosterAxisUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PaternosterAxes.
+     */
+    data: XOR<PaternosterAxisUpdateManyMutationInput, PaternosterAxisUncheckedUpdateManyInput>
+    /**
+     * Filter which PaternosterAxes to update
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * Limit how many PaternosterAxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaternosterAxis updateManyAndReturn
+   */
+  export type PaternosterAxisUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * The data used to update PaternosterAxes.
+     */
+    data: XOR<PaternosterAxisUpdateManyMutationInput, PaternosterAxisUncheckedUpdateManyInput>
+    /**
+     * Filter which PaternosterAxes to update
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * Limit how many PaternosterAxes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PaternosterAxis upsert
+   */
+  export type PaternosterAxisUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PaternosterAxis to update in case it exists.
+     */
+    where: PaternosterAxisWhereUniqueInput
+    /**
+     * In case the PaternosterAxis found by the `where` argument doesn't exist, create a new PaternosterAxis with this data.
+     */
+    create: XOR<PaternosterAxisCreateInput, PaternosterAxisUncheckedCreateInput>
+    /**
+     * In case the PaternosterAxis was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaternosterAxisUpdateInput, PaternosterAxisUncheckedUpdateInput>
+  }
+
+  /**
+   * PaternosterAxis delete
+   */
+  export type PaternosterAxisDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+    /**
+     * Filter which PaternosterAxis to delete.
+     */
+    where: PaternosterAxisWhereUniqueInput
+  }
+
+  /**
+   * PaternosterAxis deleteMany
+   */
+  export type PaternosterAxisDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PaternosterAxes to delete
+     */
+    where?: PaternosterAxisWhereInput
+    /**
+     * Limit how many PaternosterAxes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PaternosterAxis.Placements
+   */
+  export type PaternosterAxis$PlacementsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    where?: RollPlacementWhereInput
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    cursor?: RollPlacementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RollPlacementScalarFieldEnum | RollPlacementScalarFieldEnum[]
+  }
+
+  /**
+   * PaternosterAxis without action
+   */
+  export type PaternosterAxisDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PaternosterAxis
+     */
+    select?: PaternosterAxisSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PaternosterAxis
+     */
+    omit?: PaternosterAxisOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaternosterAxisInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RollPlacement
+   */
+
+  export type AggregateRollPlacement = {
+    _count: RollPlacementCountAggregateOutputType | null
+    _avg: RollPlacementAvgAggregateOutputType | null
+    _sum: RollPlacementSumAggregateOutputType | null
+    _min: RollPlacementMinAggregateOutputType | null
+    _max: RollPlacementMaxAggregateOutputType | null
+  }
+
+  export type RollPlacementAvgAggregateOutputType = {
+    id: number | null
+    AxisId: number | null
+  }
+
+  export type RollPlacementSumAggregateOutputType = {
+    id: number | null
+    AxisId: number | null
+  }
+
+  export type RollPlacementMinAggregateOutputType = {
+    id: number | null
+    AxisId: number | null
+    Itemcode: string | null
+  }
+
+  export type RollPlacementMaxAggregateOutputType = {
+    id: number | null
+    AxisId: number | null
+    Itemcode: string | null
+  }
+
+  export type RollPlacementCountAggregateOutputType = {
+    id: number
+    AxisId: number
+    Itemcode: number
+    _all: number
+  }
+
+
+  export type RollPlacementAvgAggregateInputType = {
+    id?: true
+    AxisId?: true
+  }
+
+  export type RollPlacementSumAggregateInputType = {
+    id?: true
+    AxisId?: true
+  }
+
+  export type RollPlacementMinAggregateInputType = {
+    id?: true
+    AxisId?: true
+    Itemcode?: true
+  }
+
+  export type RollPlacementMaxAggregateInputType = {
+    id?: true
+    AxisId?: true
+    Itemcode?: true
+  }
+
+  export type RollPlacementCountAggregateInputType = {
+    id?: true
+    AxisId?: true
+    Itemcode?: true
+    _all?: true
+  }
+
+  export type RollPlacementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RollPlacement to aggregate.
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RollPlacements to fetch.
+     */
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RollPlacementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RollPlacements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RollPlacements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RollPlacements
+    **/
+    _count?: true | RollPlacementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RollPlacementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RollPlacementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RollPlacementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RollPlacementMaxAggregateInputType
+  }
+
+  export type GetRollPlacementAggregateType<T extends RollPlacementAggregateArgs> = {
+        [P in keyof T & keyof AggregateRollPlacement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRollPlacement[P]>
+      : GetScalarType<T[P], AggregateRollPlacement[P]>
+  }
+
+
+
+
+  export type RollPlacementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RollPlacementWhereInput
+    orderBy?: RollPlacementOrderByWithAggregationInput | RollPlacementOrderByWithAggregationInput[]
+    by: RollPlacementScalarFieldEnum[] | RollPlacementScalarFieldEnum
+    having?: RollPlacementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RollPlacementCountAggregateInputType | true
+    _avg?: RollPlacementAvgAggregateInputType
+    _sum?: RollPlacementSumAggregateInputType
+    _min?: RollPlacementMinAggregateInputType
+    _max?: RollPlacementMaxAggregateInputType
+  }
+
+  export type RollPlacementGroupByOutputType = {
+    id: number
+    AxisId: number
+    Itemcode: string
+    _count: RollPlacementCountAggregateOutputType | null
+    _avg: RollPlacementAvgAggregateOutputType | null
+    _sum: RollPlacementSumAggregateOutputType | null
+    _min: RollPlacementMinAggregateOutputType | null
+    _max: RollPlacementMaxAggregateOutputType | null
+  }
+
+  type GetRollPlacementGroupByPayload<T extends RollPlacementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RollPlacementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RollPlacementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RollPlacementGroupByOutputType[P]>
+            : GetScalarType<T[P], RollPlacementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RollPlacementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    AxisId?: boolean
+    Itemcode?: boolean
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rollPlacement"]>
+
+  export type RollPlacementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    AxisId?: boolean
+    Itemcode?: boolean
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rollPlacement"]>
+
+  export type RollPlacementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    AxisId?: boolean
+    Itemcode?: boolean
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rollPlacement"]>
+
+  export type RollPlacementSelectScalar = {
+    id?: boolean
+    AxisId?: boolean
+    Itemcode?: boolean
+  }
+
+  export type RollPlacementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "AxisId" | "Itemcode", ExtArgs["result"]["rollPlacement"]>
+  export type RollPlacementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type RollPlacementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+  export type RollPlacementIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    PaternosterAxis?: boolean | PaternosterAxisDefaultArgs<ExtArgs>
+    Item?: boolean | ItemDefaultArgs<ExtArgs>
+  }
+
+  export type $RollPlacementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RollPlacement"
+    objects: {
+      PaternosterAxis: Prisma.$PaternosterAxisPayload<ExtArgs>
+      Item: Prisma.$ItemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      AxisId: number
+      Itemcode: string
+    }, ExtArgs["result"]["rollPlacement"]>
+    composites: {}
+  }
+
+  type RollPlacementGetPayload<S extends boolean | null | undefined | RollPlacementDefaultArgs> = $Result.GetResult<Prisma.$RollPlacementPayload, S>
+
+  type RollPlacementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RollPlacementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RollPlacementCountAggregateInputType | true
+    }
+
+  export interface RollPlacementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RollPlacement'], meta: { name: 'RollPlacement' } }
+    /**
+     * Find zero or one RollPlacement that matches the filter.
+     * @param {RollPlacementFindUniqueArgs} args - Arguments to find a RollPlacement
+     * @example
+     * // Get one RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RollPlacementFindUniqueArgs>(args: SelectSubset<T, RollPlacementFindUniqueArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RollPlacement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RollPlacementFindUniqueOrThrowArgs} args - Arguments to find a RollPlacement
+     * @example
+     * // Get one RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RollPlacementFindUniqueOrThrowArgs>(args: SelectSubset<T, RollPlacementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RollPlacement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementFindFirstArgs} args - Arguments to find a RollPlacement
+     * @example
+     * // Get one RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RollPlacementFindFirstArgs>(args?: SelectSubset<T, RollPlacementFindFirstArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RollPlacement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementFindFirstOrThrowArgs} args - Arguments to find a RollPlacement
+     * @example
+     * // Get one RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RollPlacementFindFirstOrThrowArgs>(args?: SelectSubset<T, RollPlacementFindFirstOrThrowArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RollPlacements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RollPlacements
+     * const rollPlacements = await prisma.rollPlacement.findMany()
+     * 
+     * // Get first 10 RollPlacements
+     * const rollPlacements = await prisma.rollPlacement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rollPlacementWithIdOnly = await prisma.rollPlacement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RollPlacementFindManyArgs>(args?: SelectSubset<T, RollPlacementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RollPlacement.
+     * @param {RollPlacementCreateArgs} args - Arguments to create a RollPlacement.
+     * @example
+     * // Create one RollPlacement
+     * const RollPlacement = await prisma.rollPlacement.create({
+     *   data: {
+     *     // ... data to create a RollPlacement
+     *   }
+     * })
+     * 
+     */
+    create<T extends RollPlacementCreateArgs>(args: SelectSubset<T, RollPlacementCreateArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RollPlacements.
+     * @param {RollPlacementCreateManyArgs} args - Arguments to create many RollPlacements.
+     * @example
+     * // Create many RollPlacements
+     * const rollPlacement = await prisma.rollPlacement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RollPlacementCreateManyArgs>(args?: SelectSubset<T, RollPlacementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RollPlacements and returns the data saved in the database.
+     * @param {RollPlacementCreateManyAndReturnArgs} args - Arguments to create many RollPlacements.
+     * @example
+     * // Create many RollPlacements
+     * const rollPlacement = await prisma.rollPlacement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RollPlacements and only return the `id`
+     * const rollPlacementWithIdOnly = await prisma.rollPlacement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RollPlacementCreateManyAndReturnArgs>(args?: SelectSubset<T, RollPlacementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RollPlacement.
+     * @param {RollPlacementDeleteArgs} args - Arguments to delete one RollPlacement.
+     * @example
+     * // Delete one RollPlacement
+     * const RollPlacement = await prisma.rollPlacement.delete({
+     *   where: {
+     *     // ... filter to delete one RollPlacement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RollPlacementDeleteArgs>(args: SelectSubset<T, RollPlacementDeleteArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RollPlacement.
+     * @param {RollPlacementUpdateArgs} args - Arguments to update one RollPlacement.
+     * @example
+     * // Update one RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RollPlacementUpdateArgs>(args: SelectSubset<T, RollPlacementUpdateArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RollPlacements.
+     * @param {RollPlacementDeleteManyArgs} args - Arguments to filter RollPlacements to delete.
+     * @example
+     * // Delete a few RollPlacements
+     * const { count } = await prisma.rollPlacement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RollPlacementDeleteManyArgs>(args?: SelectSubset<T, RollPlacementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RollPlacements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RollPlacements
+     * const rollPlacement = await prisma.rollPlacement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RollPlacementUpdateManyArgs>(args: SelectSubset<T, RollPlacementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RollPlacements and returns the data updated in the database.
+     * @param {RollPlacementUpdateManyAndReturnArgs} args - Arguments to update many RollPlacements.
+     * @example
+     * // Update many RollPlacements
+     * const rollPlacement = await prisma.rollPlacement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RollPlacements and only return the `id`
+     * const rollPlacementWithIdOnly = await prisma.rollPlacement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RollPlacementUpdateManyAndReturnArgs>(args: SelectSubset<T, RollPlacementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RollPlacement.
+     * @param {RollPlacementUpsertArgs} args - Arguments to update or create a RollPlacement.
+     * @example
+     * // Update or create a RollPlacement
+     * const rollPlacement = await prisma.rollPlacement.upsert({
+     *   create: {
+     *     // ... data to create a RollPlacement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RollPlacement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RollPlacementUpsertArgs>(args: SelectSubset<T, RollPlacementUpsertArgs<ExtArgs>>): Prisma__RollPlacementClient<$Result.GetResult<Prisma.$RollPlacementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RollPlacements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementCountArgs} args - Arguments to filter RollPlacements to count.
+     * @example
+     * // Count the number of RollPlacements
+     * const count = await prisma.rollPlacement.count({
+     *   where: {
+     *     // ... the filter for the RollPlacements we want to count
+     *   }
+     * })
+    **/
+    count<T extends RollPlacementCountArgs>(
+      args?: Subset<T, RollPlacementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RollPlacementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RollPlacement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RollPlacementAggregateArgs>(args: Subset<T, RollPlacementAggregateArgs>): Prisma.PrismaPromise<GetRollPlacementAggregateType<T>>
+
+    /**
+     * Group by RollPlacement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RollPlacementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RollPlacementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RollPlacementGroupByArgs['orderBy'] }
+        : { orderBy?: RollPlacementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RollPlacementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRollPlacementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RollPlacement model
+   */
+  readonly fields: RollPlacementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RollPlacement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RollPlacementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    PaternosterAxis<T extends PaternosterAxisDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PaternosterAxisDefaultArgs<ExtArgs>>): Prisma__PaternosterAxisClient<$Result.GetResult<Prisma.$PaternosterAxisPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    Item<T extends ItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemDefaultArgs<ExtArgs>>): Prisma__ItemClient<$Result.GetResult<Prisma.$ItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RollPlacement model
+   */ 
+  interface RollPlacementFieldRefs {
+    readonly id: FieldRef<"RollPlacement", 'Int'>
+    readonly AxisId: FieldRef<"RollPlacement", 'Int'>
+    readonly Itemcode: FieldRef<"RollPlacement", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RollPlacement findUnique
+   */
+  export type RollPlacementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter, which RollPlacement to fetch.
+     */
+    where: RollPlacementWhereUniqueInput
+  }
+
+  /**
+   * RollPlacement findUniqueOrThrow
+   */
+  export type RollPlacementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter, which RollPlacement to fetch.
+     */
+    where: RollPlacementWhereUniqueInput
+  }
+
+  /**
+   * RollPlacement findFirst
+   */
+  export type RollPlacementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter, which RollPlacement to fetch.
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RollPlacements to fetch.
+     */
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RollPlacements.
+     */
+    cursor?: RollPlacementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RollPlacements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RollPlacements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RollPlacements.
+     */
+    distinct?: RollPlacementScalarFieldEnum | RollPlacementScalarFieldEnum[]
+  }
+
+  /**
+   * RollPlacement findFirstOrThrow
+   */
+  export type RollPlacementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter, which RollPlacement to fetch.
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RollPlacements to fetch.
+     */
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RollPlacements.
+     */
+    cursor?: RollPlacementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RollPlacements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RollPlacements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RollPlacements.
+     */
+    distinct?: RollPlacementScalarFieldEnum | RollPlacementScalarFieldEnum[]
+  }
+
+  /**
+   * RollPlacement findMany
+   */
+  export type RollPlacementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter, which RollPlacements to fetch.
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RollPlacements to fetch.
+     */
+    orderBy?: RollPlacementOrderByWithRelationInput | RollPlacementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RollPlacements.
+     */
+    cursor?: RollPlacementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RollPlacements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RollPlacements.
+     */
+    skip?: number
+    distinct?: RollPlacementScalarFieldEnum | RollPlacementScalarFieldEnum[]
+  }
+
+  /**
+   * RollPlacement create
+   */
+  export type RollPlacementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RollPlacement.
+     */
+    data: XOR<RollPlacementCreateInput, RollPlacementUncheckedCreateInput>
+  }
+
+  /**
+   * RollPlacement createMany
+   */
+  export type RollPlacementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RollPlacements.
+     */
+    data: RollPlacementCreateManyInput | RollPlacementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RollPlacement createManyAndReturn
+   */
+  export type RollPlacementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * The data used to create many RollPlacements.
+     */
+    data: RollPlacementCreateManyInput | RollPlacementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RollPlacement update
+   */
+  export type RollPlacementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RollPlacement.
+     */
+    data: XOR<RollPlacementUpdateInput, RollPlacementUncheckedUpdateInput>
+    /**
+     * Choose, which RollPlacement to update.
+     */
+    where: RollPlacementWhereUniqueInput
+  }
+
+  /**
+   * RollPlacement updateMany
+   */
+  export type RollPlacementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RollPlacements.
+     */
+    data: XOR<RollPlacementUpdateManyMutationInput, RollPlacementUncheckedUpdateManyInput>
+    /**
+     * Filter which RollPlacements to update
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * Limit how many RollPlacements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RollPlacement updateManyAndReturn
+   */
+  export type RollPlacementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * The data used to update RollPlacements.
+     */
+    data: XOR<RollPlacementUpdateManyMutationInput, RollPlacementUncheckedUpdateManyInput>
+    /**
+     * Filter which RollPlacements to update
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * Limit how many RollPlacements to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RollPlacement upsert
+   */
+  export type RollPlacementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RollPlacement to update in case it exists.
+     */
+    where: RollPlacementWhereUniqueInput
+    /**
+     * In case the RollPlacement found by the `where` argument doesn't exist, create a new RollPlacement with this data.
+     */
+    create: XOR<RollPlacementCreateInput, RollPlacementUncheckedCreateInput>
+    /**
+     * In case the RollPlacement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RollPlacementUpdateInput, RollPlacementUncheckedUpdateInput>
+  }
+
+  /**
+   * RollPlacement delete
+   */
+  export type RollPlacementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+    /**
+     * Filter which RollPlacement to delete.
+     */
+    where: RollPlacementWhereUniqueInput
+  }
+
+  /**
+   * RollPlacement deleteMany
+   */
+  export type RollPlacementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RollPlacements to delete
+     */
+    where?: RollPlacementWhereInput
+    /**
+     * Limit how many RollPlacements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RollPlacement without action
+   */
+  export type RollPlacementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RollPlacement
+     */
+    select?: RollPlacementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RollPlacement
+     */
+    omit?: RollPlacementOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RollPlacementInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -10871,6 +14507,33 @@ export namespace Prisma {
   };
 
   export type ActivationRejectionScalarFieldEnum = (typeof ActivationRejectionScalarFieldEnum)[keyof typeof ActivationRejectionScalarFieldEnum]
+
+
+  export const PaternosterScalarFieldEnum: {
+    id: 'id',
+    Name: 'Name',
+    MaxSize: 'MaxSize',
+    ShopId: 'ShopId'
+  };
+
+  export type PaternosterScalarFieldEnum = (typeof PaternosterScalarFieldEnum)[keyof typeof PaternosterScalarFieldEnum]
+
+
+  export const PaternosterAxisScalarFieldEnum: {
+    id: 'id',
+    PaternosterId: 'PaternosterId'
+  };
+
+  export type PaternosterAxisScalarFieldEnum = (typeof PaternosterAxisScalarFieldEnum)[keyof typeof PaternosterAxisScalarFieldEnum]
+
+
+  export const RollPlacementScalarFieldEnum: {
+    id: 'id',
+    AxisId: 'AxisId',
+    Itemcode: 'Itemcode'
+  };
+
+  export type RollPlacementScalarFieldEnum = (typeof RollPlacementScalarFieldEnum)[keyof typeof RollPlacementScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -11268,6 +14931,7 @@ export namespace Prisma {
     type?: EnumItemTypeFilter<"Item"> | $Enums.ItemType
     departamentId?: IntNullableFilter<"Item"> | number | null
     remains?: RemainListRelationFilter
+    RollPlacement?: RollPlacementListRelationFilter
   }
 
   export type ItemOrderByWithRelationInput = {
@@ -11276,6 +14940,7 @@ export namespace Prisma {
     type?: SortOrder
     departamentId?: SortOrderInput | SortOrder
     remains?: RemainOrderByRelationAggregateInput
+    RollPlacement?: RollPlacementOrderByRelationAggregateInput
   }
 
   export type ItemWhereUniqueInput = Prisma.AtLeast<{
@@ -11287,6 +14952,7 @@ export namespace Prisma {
     type?: EnumItemTypeFilter<"Item"> | $Enums.ItemType
     departamentId?: IntNullableFilter<"Item"> | number | null
     remains?: RemainListRelationFilter
+    RollPlacement?: RollPlacementListRelationFilter
   }, "code">
 
   export type ItemOrderByWithAggregationInput = {
@@ -11592,6 +15258,153 @@ export namespace Prisma {
     reason?: StringWithAggregatesFilter<"ActivationRejection"> | string
   }
 
+  export type PaternosterWhereInput = {
+    AND?: PaternosterWhereInput | PaternosterWhereInput[]
+    OR?: PaternosterWhereInput[]
+    NOT?: PaternosterWhereInput | PaternosterWhereInput[]
+    id?: IntFilter<"Paternoster"> | number
+    Name?: StringFilter<"Paternoster"> | string
+    MaxSize?: FloatFilter<"Paternoster"> | number
+    ShopId?: IntFilter<"Paternoster"> | number
+    Axises?: PaternosterAxisListRelationFilter
+  }
+
+  export type PaternosterOrderByWithRelationInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+    Axises?: PaternosterAxisOrderByRelationAggregateInput
+  }
+
+  export type PaternosterWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PaternosterWhereInput | PaternosterWhereInput[]
+    OR?: PaternosterWhereInput[]
+    NOT?: PaternosterWhereInput | PaternosterWhereInput[]
+    Name?: StringFilter<"Paternoster"> | string
+    MaxSize?: FloatFilter<"Paternoster"> | number
+    ShopId?: IntFilter<"Paternoster"> | number
+    Axises?: PaternosterAxisListRelationFilter
+  }, "id">
+
+  export type PaternosterOrderByWithAggregationInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+    _count?: PaternosterCountOrderByAggregateInput
+    _avg?: PaternosterAvgOrderByAggregateInput
+    _max?: PaternosterMaxOrderByAggregateInput
+    _min?: PaternosterMinOrderByAggregateInput
+    _sum?: PaternosterSumOrderByAggregateInput
+  }
+
+  export type PaternosterScalarWhereWithAggregatesInput = {
+    AND?: PaternosterScalarWhereWithAggregatesInput | PaternosterScalarWhereWithAggregatesInput[]
+    OR?: PaternosterScalarWhereWithAggregatesInput[]
+    NOT?: PaternosterScalarWhereWithAggregatesInput | PaternosterScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Paternoster"> | number
+    Name?: StringWithAggregatesFilter<"Paternoster"> | string
+    MaxSize?: FloatWithAggregatesFilter<"Paternoster"> | number
+    ShopId?: IntWithAggregatesFilter<"Paternoster"> | number
+  }
+
+  export type PaternosterAxisWhereInput = {
+    AND?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
+    OR?: PaternosterAxisWhereInput[]
+    NOT?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
+    id?: IntFilter<"PaternosterAxis"> | number
+    PaternosterId?: IntFilter<"PaternosterAxis"> | number
+    Paternoster?: XOR<PaternosterScalarRelationFilter, PaternosterWhereInput>
+    Placements?: RollPlacementListRelationFilter
+  }
+
+  export type PaternosterAxisOrderByWithRelationInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+    Paternoster?: PaternosterOrderByWithRelationInput
+    Placements?: RollPlacementOrderByRelationAggregateInput
+  }
+
+  export type PaternosterAxisWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
+    OR?: PaternosterAxisWhereInput[]
+    NOT?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
+    PaternosterId?: IntFilter<"PaternosterAxis"> | number
+    Paternoster?: XOR<PaternosterScalarRelationFilter, PaternosterWhereInput>
+    Placements?: RollPlacementListRelationFilter
+  }, "id">
+
+  export type PaternosterAxisOrderByWithAggregationInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+    _count?: PaternosterAxisCountOrderByAggregateInput
+    _avg?: PaternosterAxisAvgOrderByAggregateInput
+    _max?: PaternosterAxisMaxOrderByAggregateInput
+    _min?: PaternosterAxisMinOrderByAggregateInput
+    _sum?: PaternosterAxisSumOrderByAggregateInput
+  }
+
+  export type PaternosterAxisScalarWhereWithAggregatesInput = {
+    AND?: PaternosterAxisScalarWhereWithAggregatesInput | PaternosterAxisScalarWhereWithAggregatesInput[]
+    OR?: PaternosterAxisScalarWhereWithAggregatesInput[]
+    NOT?: PaternosterAxisScalarWhereWithAggregatesInput | PaternosterAxisScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"PaternosterAxis"> | number
+    PaternosterId?: IntWithAggregatesFilter<"PaternosterAxis"> | number
+  }
+
+  export type RollPlacementWhereInput = {
+    AND?: RollPlacementWhereInput | RollPlacementWhereInput[]
+    OR?: RollPlacementWhereInput[]
+    NOT?: RollPlacementWhereInput | RollPlacementWhereInput[]
+    id?: IntFilter<"RollPlacement"> | number
+    AxisId?: IntFilter<"RollPlacement"> | number
+    Itemcode?: StringFilter<"RollPlacement"> | string
+    PaternosterAxis?: XOR<PaternosterAxisScalarRelationFilter, PaternosterAxisWhereInput>
+    Item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }
+
+  export type RollPlacementOrderByWithRelationInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+    Itemcode?: SortOrder
+    PaternosterAxis?: PaternosterAxisOrderByWithRelationInput
+    Item?: ItemOrderByWithRelationInput
+  }
+
+  export type RollPlacementWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: RollPlacementWhereInput | RollPlacementWhereInput[]
+    OR?: RollPlacementWhereInput[]
+    NOT?: RollPlacementWhereInput | RollPlacementWhereInput[]
+    AxisId?: IntFilter<"RollPlacement"> | number
+    Itemcode?: StringFilter<"RollPlacement"> | string
+    PaternosterAxis?: XOR<PaternosterAxisScalarRelationFilter, PaternosterAxisWhereInput>
+    Item?: XOR<ItemScalarRelationFilter, ItemWhereInput>
+  }, "id">
+
+  export type RollPlacementOrderByWithAggregationInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+    Itemcode?: SortOrder
+    _count?: RollPlacementCountOrderByAggregateInput
+    _avg?: RollPlacementAvgOrderByAggregateInput
+    _max?: RollPlacementMaxOrderByAggregateInput
+    _min?: RollPlacementMinOrderByAggregateInput
+    _sum?: RollPlacementSumOrderByAggregateInput
+  }
+
+  export type RollPlacementScalarWhereWithAggregatesInput = {
+    AND?: RollPlacementScalarWhereWithAggregatesInput | RollPlacementScalarWhereWithAggregatesInput[]
+    OR?: RollPlacementScalarWhereWithAggregatesInput[]
+    NOT?: RollPlacementScalarWhereWithAggregatesInput | RollPlacementScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"RollPlacement"> | number
+    AxisId?: IntWithAggregatesFilter<"RollPlacement"> | number
+    Itemcode?: StringWithAggregatesFilter<"RollPlacement"> | string
+  }
+
   export type UserCreateInput = {
     name: string
     password: string
@@ -11814,6 +15627,7 @@ export namespace Prisma {
     type: $Enums.ItemType
     departamentId?: number | null
     remains?: RemainCreateNestedManyWithoutItemInput
+    RollPlacement?: RollPlacementCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateInput = {
@@ -11822,6 +15636,7 @@ export namespace Prisma {
     type: $Enums.ItemType
     departamentId?: number | null
     remains?: RemainUncheckedCreateNestedManyWithoutItemInput
+    RollPlacement?: RollPlacementUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemUpdateInput = {
@@ -11830,6 +15645,7 @@ export namespace Prisma {
     type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
     departamentId?: NullableIntFieldUpdateOperationsInput | number | null
     remains?: RemainUpdateManyWithoutItemNestedInput
+    RollPlacement?: RollPlacementUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateInput = {
@@ -11838,6 +15654,7 @@ export namespace Prisma {
     type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
     departamentId?: NullableIntFieldUpdateOperationsInput | number | null
     remains?: RemainUncheckedUpdateManyWithoutItemNestedInput
+    RollPlacement?: RollPlacementUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type ItemCreateManyInput = {
@@ -12139,6 +15956,130 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     reason?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type PaternosterCreateInput = {
+    Name: string
+    MaxSize: number
+    ShopId: number
+    Axises?: PaternosterAxisCreateNestedManyWithoutPaternosterInput
+  }
+
+  export type PaternosterUncheckedCreateInput = {
+    id?: number
+    Name: string
+    MaxSize: number
+    ShopId: number
+    Axises?: PaternosterAxisUncheckedCreateNestedManyWithoutPaternosterInput
+  }
+
+  export type PaternosterUpdateInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+    Axises?: PaternosterAxisUpdateManyWithoutPaternosterNestedInput
+  }
+
+  export type PaternosterUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+    Axises?: PaternosterAxisUncheckedUpdateManyWithoutPaternosterNestedInput
+  }
+
+  export type PaternosterCreateManyInput = {
+    id?: number
+    Name: string
+    MaxSize: number
+    ShopId: number
+  }
+
+  export type PaternosterUpdateManyMutationInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaternosterUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaternosterAxisCreateInput = {
+    Paternoster: PaternosterCreateNestedOneWithoutAxisesInput
+    Placements?: RollPlacementCreateNestedManyWithoutPaternosterAxisInput
+  }
+
+  export type PaternosterAxisUncheckedCreateInput = {
+    id?: number
+    PaternosterId: number
+    Placements?: RollPlacementUncheckedCreateNestedManyWithoutPaternosterAxisInput
+  }
+
+  export type PaternosterAxisUpdateInput = {
+    Paternoster?: PaternosterUpdateOneRequiredWithoutAxisesNestedInput
+    Placements?: RollPlacementUpdateManyWithoutPaternosterAxisNestedInput
+  }
+
+  export type PaternosterAxisUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    PaternosterId?: IntFieldUpdateOperationsInput | number
+    Placements?: RollPlacementUncheckedUpdateManyWithoutPaternosterAxisNestedInput
+  }
+
+  export type PaternosterAxisCreateManyInput = {
+    id?: number
+    PaternosterId: number
+  }
+
+  export type PaternosterAxisUpdateManyMutationInput = {
+
+  }
+
+  export type PaternosterAxisUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    PaternosterId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RollPlacementCreateInput = {
+    PaternosterAxis: PaternosterAxisCreateNestedOneWithoutPlacementsInput
+    Item: ItemCreateNestedOneWithoutRollPlacementInput
+  }
+
+  export type RollPlacementUncheckedCreateInput = {
+    id?: number
+    AxisId: number
+    Itemcode: string
+  }
+
+  export type RollPlacementUpdateInput = {
+    PaternosterAxis?: PaternosterAxisUpdateOneRequiredWithoutPlacementsNestedInput
+    Item?: ItemUpdateOneRequiredWithoutRollPlacementNestedInput
+  }
+
+  export type RollPlacementUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    AxisId?: IntFieldUpdateOperationsInput | number
+    Itemcode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RollPlacementCreateManyInput = {
+    id?: number
+    AxisId: number
+    Itemcode: string
+  }
+
+  export type RollPlacementUpdateManyMutationInput = {
+
+  }
+
+  export type RollPlacementUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    AxisId?: IntFieldUpdateOperationsInput | number
+    Itemcode?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -12574,6 +16515,16 @@ export namespace Prisma {
     not?: NestedEnumItemTypeFilter<$PrismaModel> | $Enums.ItemType
   }
 
+  export type RollPlacementListRelationFilter = {
+    every?: RollPlacementWhereInput
+    some?: RollPlacementWhereInput
+    none?: RollPlacementWhereInput
+  }
+
+  export type RollPlacementOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ItemCountOrderByAggregateInput = {
     code?: SortOrder
     name?: SortOrder
@@ -12877,6 +16828,139 @@ export namespace Prisma {
   export type ActivationRejectionSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type PaternosterAxisListRelationFilter = {
+    every?: PaternosterAxisWhereInput
+    some?: PaternosterAxisWhereInput
+    none?: PaternosterAxisWhereInput
+  }
+
+  export type PaternosterAxisOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaternosterCountOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+  }
+
+  export type PaternosterAvgOrderByAggregateInput = {
+    id?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+  }
+
+  export type PaternosterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+  }
+
+  export type PaternosterMinOrderByAggregateInput = {
+    id?: SortOrder
+    Name?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+  }
+
+  export type PaternosterSumOrderByAggregateInput = {
+    id?: SortOrder
+    MaxSize?: SortOrder
+    ShopId?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type PaternosterScalarRelationFilter = {
+    is?: PaternosterWhereInput
+    isNot?: PaternosterWhereInput
+  }
+
+  export type PaternosterAxisCountOrderByAggregateInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+  }
+
+  export type PaternosterAxisAvgOrderByAggregateInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+  }
+
+  export type PaternosterAxisMaxOrderByAggregateInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+  }
+
+  export type PaternosterAxisMinOrderByAggregateInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+  }
+
+  export type PaternosterAxisSumOrderByAggregateInput = {
+    id?: SortOrder
+    PaternosterId?: SortOrder
+  }
+
+  export type PaternosterAxisScalarRelationFilter = {
+    is?: PaternosterAxisWhereInput
+    isNot?: PaternosterAxisWhereInput
+  }
+
+  export type RollPlacementCountOrderByAggregateInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+    Itemcode?: SortOrder
+  }
+
+  export type RollPlacementAvgOrderByAggregateInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+  }
+
+  export type RollPlacementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+    Itemcode?: SortOrder
+  }
+
+  export type RollPlacementMinOrderByAggregateInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
+    Itemcode?: SortOrder
+  }
+
+  export type RollPlacementSumOrderByAggregateInput = {
+    id?: SortOrder
+    AxisId?: SortOrder
   }
 
   export type NotificationCreateNestedManyWithoutForUserInput = {
@@ -13186,11 +17270,25 @@ export namespace Prisma {
     connect?: RemainWhereUniqueInput | RemainWhereUniqueInput[]
   }
 
+  export type RollPlacementCreateNestedManyWithoutItemInput = {
+    create?: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput> | RollPlacementCreateWithoutItemInput[] | RollPlacementUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutItemInput | RollPlacementCreateOrConnectWithoutItemInput[]
+    createMany?: RollPlacementCreateManyItemInputEnvelope
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+  }
+
   export type RemainUncheckedCreateNestedManyWithoutItemInput = {
     create?: XOR<RemainCreateWithoutItemInput, RemainUncheckedCreateWithoutItemInput> | RemainCreateWithoutItemInput[] | RemainUncheckedCreateWithoutItemInput[]
     connectOrCreate?: RemainCreateOrConnectWithoutItemInput | RemainCreateOrConnectWithoutItemInput[]
     createMany?: RemainCreateManyItemInputEnvelope
     connect?: RemainWhereUniqueInput | RemainWhereUniqueInput[]
+  }
+
+  export type RollPlacementUncheckedCreateNestedManyWithoutItemInput = {
+    create?: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput> | RollPlacementCreateWithoutItemInput[] | RollPlacementUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutItemInput | RollPlacementCreateOrConnectWithoutItemInput[]
+    createMany?: RollPlacementCreateManyItemInputEnvelope
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
   }
 
   export type EnumItemTypeFieldUpdateOperationsInput = {
@@ -13211,6 +17309,20 @@ export namespace Prisma {
     deleteMany?: RemainScalarWhereInput | RemainScalarWhereInput[]
   }
 
+  export type RollPlacementUpdateManyWithoutItemNestedInput = {
+    create?: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput> | RollPlacementCreateWithoutItemInput[] | RollPlacementUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutItemInput | RollPlacementCreateOrConnectWithoutItemInput[]
+    upsert?: RollPlacementUpsertWithWhereUniqueWithoutItemInput | RollPlacementUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: RollPlacementCreateManyItemInputEnvelope
+    set?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    disconnect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    delete?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    update?: RollPlacementUpdateWithWhereUniqueWithoutItemInput | RollPlacementUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: RollPlacementUpdateManyWithWhereWithoutItemInput | RollPlacementUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
+  }
+
   export type RemainUncheckedUpdateManyWithoutItemNestedInput = {
     create?: XOR<RemainCreateWithoutItemInput, RemainUncheckedCreateWithoutItemInput> | RemainCreateWithoutItemInput[] | RemainUncheckedCreateWithoutItemInput[]
     connectOrCreate?: RemainCreateOrConnectWithoutItemInput | RemainCreateOrConnectWithoutItemInput[]
@@ -13223,6 +17335,20 @@ export namespace Prisma {
     update?: RemainUpdateWithWhereUniqueWithoutItemInput | RemainUpdateWithWhereUniqueWithoutItemInput[]
     updateMany?: RemainUpdateManyWithWhereWithoutItemInput | RemainUpdateManyWithWhereWithoutItemInput[]
     deleteMany?: RemainScalarWhereInput | RemainScalarWhereInput[]
+  }
+
+  export type RollPlacementUncheckedUpdateManyWithoutItemNestedInput = {
+    create?: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput> | RollPlacementCreateWithoutItemInput[] | RollPlacementUncheckedCreateWithoutItemInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutItemInput | RollPlacementCreateOrConnectWithoutItemInput[]
+    upsert?: RollPlacementUpsertWithWhereUniqueWithoutItemInput | RollPlacementUpsertWithWhereUniqueWithoutItemInput[]
+    createMany?: RollPlacementCreateManyItemInputEnvelope
+    set?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    disconnect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    delete?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    update?: RollPlacementUpdateWithWhereUniqueWithoutItemInput | RollPlacementUpdateWithWhereUniqueWithoutItemInput[]
+    updateMany?: RollPlacementUpdateManyWithWhereWithoutItemInput | RollPlacementUpdateManyWithWhereWithoutItemInput[]
+    deleteMany?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
   }
 
   export type ItemCreateNestedOneWithoutRemainsInput = {
@@ -13297,6 +17423,140 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutActivationRejectionInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutActivationRejectionInput, UserUpdateWithoutActivationRejectionInput>, UserUncheckedUpdateWithoutActivationRejectionInput>
+  }
+
+  export type PaternosterAxisCreateNestedManyWithoutPaternosterInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput> | PaternosterAxisCreateWithoutPaternosterInput[] | PaternosterAxisUncheckedCreateWithoutPaternosterInput[]
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPaternosterInput | PaternosterAxisCreateOrConnectWithoutPaternosterInput[]
+    createMany?: PaternosterAxisCreateManyPaternosterInputEnvelope
+    connect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+  }
+
+  export type PaternosterAxisUncheckedCreateNestedManyWithoutPaternosterInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput> | PaternosterAxisCreateWithoutPaternosterInput[] | PaternosterAxisUncheckedCreateWithoutPaternosterInput[]
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPaternosterInput | PaternosterAxisCreateOrConnectWithoutPaternosterInput[]
+    createMany?: PaternosterAxisCreateManyPaternosterInputEnvelope
+    connect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type PaternosterAxisUpdateManyWithoutPaternosterNestedInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput> | PaternosterAxisCreateWithoutPaternosterInput[] | PaternosterAxisUncheckedCreateWithoutPaternosterInput[]
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPaternosterInput | PaternosterAxisCreateOrConnectWithoutPaternosterInput[]
+    upsert?: PaternosterAxisUpsertWithWhereUniqueWithoutPaternosterInput | PaternosterAxisUpsertWithWhereUniqueWithoutPaternosterInput[]
+    createMany?: PaternosterAxisCreateManyPaternosterInputEnvelope
+    set?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    disconnect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    delete?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    connect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    update?: PaternosterAxisUpdateWithWhereUniqueWithoutPaternosterInput | PaternosterAxisUpdateWithWhereUniqueWithoutPaternosterInput[]
+    updateMany?: PaternosterAxisUpdateManyWithWhereWithoutPaternosterInput | PaternosterAxisUpdateManyWithWhereWithoutPaternosterInput[]
+    deleteMany?: PaternosterAxisScalarWhereInput | PaternosterAxisScalarWhereInput[]
+  }
+
+  export type PaternosterAxisUncheckedUpdateManyWithoutPaternosterNestedInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput> | PaternosterAxisCreateWithoutPaternosterInput[] | PaternosterAxisUncheckedCreateWithoutPaternosterInput[]
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPaternosterInput | PaternosterAxisCreateOrConnectWithoutPaternosterInput[]
+    upsert?: PaternosterAxisUpsertWithWhereUniqueWithoutPaternosterInput | PaternosterAxisUpsertWithWhereUniqueWithoutPaternosterInput[]
+    createMany?: PaternosterAxisCreateManyPaternosterInputEnvelope
+    set?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    disconnect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    delete?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    connect?: PaternosterAxisWhereUniqueInput | PaternosterAxisWhereUniqueInput[]
+    update?: PaternosterAxisUpdateWithWhereUniqueWithoutPaternosterInput | PaternosterAxisUpdateWithWhereUniqueWithoutPaternosterInput[]
+    updateMany?: PaternosterAxisUpdateManyWithWhereWithoutPaternosterInput | PaternosterAxisUpdateManyWithWhereWithoutPaternosterInput[]
+    deleteMany?: PaternosterAxisScalarWhereInput | PaternosterAxisScalarWhereInput[]
+  }
+
+  export type PaternosterCreateNestedOneWithoutAxisesInput = {
+    create?: XOR<PaternosterCreateWithoutAxisesInput, PaternosterUncheckedCreateWithoutAxisesInput>
+    connectOrCreate?: PaternosterCreateOrConnectWithoutAxisesInput
+    connect?: PaternosterWhereUniqueInput
+  }
+
+  export type RollPlacementCreateNestedManyWithoutPaternosterAxisInput = {
+    create?: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput> | RollPlacementCreateWithoutPaternosterAxisInput[] | RollPlacementUncheckedCreateWithoutPaternosterAxisInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutPaternosterAxisInput | RollPlacementCreateOrConnectWithoutPaternosterAxisInput[]
+    createMany?: RollPlacementCreateManyPaternosterAxisInputEnvelope
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+  }
+
+  export type RollPlacementUncheckedCreateNestedManyWithoutPaternosterAxisInput = {
+    create?: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput> | RollPlacementCreateWithoutPaternosterAxisInput[] | RollPlacementUncheckedCreateWithoutPaternosterAxisInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutPaternosterAxisInput | RollPlacementCreateOrConnectWithoutPaternosterAxisInput[]
+    createMany?: RollPlacementCreateManyPaternosterAxisInputEnvelope
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+  }
+
+  export type PaternosterUpdateOneRequiredWithoutAxisesNestedInput = {
+    create?: XOR<PaternosterCreateWithoutAxisesInput, PaternosterUncheckedCreateWithoutAxisesInput>
+    connectOrCreate?: PaternosterCreateOrConnectWithoutAxisesInput
+    upsert?: PaternosterUpsertWithoutAxisesInput
+    connect?: PaternosterWhereUniqueInput
+    update?: XOR<XOR<PaternosterUpdateToOneWithWhereWithoutAxisesInput, PaternosterUpdateWithoutAxisesInput>, PaternosterUncheckedUpdateWithoutAxisesInput>
+  }
+
+  export type RollPlacementUpdateManyWithoutPaternosterAxisNestedInput = {
+    create?: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput> | RollPlacementCreateWithoutPaternosterAxisInput[] | RollPlacementUncheckedCreateWithoutPaternosterAxisInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutPaternosterAxisInput | RollPlacementCreateOrConnectWithoutPaternosterAxisInput[]
+    upsert?: RollPlacementUpsertWithWhereUniqueWithoutPaternosterAxisInput | RollPlacementUpsertWithWhereUniqueWithoutPaternosterAxisInput[]
+    createMany?: RollPlacementCreateManyPaternosterAxisInputEnvelope
+    set?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    disconnect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    delete?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    update?: RollPlacementUpdateWithWhereUniqueWithoutPaternosterAxisInput | RollPlacementUpdateWithWhereUniqueWithoutPaternosterAxisInput[]
+    updateMany?: RollPlacementUpdateManyWithWhereWithoutPaternosterAxisInput | RollPlacementUpdateManyWithWhereWithoutPaternosterAxisInput[]
+    deleteMany?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
+  }
+
+  export type RollPlacementUncheckedUpdateManyWithoutPaternosterAxisNestedInput = {
+    create?: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput> | RollPlacementCreateWithoutPaternosterAxisInput[] | RollPlacementUncheckedCreateWithoutPaternosterAxisInput[]
+    connectOrCreate?: RollPlacementCreateOrConnectWithoutPaternosterAxisInput | RollPlacementCreateOrConnectWithoutPaternosterAxisInput[]
+    upsert?: RollPlacementUpsertWithWhereUniqueWithoutPaternosterAxisInput | RollPlacementUpsertWithWhereUniqueWithoutPaternosterAxisInput[]
+    createMany?: RollPlacementCreateManyPaternosterAxisInputEnvelope
+    set?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    disconnect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    delete?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    connect?: RollPlacementWhereUniqueInput | RollPlacementWhereUniqueInput[]
+    update?: RollPlacementUpdateWithWhereUniqueWithoutPaternosterAxisInput | RollPlacementUpdateWithWhereUniqueWithoutPaternosterAxisInput[]
+    updateMany?: RollPlacementUpdateManyWithWhereWithoutPaternosterAxisInput | RollPlacementUpdateManyWithWhereWithoutPaternosterAxisInput[]
+    deleteMany?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
+  }
+
+  export type PaternosterAxisCreateNestedOneWithoutPlacementsInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPlacementsInput, PaternosterAxisUncheckedCreateWithoutPlacementsInput>
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPlacementsInput
+    connect?: PaternosterAxisWhereUniqueInput
+  }
+
+  export type ItemCreateNestedOneWithoutRollPlacementInput = {
+    create?: XOR<ItemCreateWithoutRollPlacementInput, ItemUncheckedCreateWithoutRollPlacementInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutRollPlacementInput
+    connect?: ItemWhereUniqueInput
+  }
+
+  export type PaternosterAxisUpdateOneRequiredWithoutPlacementsNestedInput = {
+    create?: XOR<PaternosterAxisCreateWithoutPlacementsInput, PaternosterAxisUncheckedCreateWithoutPlacementsInput>
+    connectOrCreate?: PaternosterAxisCreateOrConnectWithoutPlacementsInput
+    upsert?: PaternosterAxisUpsertWithoutPlacementsInput
+    connect?: PaternosterAxisWhereUniqueInput
+    update?: XOR<XOR<PaternosterAxisUpdateToOneWithWhereWithoutPlacementsInput, PaternosterAxisUpdateWithoutPlacementsInput>, PaternosterAxisUncheckedUpdateWithoutPlacementsInput>
+  }
+
+  export type ItemUpdateOneRequiredWithoutRollPlacementNestedInput = {
+    create?: XOR<ItemCreateWithoutRollPlacementInput, ItemUncheckedCreateWithoutRollPlacementInput>
+    connectOrCreate?: ItemCreateOrConnectWithoutRollPlacementInput
+    upsert?: ItemUpsertWithoutRollPlacementInput
+    connect?: ItemWhereUniqueInput
+    update?: XOR<XOR<ItemUpdateToOneWithWhereWithoutRollPlacementInput, ItemUpdateWithoutRollPlacementInput>, ItemUncheckedUpdateWithoutRollPlacementInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -13620,6 +17880,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumRequestStatusFilter<$PrismaModel>
     _max?: NestedEnumRequestStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NotificationCreateWithoutForUserInput = {
@@ -14139,6 +18415,25 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RollPlacementCreateWithoutItemInput = {
+    PaternosterAxis: PaternosterAxisCreateNestedOneWithoutPlacementsInput
+  }
+
+  export type RollPlacementUncheckedCreateWithoutItemInput = {
+    id?: number
+    AxisId: number
+  }
+
+  export type RollPlacementCreateOrConnectWithoutItemInput = {
+    where: RollPlacementWhereUniqueInput
+    create: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput>
+  }
+
+  export type RollPlacementCreateManyItemInputEnvelope = {
+    data: RollPlacementCreateManyItemInput | RollPlacementCreateManyItemInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RemainUpsertWithWhereUniqueWithoutItemInput = {
     where: RemainWhereUniqueInput
     update: XOR<RemainUpdateWithoutItemInput, RemainUncheckedUpdateWithoutItemInput>
@@ -14155,11 +18450,37 @@ export namespace Prisma {
     data: XOR<RemainUpdateManyMutationInput, RemainUncheckedUpdateManyWithoutItemInput>
   }
 
+  export type RollPlacementUpsertWithWhereUniqueWithoutItemInput = {
+    where: RollPlacementWhereUniqueInput
+    update: XOR<RollPlacementUpdateWithoutItemInput, RollPlacementUncheckedUpdateWithoutItemInput>
+    create: XOR<RollPlacementCreateWithoutItemInput, RollPlacementUncheckedCreateWithoutItemInput>
+  }
+
+  export type RollPlacementUpdateWithWhereUniqueWithoutItemInput = {
+    where: RollPlacementWhereUniqueInput
+    data: XOR<RollPlacementUpdateWithoutItemInput, RollPlacementUncheckedUpdateWithoutItemInput>
+  }
+
+  export type RollPlacementUpdateManyWithWhereWithoutItemInput = {
+    where: RollPlacementScalarWhereInput
+    data: XOR<RollPlacementUpdateManyMutationInput, RollPlacementUncheckedUpdateManyWithoutItemInput>
+  }
+
+  export type RollPlacementScalarWhereInput = {
+    AND?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
+    OR?: RollPlacementScalarWhereInput[]
+    NOT?: RollPlacementScalarWhereInput | RollPlacementScalarWhereInput[]
+    id?: IntFilter<"RollPlacement"> | number
+    AxisId?: IntFilter<"RollPlacement"> | number
+    Itemcode?: StringFilter<"RollPlacement"> | string
+  }
+
   export type ItemCreateWithoutRemainsInput = {
     code: string
     name: string
     type: $Enums.ItemType
     departamentId?: number | null
+    RollPlacement?: RollPlacementCreateNestedManyWithoutItemInput
   }
 
   export type ItemUncheckedCreateWithoutRemainsInput = {
@@ -14167,6 +18488,7 @@ export namespace Prisma {
     name: string
     type: $Enums.ItemType
     departamentId?: number | null
+    RollPlacement?: RollPlacementUncheckedCreateNestedManyWithoutItemInput
   }
 
   export type ItemCreateOrConnectWithoutRemainsInput = {
@@ -14230,6 +18552,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
     departamentId?: NullableIntFieldUpdateOperationsInput | number | null
+    RollPlacement?: RollPlacementUpdateManyWithoutItemNestedInput
   }
 
   export type ItemUncheckedUpdateWithoutRemainsInput = {
@@ -14237,6 +18560,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
     departamentId?: NullableIntFieldUpdateOperationsInput | number | null
+    RollPlacement?: RollPlacementUncheckedUpdateManyWithoutItemNestedInput
   }
 
   export type UserUpsertWithoutCreatedRemainsInput = {
@@ -14543,6 +18867,208 @@ export namespace Prisma {
     toolRequests?: ToolRequestUncheckedUpdateManyWithoutForUserNestedInput
   }
 
+  export type PaternosterAxisCreateWithoutPaternosterInput = {
+    Placements?: RollPlacementCreateNestedManyWithoutPaternosterAxisInput
+  }
+
+  export type PaternosterAxisUncheckedCreateWithoutPaternosterInput = {
+    id?: number
+    Placements?: RollPlacementUncheckedCreateNestedManyWithoutPaternosterAxisInput
+  }
+
+  export type PaternosterAxisCreateOrConnectWithoutPaternosterInput = {
+    where: PaternosterAxisWhereUniqueInput
+    create: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput>
+  }
+
+  export type PaternosterAxisCreateManyPaternosterInputEnvelope = {
+    data: PaternosterAxisCreateManyPaternosterInput | PaternosterAxisCreateManyPaternosterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaternosterAxisUpsertWithWhereUniqueWithoutPaternosterInput = {
+    where: PaternosterAxisWhereUniqueInput
+    update: XOR<PaternosterAxisUpdateWithoutPaternosterInput, PaternosterAxisUncheckedUpdateWithoutPaternosterInput>
+    create: XOR<PaternosterAxisCreateWithoutPaternosterInput, PaternosterAxisUncheckedCreateWithoutPaternosterInput>
+  }
+
+  export type PaternosterAxisUpdateWithWhereUniqueWithoutPaternosterInput = {
+    where: PaternosterAxisWhereUniqueInput
+    data: XOR<PaternosterAxisUpdateWithoutPaternosterInput, PaternosterAxisUncheckedUpdateWithoutPaternosterInput>
+  }
+
+  export type PaternosterAxisUpdateManyWithWhereWithoutPaternosterInput = {
+    where: PaternosterAxisScalarWhereInput
+    data: XOR<PaternosterAxisUpdateManyMutationInput, PaternosterAxisUncheckedUpdateManyWithoutPaternosterInput>
+  }
+
+  export type PaternosterAxisScalarWhereInput = {
+    AND?: PaternosterAxisScalarWhereInput | PaternosterAxisScalarWhereInput[]
+    OR?: PaternosterAxisScalarWhereInput[]
+    NOT?: PaternosterAxisScalarWhereInput | PaternosterAxisScalarWhereInput[]
+    id?: IntFilter<"PaternosterAxis"> | number
+    PaternosterId?: IntFilter<"PaternosterAxis"> | number
+  }
+
+  export type PaternosterCreateWithoutAxisesInput = {
+    Name: string
+    MaxSize: number
+    ShopId: number
+  }
+
+  export type PaternosterUncheckedCreateWithoutAxisesInput = {
+    id?: number
+    Name: string
+    MaxSize: number
+    ShopId: number
+  }
+
+  export type PaternosterCreateOrConnectWithoutAxisesInput = {
+    where: PaternosterWhereUniqueInput
+    create: XOR<PaternosterCreateWithoutAxisesInput, PaternosterUncheckedCreateWithoutAxisesInput>
+  }
+
+  export type RollPlacementCreateWithoutPaternosterAxisInput = {
+    Item: ItemCreateNestedOneWithoutRollPlacementInput
+  }
+
+  export type RollPlacementUncheckedCreateWithoutPaternosterAxisInput = {
+    id?: number
+    Itemcode: string
+  }
+
+  export type RollPlacementCreateOrConnectWithoutPaternosterAxisInput = {
+    where: RollPlacementWhereUniqueInput
+    create: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput>
+  }
+
+  export type RollPlacementCreateManyPaternosterAxisInputEnvelope = {
+    data: RollPlacementCreateManyPaternosterAxisInput | RollPlacementCreateManyPaternosterAxisInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaternosterUpsertWithoutAxisesInput = {
+    update: XOR<PaternosterUpdateWithoutAxisesInput, PaternosterUncheckedUpdateWithoutAxisesInput>
+    create: XOR<PaternosterCreateWithoutAxisesInput, PaternosterUncheckedCreateWithoutAxisesInput>
+    where?: PaternosterWhereInput
+  }
+
+  export type PaternosterUpdateToOneWithWhereWithoutAxisesInput = {
+    where?: PaternosterWhereInput
+    data: XOR<PaternosterUpdateWithoutAxisesInput, PaternosterUncheckedUpdateWithoutAxisesInput>
+  }
+
+  export type PaternosterUpdateWithoutAxisesInput = {
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaternosterUncheckedUpdateWithoutAxisesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Name?: StringFieldUpdateOperationsInput | string
+    MaxSize?: FloatFieldUpdateOperationsInput | number
+    ShopId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RollPlacementUpsertWithWhereUniqueWithoutPaternosterAxisInput = {
+    where: RollPlacementWhereUniqueInput
+    update: XOR<RollPlacementUpdateWithoutPaternosterAxisInput, RollPlacementUncheckedUpdateWithoutPaternosterAxisInput>
+    create: XOR<RollPlacementCreateWithoutPaternosterAxisInput, RollPlacementUncheckedCreateWithoutPaternosterAxisInput>
+  }
+
+  export type RollPlacementUpdateWithWhereUniqueWithoutPaternosterAxisInput = {
+    where: RollPlacementWhereUniqueInput
+    data: XOR<RollPlacementUpdateWithoutPaternosterAxisInput, RollPlacementUncheckedUpdateWithoutPaternosterAxisInput>
+  }
+
+  export type RollPlacementUpdateManyWithWhereWithoutPaternosterAxisInput = {
+    where: RollPlacementScalarWhereInput
+    data: XOR<RollPlacementUpdateManyMutationInput, RollPlacementUncheckedUpdateManyWithoutPaternosterAxisInput>
+  }
+
+  export type PaternosterAxisCreateWithoutPlacementsInput = {
+    Paternoster: PaternosterCreateNestedOneWithoutAxisesInput
+  }
+
+  export type PaternosterAxisUncheckedCreateWithoutPlacementsInput = {
+    id?: number
+    PaternosterId: number
+  }
+
+  export type PaternosterAxisCreateOrConnectWithoutPlacementsInput = {
+    where: PaternosterAxisWhereUniqueInput
+    create: XOR<PaternosterAxisCreateWithoutPlacementsInput, PaternosterAxisUncheckedCreateWithoutPlacementsInput>
+  }
+
+  export type ItemCreateWithoutRollPlacementInput = {
+    code: string
+    name: string
+    type: $Enums.ItemType
+    departamentId?: number | null
+    remains?: RemainCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemUncheckedCreateWithoutRollPlacementInput = {
+    code: string
+    name: string
+    type: $Enums.ItemType
+    departamentId?: number | null
+    remains?: RemainUncheckedCreateNestedManyWithoutItemInput
+  }
+
+  export type ItemCreateOrConnectWithoutRollPlacementInput = {
+    where: ItemWhereUniqueInput
+    create: XOR<ItemCreateWithoutRollPlacementInput, ItemUncheckedCreateWithoutRollPlacementInput>
+  }
+
+  export type PaternosterAxisUpsertWithoutPlacementsInput = {
+    update: XOR<PaternosterAxisUpdateWithoutPlacementsInput, PaternosterAxisUncheckedUpdateWithoutPlacementsInput>
+    create: XOR<PaternosterAxisCreateWithoutPlacementsInput, PaternosterAxisUncheckedCreateWithoutPlacementsInput>
+    where?: PaternosterAxisWhereInput
+  }
+
+  export type PaternosterAxisUpdateToOneWithWhereWithoutPlacementsInput = {
+    where?: PaternosterAxisWhereInput
+    data: XOR<PaternosterAxisUpdateWithoutPlacementsInput, PaternosterAxisUncheckedUpdateWithoutPlacementsInput>
+  }
+
+  export type PaternosterAxisUpdateWithoutPlacementsInput = {
+    Paternoster?: PaternosterUpdateOneRequiredWithoutAxisesNestedInput
+  }
+
+  export type PaternosterAxisUncheckedUpdateWithoutPlacementsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    PaternosterId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ItemUpsertWithoutRollPlacementInput = {
+    update: XOR<ItemUpdateWithoutRollPlacementInput, ItemUncheckedUpdateWithoutRollPlacementInput>
+    create: XOR<ItemCreateWithoutRollPlacementInput, ItemUncheckedCreateWithoutRollPlacementInput>
+    where?: ItemWhereInput
+  }
+
+  export type ItemUpdateToOneWithWhereWithoutRollPlacementInput = {
+    where?: ItemWhereInput
+    data: XOR<ItemUpdateWithoutRollPlacementInput, ItemUncheckedUpdateWithoutRollPlacementInput>
+  }
+
+  export type ItemUpdateWithoutRollPlacementInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+    departamentId?: NullableIntFieldUpdateOperationsInput | number | null
+    remains?: RemainUpdateManyWithoutItemNestedInput
+  }
+
+  export type ItemUncheckedUpdateWithoutRollPlacementInput = {
+    code?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumItemTypeFieldUpdateOperationsInput | $Enums.ItemType
+    departamentId?: NullableIntFieldUpdateOperationsInput | number | null
+    remains?: RemainUncheckedUpdateManyWithoutItemNestedInput
+  }
+
   export type NotificationCreateManyForUserInput = {
     id?: number
     createdAt?: Date | string
@@ -14720,6 +19246,11 @@ export namespace Prisma {
     IsDeleted?: boolean
   }
 
+  export type RollPlacementCreateManyItemInput = {
+    id?: number
+    AxisId: number
+  }
+
   export type RemainUpdateWithoutItemInput = {
     id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14754,6 +19285,56 @@ export namespace Prisma {
     PrintedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     DepartamentId?: NullableIntFieldUpdateOperationsInput | number | null
     IsDeleted?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type RollPlacementUpdateWithoutItemInput = {
+    PaternosterAxis?: PaternosterAxisUpdateOneRequiredWithoutPlacementsNestedInput
+  }
+
+  export type RollPlacementUncheckedUpdateWithoutItemInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    AxisId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RollPlacementUncheckedUpdateManyWithoutItemInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    AxisId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PaternosterAxisCreateManyPaternosterInput = {
+    id?: number
+  }
+
+  export type PaternosterAxisUpdateWithoutPaternosterInput = {
+    Placements?: RollPlacementUpdateManyWithoutPaternosterAxisNestedInput
+  }
+
+  export type PaternosterAxisUncheckedUpdateWithoutPaternosterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Placements?: RollPlacementUncheckedUpdateManyWithoutPaternosterAxisNestedInput
+  }
+
+  export type PaternosterAxisUncheckedUpdateManyWithoutPaternosterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RollPlacementCreateManyPaternosterAxisInput = {
+    id?: number
+    Itemcode: string
+  }
+
+  export type RollPlacementUpdateWithoutPaternosterAxisInput = {
+    Item?: ItemUpdateOneRequiredWithoutRollPlacementNestedInput
+  }
+
+  export type RollPlacementUncheckedUpdateWithoutPaternosterAxisInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Itemcode?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RollPlacementUncheckedUpdateManyWithoutPaternosterAxisInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    Itemcode?: StringFieldUpdateOperationsInput | string
   }
 
 

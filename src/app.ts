@@ -13,6 +13,7 @@ import RequestRouter from "./routers/request/RequestRouter";
 import PrintRouter from "./routers/print/PrintRouter";
 import SystemRouter from "./routers/system/SystemRouter";
 import CreateLogger from "./tools/Logger";
+import PaternosterRouter from "./routers/paternoster/PaternosterRouter";
 
 const Logger = CreateLogger("EXPRESS");
 
@@ -31,8 +32,6 @@ app.use(cors({
 }));
 app.use(express.json());
 
-
-
 app.use(apiPath+"/admin",AdminRouter);
 app.use(apiPath+"/auth",AuthRouter);
 app.use(apiPath+"/items",ItemsRouter);
@@ -43,6 +42,7 @@ app.use(apiPath+"/tools/requests",RequestRouter);
 app.use(apiPath+"/notifications",NotificationRouter);
 app.use(apiPath+"/prints",PrintRouter);
 app.use(apiPath+"/system",SystemRouter);
+app.use(apiPath+"/paternoster",PaternosterRouter);
 app.use(ErrorHandler);
 
 app.use("/",(req: Request, res: Response) => {

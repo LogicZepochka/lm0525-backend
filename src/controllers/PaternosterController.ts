@@ -1,0 +1,274 @@
+import { version } from "../../package.json";
+import ApiAnswer from "../response/apiResponse";
+import { ErrorCode } from "../response/types";
+import CreateLogger, { LoggerMessageType } from "../tools/Logger";
+import Prisma from "../tools/prisma";
+import { PaternosterSchema, RollPlacementSchema } from "../validators/paternosterValidator";
+
+interface APIDataInfo {
+    version: string,
+}
+
+const Logger = CreateLogger("PATERNOSTER-CONTROLLER")
+
+const PaternosterController = new class PaternosterController {
+    async GetPaternoster(req: any, res: any) {
+        try {
+            const patern = Number(req.params.patern);
+            if(isNaN(patern)) 
+                return res.status(400).json(
+                    new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+                )
+            let data = await Prisma.paternoster.findFirst({
+                where:{id: patern},
+                select: {
+                    id: true,
+                    Name: true,
+                    MaxSize: true,
+                    ShopId: true,
+                    Axises: {
+                        select: {
+                            id: true,
+                            Placements: true
+                        }
+                    }
+                }
+            });
+            if(!data) {
+                return res.status(404).json(
+                    new ApiAnswer(404).SetError(ErrorCode.NotFound,"Данного патерностера не существует")
+                )
+            }
+            else {
+                return res.status(200).json(
+                    new ApiAnswer(200).SetContent(data)
+                )
+            }
+        }
+        catch(e) {
+            Logger("Failed to send data: "+e,LoggerMessageType.Error);
+            return res.status(500).json(
+                new ApiAnswer(500).SetError(ErrorCode.InternalError,"Что-то пошло не так")
+            )
+        }
+    }
+
+
+    CreateReport(req: any, res: any) {
+        throw new Error("Method not implemented.");
+    }
+
+    async CreatePaternoster(req: any, res: any) {
+        let result = PaternosterSchema.safeParse(req.body);
+        if(result.error) {
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные").SetContent(result.error.errors)
+            )
+        }
+
+        let paternoster = await Prisma.paternoster.create({
+            data: {
+                Name: result.data.name,
+                MaxSize: result.data.maxSize,
+                ShopId: result.data.shopId
+            }
+        });
+
+        if(!paternoster) {
+            Logger("Error occured when create new paternoster",LoggerMessageType.Error)
+            return res.status(500).json(
+                new ApiAnswer(500).SetError(ErrorCode.InternalError,"Что-то пошло не так")
+            )
+        }
+
+        Logger("Created new paternoster with id "+paternoster.id)
+        return res.status(200).json(
+            new ApiAnswer(200).SetContent(paternoster)
+        )
+    }
+
+    async DeletePaternoster(req: any, res: any) {
+        const patern = Number(req.params.patern);
+        if(isNaN(patern)) 
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+            )
+        let data = await Prisma.paternoster.findFirst({
+                where:{id: patern}
+            });
+        if(!data) {
+            return res.status(404).json(
+                new ApiAnswer(404).SetError(ErrorCode.NotFound,"Данного патерностера не существует")
+            )
+        }
+        else {
+            await Prisma.paternoster.delete({
+                where:{
+                    id: patern
+                }
+            })
+
+            return res.status(200).json(
+                new ApiAnswer(200).SetMessage("OK")
+            )
+        }
+    }
+
+    async CreateAxis(req: any, res: any) {
+        try {
+            const patern = Number(req.params.patern);
+            if(isNaN(patern)) 
+                return res.status(400).json(
+                    new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+                )
+            let data = await Prisma.paternoster.findFirst({
+                where:{id: patern}
+            });
+            if(!data) {
+                return res.status(404).json(
+                    new ApiAnswer(404).SetError(ErrorCode.NotFound,"Данного патерностера не существует")
+                )
+            }
+            else {
+                let result = await Prisma.paternosterAxis.create({
+                    data: {
+                        PaternosterId: patern
+                    }
+                })
+
+                return res.status(200).json(
+                    new ApiAnswer(200).SetContent(result)
+                )
+            }
+        }
+        catch(e) {
+            Logger("Failed to send data: "+e,LoggerMessageType.Error);
+            return res.status(500).json(
+                new ApiAnswer(500).SetError(ErrorCode.InternalError,"Что-то пошло не так")
+            )
+        }
+    }
+
+    async InstertToAxis(req: any, res: any) {
+        const patern = Number(req.params.patern);
+        const axis = Number(req.params.axis);
+        if(isNaN(patern) || isNaN(axis)) 
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+        )
+        
+        let result = RollPlacementSchema.safeParse(req.body);
+        if(result.error) {
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные").SetContent(result.error.errors)
+            )
+        }
+
+        let data = await Prisma.paternosterAxis.findFirst({
+            where: {
+                id: axis,
+                PaternosterId: patern
+            }
+        });
+        if(!data) {
+            return res.status(404).json(
+                new ApiAnswer(404).SetError(ErrorCode.NotFound,"Данная ось не принадлежит этому патерностеру, или оси не существует")
+            )
+        }
+
+        let item = await Prisma.item.findFirst({
+            where:{
+                code: result.data.ItemCode
+            }
+        });
+        if(!item) {
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Данного товара не существует")
+            )
+        }
+        
+        let rollPlacement = await Prisma.rollPlacement.create({
+            data: {
+                AxisId: axis,
+                Itemcode: item.code
+            }
+        })
+
+        return res.status(200).json(
+                new ApiAnswer(200).SetContent(rollPlacement)
+        )
+    }
+
+    async RemoveFromAxis(req: any, res: any) {
+        const patern = Number(req.params.patern);
+        const axis = Number(req.params.axis);
+        const id = req.params.id;
+        if(isNaN(patern) || isNaN(axis)) 
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+        )
+
+        let rollPlacement = await Prisma.rollPlacement.findFirst({
+            where: {
+                AxisId: axis,
+                Itemcode: id
+            }
+        })
+
+        if(!rollPlacement) {
+            return res.status(404).json(
+                new ApiAnswer(404).SetError(ErrorCode.NotFound,"Предмета нет на оси, либо ось не существует")
+            )
+        }
+
+        await Prisma.rollPlacement.delete({
+            where: {
+                id: rollPlacement.id,
+                AxisId: rollPlacement.AxisId
+            }
+        })
+
+        return res.status(200).json(
+                new ApiAnswer(200).SetContent(rollPlacement)
+        )
+    }
+    
+    async DeleteAxis(req: any, res: any) {
+        const patern = Number(req.params.patern);
+        const axis = Number(req.params.axis);
+        if(isNaN(patern) || isNaN(axis)) 
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+        )
+
+        let data = await Prisma.paternosterAxis.findFirst({
+            where: {
+                id: axis,
+                PaternosterId: patern
+            }
+        });
+        if(!data) {
+            return res.status(404).json(
+                new ApiAnswer(404).SetError(ErrorCode.NotFound,"Данная ось не принадлежит этому патерностеру, или оси не существует")
+            )
+        }
+
+        let item = await Prisma.paternosterAxis.delete({
+            where:{
+                id: axis,
+                PaternosterId: patern
+            }
+        });
+        if(!item) {
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Данного товара не существует")
+            )
+        }
+
+        return res.status(200).json(
+                new ApiAnswer(200).SetContent(item)
+        )
+    }
+}
+
+export default PaternosterController;
