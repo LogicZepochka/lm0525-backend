@@ -3,7 +3,7 @@ import ApiAnswer from "../response/apiResponse";
 import { ErrorCode } from "../response/types";
 import CreateLogger, { LoggerMessageType } from "../tools/Logger";
 import Prisma from "../tools/prisma";
-import { PaternosterSchema, RollPlacementSchema } from "../validators/paternosterValidator";
+import { PaternosterAxisSchema, PaternosterSchema, RollPlacementSchema } from "../validators/paternosterValidator";
 
 interface APIDataInfo {
     version: string,
@@ -29,7 +29,21 @@ const PaternosterController = new class PaternosterController {
                     Axises: {
                         select: {
                             id: true,
-                            Placements: true
+                            AxisNum: true,
+                            AxisLetter: true,
+                            Placements: {
+                                select: {
+                                    Item: {
+                                        select: {
+                                            code: true,
+                                            name: true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        orderBy: {
+                            AxisNum: "desc"
                         }
                     }
                 }
@@ -121,6 +135,13 @@ const PaternosterController = new class PaternosterController {
                 return res.status(400).json(
                     new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
                 )
+            let schema = PaternosterAxisSchema.safeParse(req.body);
+            if(schema.error) {
+                return res.status(400).json(
+                    new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные").SetContent(schema.error.errors)
+                )
+            }
+            
             let data = await Prisma.paternoster.findFirst({
                 where:{id: patern}
             });
@@ -130,9 +151,26 @@ const PaternosterController = new class PaternosterController {
                 )
             }
             else {
+                let search = await Prisma.paternosterAxis.findFirst({
+                    where: {
+                        PaternosterId: patern,
+                        OR: [
+                        {AxisLetter: schema.data.AxisLetter},
+                        {AxisNum: schema.data.AxisNum}
+                        ]
+                    }
+                })
+                if(search) {
+                    return res.status(400).json(
+                        new ApiAnswer(400).SetError(ErrorCode.WrongData,"Уже существует ось с данной буквой или номером")
+                    )
+                }
+
                 let result = await Prisma.paternosterAxis.create({
                     data: {
-                        PaternosterId: patern
+                        PaternosterId: patern,
+                        AxisLetter: schema.data.AxisLetter,
+                        AxisNum: schema.data.AxisNum
                     }
                 })
 

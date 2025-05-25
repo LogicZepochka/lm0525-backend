@@ -204,6 +204,8 @@ exports.Prisma.PaternosterScalarFieldEnum = {
 
 exports.Prisma.PaternosterAxisScalarFieldEnum = {
   id: 'id',
+  AxisNum: 'AxisNum',
+  AxisLetter: 'AxisLetter',
   PaternosterId: 'PaternosterId'
 };
 

@@ -9,7 +9,8 @@ export const PaternosterSchema = z.object({
 })
 
 export const PaternosterAxisSchema = z.object({
-    PaternosterId: z.number().positive()
+    AxisNum: z.number().positive(),
+    AxisLetter: z.string().min(1).max(1)
 })
 
 export const RollPlacementSchema = z.object({

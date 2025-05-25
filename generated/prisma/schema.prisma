@@ -115,6 +115,8 @@ model Paternoster {
 model PaternosterAxis {
   id            Int             @id @default(autoincrement())
   Paternoster   Paternoster     @relation(fields: [PaternosterId], references: [id], onDelete: Cascade)
+  AxisNum       Int             @default(1)
+  AxisLetter    String          @default("A")
   PaternosterId Int
   Placements    RollPlacement[]
 }

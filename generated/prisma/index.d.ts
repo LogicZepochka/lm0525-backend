@@ -12242,26 +12242,34 @@ export namespace Prisma {
 
   export type PaternosterAxisAvgAggregateOutputType = {
     id: number | null
+    AxisNum: number | null
     PaternosterId: number | null
   }
 
   export type PaternosterAxisSumAggregateOutputType = {
     id: number | null
+    AxisNum: number | null
     PaternosterId: number | null
   }
 
   export type PaternosterAxisMinAggregateOutputType = {
     id: number | null
+    AxisNum: number | null
+    AxisLetter: string | null
     PaternosterId: number | null
   }
 
   export type PaternosterAxisMaxAggregateOutputType = {
     id: number | null
+    AxisNum: number | null
+    AxisLetter: string | null
     PaternosterId: number | null
   }
 
   export type PaternosterAxisCountAggregateOutputType = {
     id: number
+    AxisNum: number
+    AxisLetter: number
     PaternosterId: number
     _all: number
   }
@@ -12269,26 +12277,34 @@ export namespace Prisma {
 
   export type PaternosterAxisAvgAggregateInputType = {
     id?: true
+    AxisNum?: true
     PaternosterId?: true
   }
 
   export type PaternosterAxisSumAggregateInputType = {
     id?: true
+    AxisNum?: true
     PaternosterId?: true
   }
 
   export type PaternosterAxisMinAggregateInputType = {
     id?: true
+    AxisNum?: true
+    AxisLetter?: true
     PaternosterId?: true
   }
 
   export type PaternosterAxisMaxAggregateInputType = {
     id?: true
+    AxisNum?: true
+    AxisLetter?: true
     PaternosterId?: true
   }
 
   export type PaternosterAxisCountAggregateInputType = {
     id?: true
+    AxisNum?: true
+    AxisLetter?: true
     PaternosterId?: true
     _all?: true
   }
@@ -12381,6 +12397,8 @@ export namespace Prisma {
 
   export type PaternosterAxisGroupByOutputType = {
     id: number
+    AxisNum: number
+    AxisLetter: string
     PaternosterId: number
     _count: PaternosterAxisCountAggregateOutputType | null
     _avg: PaternosterAxisAvgAggregateOutputType | null
@@ -12405,6 +12423,8 @@ export namespace Prisma {
 
   export type PaternosterAxisSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    AxisNum?: boolean
+    AxisLetter?: boolean
     PaternosterId?: boolean
     Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
     Placements?: boolean | PaternosterAxis$PlacementsArgs<ExtArgs>
@@ -12413,22 +12433,28 @@ export namespace Prisma {
 
   export type PaternosterAxisSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    AxisNum?: boolean
+    AxisLetter?: boolean
     PaternosterId?: boolean
     Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paternosterAxis"]>
 
   export type PaternosterAxisSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    AxisNum?: boolean
+    AxisLetter?: boolean
     PaternosterId?: boolean
     Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["paternosterAxis"]>
 
   export type PaternosterAxisSelectScalar = {
     id?: boolean
+    AxisNum?: boolean
+    AxisLetter?: boolean
     PaternosterId?: boolean
   }
 
-  export type PaternosterAxisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "PaternosterId", ExtArgs["result"]["paternosterAxis"]>
+  export type PaternosterAxisOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "AxisNum" | "AxisLetter" | "PaternosterId", ExtArgs["result"]["paternosterAxis"]>
   export type PaternosterAxisInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Paternoster?: boolean | PaternosterDefaultArgs<ExtArgs>
     Placements?: boolean | PaternosterAxis$PlacementsArgs<ExtArgs>
@@ -12449,6 +12475,8 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      AxisNum: number
+      AxisLetter: string
       PaternosterId: number
     }, ExtArgs["result"]["paternosterAxis"]>
     composites: {}
@@ -12876,6 +12904,8 @@ export namespace Prisma {
    */ 
   interface PaternosterAxisFieldRefs {
     readonly id: FieldRef<"PaternosterAxis", 'Int'>
+    readonly AxisNum: FieldRef<"PaternosterAxis", 'Int'>
+    readonly AxisLetter: FieldRef<"PaternosterAxis", 'String'>
     readonly PaternosterId: FieldRef<"PaternosterAxis", 'Int'>
   }
     
@@ -14521,6 +14551,8 @@ export namespace Prisma {
 
   export const PaternosterAxisScalarFieldEnum: {
     id: 'id',
+    AxisNum: 'AxisNum',
+    AxisLetter: 'AxisLetter',
     PaternosterId: 'PaternosterId'
   };
 
@@ -15315,6 +15347,8 @@ export namespace Prisma {
     OR?: PaternosterAxisWhereInput[]
     NOT?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
     id?: IntFilter<"PaternosterAxis"> | number
+    AxisNum?: IntFilter<"PaternosterAxis"> | number
+    AxisLetter?: StringFilter<"PaternosterAxis"> | string
     PaternosterId?: IntFilter<"PaternosterAxis"> | number
     Paternoster?: XOR<PaternosterScalarRelationFilter, PaternosterWhereInput>
     Placements?: RollPlacementListRelationFilter
@@ -15322,6 +15356,8 @@ export namespace Prisma {
 
   export type PaternosterAxisOrderByWithRelationInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
+    AxisLetter?: SortOrder
     PaternosterId?: SortOrder
     Paternoster?: PaternosterOrderByWithRelationInput
     Placements?: RollPlacementOrderByRelationAggregateInput
@@ -15332,6 +15368,8 @@ export namespace Prisma {
     AND?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
     OR?: PaternosterAxisWhereInput[]
     NOT?: PaternosterAxisWhereInput | PaternosterAxisWhereInput[]
+    AxisNum?: IntFilter<"PaternosterAxis"> | number
+    AxisLetter?: StringFilter<"PaternosterAxis"> | string
     PaternosterId?: IntFilter<"PaternosterAxis"> | number
     Paternoster?: XOR<PaternosterScalarRelationFilter, PaternosterWhereInput>
     Placements?: RollPlacementListRelationFilter
@@ -15339,6 +15377,8 @@ export namespace Prisma {
 
   export type PaternosterAxisOrderByWithAggregationInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
+    AxisLetter?: SortOrder
     PaternosterId?: SortOrder
     _count?: PaternosterAxisCountOrderByAggregateInput
     _avg?: PaternosterAxisAvgOrderByAggregateInput
@@ -15352,6 +15392,8 @@ export namespace Prisma {
     OR?: PaternosterAxisScalarWhereWithAggregatesInput[]
     NOT?: PaternosterAxisScalarWhereWithAggregatesInput | PaternosterAxisScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"PaternosterAxis"> | number
+    AxisNum?: IntWithAggregatesFilter<"PaternosterAxis"> | number
+    AxisLetter?: StringWithAggregatesFilter<"PaternosterAxis"> | string
     PaternosterId?: IntWithAggregatesFilter<"PaternosterAxis"> | number
   }
 
@@ -16009,38 +16051,51 @@ export namespace Prisma {
   }
 
   export type PaternosterAxisCreateInput = {
+    AxisNum?: number
+    AxisLetter?: string
     Paternoster: PaternosterCreateNestedOneWithoutAxisesInput
     Placements?: RollPlacementCreateNestedManyWithoutPaternosterAxisInput
   }
 
   export type PaternosterAxisUncheckedCreateInput = {
     id?: number
+    AxisNum?: number
+    AxisLetter?: string
     PaternosterId: number
     Placements?: RollPlacementUncheckedCreateNestedManyWithoutPaternosterAxisInput
   }
 
   export type PaternosterAxisUpdateInput = {
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     Paternoster?: PaternosterUpdateOneRequiredWithoutAxisesNestedInput
     Placements?: RollPlacementUpdateManyWithoutPaternosterAxisNestedInput
   }
 
   export type PaternosterAxisUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     PaternosterId?: IntFieldUpdateOperationsInput | number
     Placements?: RollPlacementUncheckedUpdateManyWithoutPaternosterAxisNestedInput
   }
 
   export type PaternosterAxisCreateManyInput = {
     id?: number
+    AxisNum?: number
+    AxisLetter?: string
     PaternosterId: number
   }
 
   export type PaternosterAxisUpdateManyMutationInput = {
-
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
   }
 
   export type PaternosterAxisUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     PaternosterId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -16907,26 +16962,34 @@ export namespace Prisma {
 
   export type PaternosterAxisCountOrderByAggregateInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
+    AxisLetter?: SortOrder
     PaternosterId?: SortOrder
   }
 
   export type PaternosterAxisAvgOrderByAggregateInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
     PaternosterId?: SortOrder
   }
 
   export type PaternosterAxisMaxOrderByAggregateInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
+    AxisLetter?: SortOrder
     PaternosterId?: SortOrder
   }
 
   export type PaternosterAxisMinOrderByAggregateInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
+    AxisLetter?: SortOrder
     PaternosterId?: SortOrder
   }
 
   export type PaternosterAxisSumOrderByAggregateInput = {
     id?: SortOrder
+    AxisNum?: SortOrder
     PaternosterId?: SortOrder
   }
 
@@ -18868,11 +18931,15 @@ export namespace Prisma {
   }
 
   export type PaternosterAxisCreateWithoutPaternosterInput = {
+    AxisNum?: number
+    AxisLetter?: string
     Placements?: RollPlacementCreateNestedManyWithoutPaternosterAxisInput
   }
 
   export type PaternosterAxisUncheckedCreateWithoutPaternosterInput = {
     id?: number
+    AxisNum?: number
+    AxisLetter?: string
     Placements?: RollPlacementUncheckedCreateNestedManyWithoutPaternosterAxisInput
   }
 
@@ -18907,6 +18974,8 @@ export namespace Prisma {
     OR?: PaternosterAxisScalarWhereInput[]
     NOT?: PaternosterAxisScalarWhereInput | PaternosterAxisScalarWhereInput[]
     id?: IntFilter<"PaternosterAxis"> | number
+    AxisNum?: IntFilter<"PaternosterAxis"> | number
+    AxisLetter?: StringFilter<"PaternosterAxis"> | string
     PaternosterId?: IntFilter<"PaternosterAxis"> | number
   }
 
@@ -18988,11 +19057,15 @@ export namespace Prisma {
   }
 
   export type PaternosterAxisCreateWithoutPlacementsInput = {
+    AxisNum?: number
+    AxisLetter?: string
     Paternoster: PaternosterCreateNestedOneWithoutAxisesInput
   }
 
   export type PaternosterAxisUncheckedCreateWithoutPlacementsInput = {
     id?: number
+    AxisNum?: number
+    AxisLetter?: string
     PaternosterId: number
   }
 
@@ -19034,11 +19107,15 @@ export namespace Prisma {
   }
 
   export type PaternosterAxisUpdateWithoutPlacementsInput = {
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     Paternoster?: PaternosterUpdateOneRequiredWithoutAxisesNestedInput
   }
 
   export type PaternosterAxisUncheckedUpdateWithoutPlacementsInput = {
     id?: IntFieldUpdateOperationsInput | number
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     PaternosterId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -19303,19 +19380,27 @@ export namespace Prisma {
 
   export type PaternosterAxisCreateManyPaternosterInput = {
     id?: number
+    AxisNum?: number
+    AxisLetter?: string
   }
 
   export type PaternosterAxisUpdateWithoutPaternosterInput = {
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     Placements?: RollPlacementUpdateManyWithoutPaternosterAxisNestedInput
   }
 
   export type PaternosterAxisUncheckedUpdateWithoutPaternosterInput = {
     id?: IntFieldUpdateOperationsInput | number
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
     Placements?: RollPlacementUncheckedUpdateManyWithoutPaternosterAxisNestedInput
   }
 
   export type PaternosterAxisUncheckedUpdateManyWithoutPaternosterInput = {
     id?: IntFieldUpdateOperationsInput | number
+    AxisNum?: IntFieldUpdateOperationsInput | number
+    AxisLetter?: StringFieldUpdateOperationsInput | string
   }
 
   export type RollPlacementCreateManyPaternosterAxisInput = {

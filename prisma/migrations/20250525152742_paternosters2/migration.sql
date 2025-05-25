@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "PaternosterAxis" ADD COLUMN     "AxisLetter" TEXT NOT NULL DEFAULT 'A',
+ADD COLUMN     "AxisNum" INTEGER NOT NULL DEFAULT 1;

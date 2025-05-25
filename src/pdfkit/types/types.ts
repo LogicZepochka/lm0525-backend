@@ -1,5 +1,6 @@
 import PDFKitData from "pdfkit/js/data";
-import { ItemType } from "../../../generated/prisma";
+import { ItemType, Paternoster } from "../../../generated/prisma";
+import PDFDocumentWithTables from "pdfkit-table";
 
 export interface PrintData {
     id: string
@@ -40,6 +41,10 @@ export const Mocked: PrintData = {
 
 export interface PDFRemainVariant {
     generatePDF: (remain: PrintData,PDF: PDFKit.PDFDocument, barPng: any, qr: Buffer<ArrayBufferLike>) => void;
+}
+
+export interface PDFPaternosterReportVariant {
+    generatePDF: (remain: Paternoster,PDF: PDFDocumentWithTables,row: string[][]) => void;
 }
 
 export function ConvertTypeToName(type: ItemType): string {

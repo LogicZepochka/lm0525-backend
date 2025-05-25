@@ -4,12 +4,14 @@ import PDFDocument from "pdfkit";
 const path = require('path');
 const appDir = path.dirname(require.main?.filename);
 import bwipjs from '@bwip-js/node'
-import { ItemType } from "../../generated/prisma";
+import { ItemType, Paternoster } from "../../generated/prisma";
 import LinPDFBuilder from "./LinPDFBuilder";
 import KovrPDFBuilder from "./KovrPDFBuilder";
 import qrcode from "qrcode";
 import Prisma from "../tools/prisma";
 import CreateLogger, { LoggerMessageType } from "../tools/Logger";
+import ReportPDFBuilder from "./ReportPDFBuilder";
+import PDFDocumentWithTables from "pdfkit-table";
 
 const Logger = CreateLogger("PDFBUILDER")
 
@@ -34,6 +36,82 @@ export default class PDFCreator {
                 }
             });
     })
+    }
+
+    static async generatePaternosterReport(paternosters: Paternoster[]): Promise<string> {
+        const startTime = process.hrtime();
+        try {
+            var fileName = `debug.pdf`;
+            var doc = new PDFDocumentWithTables({size: "A4"});
+            doc.registerFont('RussianFont', './src/pdfkit/fonts/leroy-merlin-sans-bold.ttf');
+            doc.font("RussianFont")
+            var stream = fs.createWriteStream(path.join(appDir,"public",`${fileName}`));
+            doc.pipe(stream);
+            Logger("Поток создан")
+            for (const [index, paternoster] of paternosters.entries()) {
+                    let axises = await Prisma.paternosterAxis.findMany({
+                        where: {
+                            PaternosterId: paternoster.id
+                        },
+                        include: {
+                            Placements: {
+                                select: {
+                                    Item: {
+                                        select: {
+                                            name: true,
+                                            code: true
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        orderBy: {
+                            AxisNum: "asc"
+                        }
+                    })
+                    const tableData = [
+                        
+                    ];
+                    for(const axis of axises) {
+                        for(const item of axis.Placements) {
+                            tableData.push(
+                                [axis.AxisNum.toString(),axis.AxisLetter,item.Item.name,item.Item.code]
+                            )
+                        }
+                        if(axis.Placements.length == 0) {
+                             tableData.push([axis.AxisNum.toString(),axis.AxisLetter,"",""])
+                        }
+                    }
+                    await ReportPDFBuilder.generatePDF(paternoster,doc,tableData);
+                    if(index+1 != paternosters.length) {
+                        doc.addPage();
+                    }
+            }
+            stream.on('finish', () => {
+                /*setTimeout(() => {
+                    Logger(`Удаляю созданный PDF...`)
+                    fs.unlink(path.join(appDir,"public",`${fileName}`), (err) => {
+                        if(err) Logger(`Ошибка удаления PDF: ${err}`,LoggerMessageType.Error)
+                    });
+                }, 1000*10);*/
+                //resolve(path.join(appDir,"public",`${fileName}`));
+            });
+            
+            stream.on('error', (err) => {
+                if(err) Logger(`Ошибка создания PDF: ${err}`,LoggerMessageType.Error)
+                //reject(err);
+            });
+            
+            doc.end();
+        }
+        catch(e) {
+
+        }
+        finally {
+            const diffTime = process.hrtime(startTime);
+            Logger(`Время выполнения: ${diffTime[0]}s ${diffTime[1] / 1e6}ms`);
+        }
+        return "fuck";
     }
 
     static async generate(remains: PrintData[]): Promise<string> {
