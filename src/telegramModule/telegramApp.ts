@@ -24,20 +24,25 @@ const Telegram = new class Telegam {
         AddApproveCallback(this.bot);
 
         this.bot.onText(/\/start/,async (msg) => {
-            const opts = {
+            const opts: TelegramBot.SendMessageOptions = {
                 reply_markup: {
                     keyboard: [
                         [{text: 'Отправить свой номер телефона',request_contact: true}]
                     ],
                     resize_keyboard: true
-                }
+                },
+                parse_mode: 'MarkdownV2'
             };
             await this.bot.sendMessage(
                 msg.chat.id,
-                "Привет! Пожалуйста, для начала работы отправь свой номер телефона.\n\
-                \n\
-                Это позволит мне верифицировать тебя.\n\
-                Обрати внимание, что твой номер телефона должен быть привязан к Телеграмму. Иначе выполнить подтверждение не получится",
+                (
+"Привет\\!\n\n\
+Пожалуйста, для начала работы отправь свой номер телефона\\.\n\n\
+_Для этого нажми на кнопку снизу под строкой ввода сообщения_\n\
+Это позволит мне верифицировать тебя\\.\n\
+\n\
+\n\
+Обрати внимание, что твой номер телефона должен быть привязан к Телеграмму\\. Иначе выполнить подтверждение не получится"),
                 opts
             )
         });
@@ -47,22 +52,30 @@ const Telegram = new class Telegam {
                 if(!contact.contact?.user_id|| contact.contact?.user_id != contact.chat?.id) {
                     await this.bot.sendMessage(
                     contact.chat.id,
-                    "Ты отправил не свой номер телефона, или твой номер телефона не привязан к твоему телеграмм. Проверь номер и попробуй еще раз"
+`‼️ Ты отправил не свой номер телефона, либо твой номер телефона не привязан к твоему телеграмм аккаунту\\.\n\n\
+Пожалуйста, убедись что отправляешь правильный номер, либо выполни регистрацию на номер, привязанный к телеграмм\\.`
+                    ,{parse_mode:'MarkdownV2'}
                 )
                     return;
                 }
                 else {
                     let msgToEdit = await this.bot.sendMessage(
                     contact.chat.id,
-                    "Получил твой номер, пожалуйста, подожди"
+                    "_Получил твой номер, пожалуйста, подожди\\.\\.\\._"
                     ,{parse_mode:'MarkdownV2'});
                     let user = await Prisma.user.findFirst({where:{phone: contact.contact.phone_number}});
                     console.log("User",user);
                     if(!user) {
                         console.log("User not found");
                         await this.bot.editMessageText(
-                            "Ты еще не зарегистрировался в LM0525.\n\
-                            Зарегистрироваться ты можешь здесь: http://localhost:3000/register",{chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id})
+`Ты еще не зарегистрировался в LM0525.\n\
+Зарегистрироваться ты можешь здесь: ${config.telegram.FrontEndURL}/register`,{chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id,
+    reply_markup: {
+        inline_keyboard: [
+            [{text:"Зарегистрироваться",url:`${config.telegram.FrontEndURL}/register`}]
+        ]
+    }
+})
                         return;
                     }
                     console.log("User found");
@@ -75,14 +88,25 @@ const Telegram = new class Telegam {
                             chatId: msgToEdit.chat.id
                         });
                         await this.bot.editMessageText(
-                            `Для продолжения связывания аккаунта телеграмм с аккаунтом в LM0525 введи данный код на странице регистрации\n*${code}*`,
-                            {parse_mode:'MarkdownV2',chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id}
+`✅ Твой телефон зарегистрирован в LM0525\n\n\
+Для продолжения связывания аккаунта телеграмм с аккаунтом в LM0525 введи данный код на странице регистрации\n\
+\n\
+Код привязки: \`${code}\`\n\n\
+_Нажми на код, чтобы скопировать его в буфер обмена_`,
+
+{parse_mode:'MarkdownV2',chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id, reply_markup: {
+                inline_keyboard: [
+                    [{text:'Перейти на страницу подтверждения',url:`${config.telegram.FrontEndURL}/register/bindTelegram`}]
+                ]
+            }}
                         )
                     }
                     else {
                         console.log("Account already activated");
                         await this.bot.editMessageText(
-                            "Твой аккаунт уже активирован и связан",{chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id})
+"✅ *Твой аккаунт уже активирован и связан*\\.\n\n\
+Если ты не помнишь свой пароль \\- воспользуйся функцией _\"Забыл пароль\"_ на странице авторизации",
+{chat_id: msgToEdit.chat.id, message_id: msgToEdit.message_id,parse_mode:'MarkdownV2'})
                     }
                 }
             }
@@ -106,7 +130,7 @@ const Telegram = new class Telegam {
             return;
         }
 
-        await this.bot.sendMessage(User.telegramChat, message);
+        await this.bot.sendMessage(User.telegramChat, message, {parse_mode:'MarkdownV2'});
         }
         catch(e) {
             console.log("Failed to send notification: ",e);
@@ -129,14 +153,14 @@ const Telegram = new class Telegam {
             }
             let user = await Prisma.user.update({where:{phone:activator.phone},data:{telegramChat:activator.chatId.toString(), telegramSettings: settings}});
             this.SendNotification(user,
-`Привязывание учетной записи телеграмм к LM0525 успешно:\n\
+`✅ *Привязывание к LM0525 успешно:* ✅\n\
 \n\
-Связанная учетная запись:\n\
-Имя Фамилия: ${user.name}\n\
-Магазин: ${user.shopId}\n\
-Отдел: ${user.departamentId}\n\
+_Связанная учетная запись:_\n\
+*Имя Фамилия:* _${user.name.replace(/[.,*\/\-+?:"{}\\]/g, '')}_\n\
+*Магазин:* _${user.shopId}_\n\
+*Отдел:* _${user.departamentId}_\n\
 
-Статус аккаунта: ${user.role == "NOTAPROVED" ? "Ожидает подтверждения менеджером" : "Подтвержден"}`,NotificationLevel.Security);
+Статус аккаунта: ${user.role == "NOTAPROVED" ? "🟠 Ожидает подтверждения менеджером" : "🟢 Подтвержден"}`,NotificationLevel.Security);
             this.activationPairs.delete(code);
         }
         else {

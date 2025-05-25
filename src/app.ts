@@ -11,13 +11,14 @@ import cors from "cors";
 import NotificationRouter from "./routers/notification/NotificationRouter";
 import RequestRouter from "./routers/request/RequestRouter";
 import PrintRouter from "./routers/print/PrintRouter";
+import SystemRouter from "./routers/system/SystemRouter";
 
 console.log("[Express] Starting express...")
 const app = express();
 const apiPath: string = config.defaultApiPath;
 console.log("[Express] Default API path: "+config.defaultApiPath)
 
-const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app', 'http://localhost:3001'];
+const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app', 'http://localhost:3001','http://192.168.0.108:3001'];
 
 app.use(cors({
   origin: allowedOrigins,
@@ -36,6 +37,7 @@ app.use(apiPath+"/remains",RemainsRouter);
 app.use(apiPath+"/tools/requests",RequestRouter);
 app.use(apiPath+"/notifications",NotificationRouter);
 app.use(apiPath+"/prints",PrintRouter);
+app.use(apiPath+"/system",SystemRouter);
 
 app.use(ErrorHandler);
 

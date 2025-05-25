@@ -41,7 +41,6 @@ export default function AddApproveCallback(bot: TelegramBot) {
                 `Твой аккаунт был подтвержден. Теперь ты можешь пользоваться приложением`, NotificationLevel.Security
             );
             await bot.editMessageText('Пользователь подтверждён',{chat_id: ctx.message?.chat.id, message_id: ctx.message?.message_id, reply_markup: undefined});
-
         }
         else {
             await Prisma.user.update({
