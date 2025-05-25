@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -14,6 +47,9 @@ const types_2 = require("../telegramModule/types");
 const ConfirmUserThrowTelegram_1 = __importDefault(require("../telegramModule/messagePrefabs/ConfirmUserThrowTelegram"));
 const RestoreUserMessage_1 = __importDefault(require("../telegramModule/messagePrefabs/RestoreUserMessage"));
 const config_1 = __importDefault(require("../config/config"));
+const textMessages_json_1 = require("../telegramModule/textMessages.json");
+const StringUtils_1 = __importDefault(require("../tools/StringUtils"));
+const Logger_1 = __importStar(require("../tools/Logger"));
 function hashPassword(password) {
     return (0, password_hash_1.generate)(password);
 }
@@ -34,6 +70,7 @@ function generateRandomBase64Url(length = 32) {
         .replace(/\//g, '_')
         .replace(/=+$/, '');
 }
+const Logger = (0, Logger_1.default)("AUTH-CONTROLLER");
 exports.default = new class AuthController {
     async SignIn(req, res) {
         if (!req.body) {
@@ -59,6 +96,7 @@ exports.default = new class AuthController {
                 lastOnline: new Date()
             }
         });
+        Logger(`Успешная авторизация для пользователя: ${user.name}`);
         var Result = {
             user: { id: user.id, name: user.name, phone: user.phone, role: user.role, shop: user.shopId || 0, departament: user.departamentId || 0 },
             tokens: tokens
@@ -103,18 +141,20 @@ exports.default = new class AuthController {
             });
             let dataToUpdate = [];
             for (let manager of managers) {
-                dataToUpdate.push({ userId: manager.id, message: `Зарегистрировался сотрудник ${user.name}.</br></br>Учетные данные:</br>Магазин: ${user.shopId}</br>Отдел:${user.departamentId}</br></br>Пожалуйста, проверьте и подтвердите его.` });
+                dataToUpdate.push({ userId: manager.id, message: StringUtils_1.default.format(textMessages_json_1.RegistrationMessageForManagers, user.name, user.shopId, user.departamentId, user.phone) });
                 await (0, ConfirmUserThrowTelegram_1.default)(manager, user);
             }
             for (let admin of admins) {
-                dataToUpdate.push({ userId: admin.id, message: `Зарегистрировался сотрудник ${user.name}.</br></br>Учетные данные:</br>Магазин: ${user.shopId}</br>Отдел:${user.departamentId}` });
+                dataToUpdate.push({ userId: admin.id, message: StringUtils_1.default.format(textMessages_json_1.RegistrationMessageForAdmins, user.name, user.shopId, user.departamentId, user.phone) });
                 await (0, ConfirmUserThrowTelegram_1.default)(admin, user);
             }
             await prisma_1.default.notification.createMany({ data: dataToUpdate });
+            Logger(`Успешная регистрация для пользователя: ${user.name}`);
             return res.status(201).json(new apiResponse_1.default(201).SetMessage("Успешная регистрация"));
         }
         catch (e) {
             console.log(e);
+            Logger(`Регистрация провалилась: ${e}`, Logger_1.LoggerMessageType.Warning);
             return res.status(401).json(new apiResponse_1.default(401).SetMessage("Не удалось зарегистрироваться"));
         }
     }
@@ -127,16 +167,14 @@ exports.default = new class AuthController {
             return res.status(401).json(new apiResponse_1.default(401).SetError(types_1.ErrorCode.WrongData, "Введеный невалидные данные"));
         }
         try {
-            console.log("[AUTH] Refreshing tokens...");
             let tokens = await JwtUtils_1.default.RefreshToken(token);
             if (tokens == null) {
                 return res.status(401).json(new apiResponse_1.default(401).SetError(types_1.ErrorCode.InvalidToken, "Невалидный токен"));
             }
-            console.log("[AUTH] Refreshing finished");
             return res.status(200).json(new apiResponse_1.default(200).SetContent(tokens));
         }
         catch (e) {
-            console.log("Failed to refresh: " + e);
+            Logger(`Обновление токена провалилась: ${e}`, Logger_1.LoggerMessageType.Warning);
             return res.status(401).json(new apiResponse_1.default(401).SetError(types_1.ErrorCode.InvalidToken, "Невалидный токен"));
         }
     }
@@ -164,6 +202,7 @@ exports.default = new class AuthController {
             return res.status(400).json(new apiResponse_1.default(400).SetError(types_1.ErrorCode.WrongData, "Код не верный или истёк его скрок. Начните привязку заново."));
         }
         else {
+            Logger(`Успешная привязка токена: ${key}`);
             return res.status(200).json(new apiResponse_1.default(200).SetMessage("Успешное связывание"));
         }
     }
@@ -173,12 +212,12 @@ exports.default = new class AuthController {
             return res.status(400).json(new apiResponse_1.default(400).SetError(types_1.ErrorCode.WrongData, "Введеный невалидные данные"));
         }
         try {
-            console.log(phone);
             res.sendStatus(201);
             let user = await prisma_1.default.user.findFirst({ where: { phone: phone } });
             if (!user)
                 return;
             const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.ip;
+            Logger(`Запущен процесс восстановления пароля для пользователя ${phone} | ${ip}`);
             let newRestorator = await prisma_1.default.passwordResetRequest.create({
                 data: {
                     userId: user.id,
@@ -240,7 +279,8 @@ exports.default = new class AuthController {
                 password: hashPassword(password)
             }
         });
-        await telegramApp_1.default.SendNotification(user, `Ваш пароль успешно изменен.`, types_2.NotificationLevel.Security);
+        Logger(`Изменение пароля для пользователя ${user.name} (${user.id}) прошло успешно`);
+        await telegramApp_1.default.SendNotification(user, `Ваш пароль успешно изменен\\.`, types_2.NotificationLevel.Security);
         await prisma_1.default.passwordResetRequest.update({
             where: { id: restore.id },
             data: { isUsed: true }

@@ -3,9 +3,9 @@ declare const Notifications: {
     CreateNotificationForUser(message: NotificationMessage): Promise<{
         id: number;
         userId: number;
-        message: string;
         createdAt: Date;
         IsDeleted: boolean;
+        message: string;
         Readed: boolean;
         showed: Date | null;
     }>;

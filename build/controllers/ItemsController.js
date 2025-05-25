@@ -9,7 +9,9 @@ exports.ChangeItemName = ChangeItemName;
 exports.GetNames = GetNames;
 exports.CreateNewItem = CreateNewItem;
 const apiResponse_1 = __importDefault(require("../response/apiResponse"));
+const Logger_1 = __importDefault(require("../tools/Logger"));
 const prisma_1 = __importDefault(require("../tools/prisma"));
+const Logger = (0, Logger_1.default)("ITEMS-CONTROLLER");
 async function GetOneItem(req, res) {
     const lmcode = req.params.lmcode;
     let item = await prisma_1.default.item.findFirst({ where: { code: lmcode } });
@@ -31,7 +33,6 @@ async function GetList(req, res) {
     };
     let items = await prisma_1.default.item.findMany({ skip: offset * page, take: offset, orderBy: { name: 'desc' } });
     if (items.length == 0) {
-        console.log("[Painator] Not found");
         return res.status(200).json(new apiResponse_1.default(200).SetMessage("Не найдено").SetContent({
             pagination: paginationInfo,
             data: []
@@ -52,6 +53,7 @@ async function CreateNewItem(req, res) {
     const { Name, lm_code, metadata } = req.body.item;
     let item = await prisma_1.default.item.findFirst({ where: { code: lm_code } });
     if (item) {
+        Logger(`Не удалось создать новый товар: код ${lm_code} уже существует`);
         return res.status(400).json(new apiResponse_1.default(400).SetMessage("Такой код уже существует"));
     }
     item = await prisma_1.default.item.create({

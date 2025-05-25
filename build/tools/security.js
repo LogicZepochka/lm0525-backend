@@ -14,7 +14,6 @@ async function encryptAES(text, password) {
     return `${iv.toString('base64url')}:.:${encrypted}`;
 }
 async function decryptAES(encrypted, password) {
-    console.log("ENCRYPTED: ", encrypted);
     let parts = encrypted.split(":.:");
     // Преобразуем iv из base64 в Buffer
     const iv = Buffer.from(parts[0], 'base64url');
@@ -25,6 +24,5 @@ async function decryptAES(encrypted, password) {
     // Дешифруем содержимое
     let decrypted = decipher.update(parts[1], 'base64url', 'utf8');
     decrypted += decipher.final('utf8');
-    console.log("DECRYPTED: ", decrypted);
     return decrypted;
 }

@@ -8,7 +8,9 @@ const apiResponse_1 = __importDefault(require("../response/apiResponse"));
 const types_1 = require("../response/types");
 const telegramApp_1 = __importDefault(require("../telegramModule/telegramApp"));
 const types_2 = require("../telegramModule/types");
+const Logger_1 = __importDefault(require("../tools/Logger"));
 const prisma_2 = __importDefault(require("../tools/prisma"));
+const Logger = (0, Logger_1.default)("MANAGER-CONTROLLER");
 const ManagerController = new class ManagerController {
     async AproveUser(req, res) {
         const userId = Number(req.params.id);
@@ -33,6 +35,7 @@ const ManagerController = new class ManagerController {
                 role: prisma_1.Role.USER
             }
         });
+        Logger(`Пользователь ${user.name} был подтвержден ${req.user.name}`);
         telegramApp_1.default.SendNotification(user, `Твой аккаунт был подтвержден. Теперь ты можешь пользоваться приложением`, types_2.NotificationLevel.Security);
         return res.sendStatus(204);
     }

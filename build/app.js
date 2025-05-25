@@ -16,11 +16,20 @@ const cors_1 = __importDefault(require("cors"));
 const NotificationRouter_1 = __importDefault(require("./routers/notification/NotificationRouter"));
 const RequestRouter_1 = __importDefault(require("./routers/request/RequestRouter"));
 const PrintRouter_1 = __importDefault(require("./routers/print/PrintRouter"));
-console.log("[Express] Starting express...");
+const SystemRouter_1 = __importDefault(require("./routers/system/SystemRouter"));
+const Logger_1 = __importDefault(require("./tools/Logger"));
+const Logger = (0, Logger_1.default)("EXPRESS");
+Logger("Express created...");
 const app = (0, express_1.default)();
 const apiPath = config_1.default.defaultApiPath;
-console.log("[Express] Default API path: " + config_1.default.defaultApiPath);
-app.use((0, cors_1.default)());
+Logger("Default API path: " + config_1.default.defaultApiPath);
+const allowedOrigins = ['https://lm0525.ru', 'https://lm0525.netlify.app', 'http://localhost:3001', 'http://192.168.0.108:3001'];
+app.use((0, cors_1.default)({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', "PATCH"],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+}));
 app.use(express_1.default.json());
 app.use(apiPath + "/admin", admin_1.default);
 app.use(apiPath + "/auth", AuthorizationRouter_1.default);
@@ -31,5 +40,10 @@ app.use(apiPath + "/remains", RemainsRouter_1.default);
 app.use(apiPath + "/tools/requests", RequestRouter_1.default);
 app.use(apiPath + "/notifications", NotificationRouter_1.default);
 app.use(apiPath + "/prints", PrintRouter_1.default);
+app.use(apiPath + "/system", SystemRouter_1.default);
 app.use(ErrorHandler_1.default);
+app.use("/", (req, res) => {
+    res.sendStatus(403);
+});
+Logger("Server is ready");
 exports.default = app;

@@ -57,7 +57,6 @@ const RemainsController = new class RemainsController {
                 dictionary.get(remain.item.code)?.push(new RemainDTO_1.default(remain, remain.createdBy, remain.item, remain.metadata));
             }
             else {
-                console.log("GROUP TO DTO:", remain);
                 dictionary.set(remain.item.code, []);
                 dictionary.get(remain.item.code)?.push(new RemainDTO_1.default(remain, remain.createdBy, remain.item, remain.metadata));
             }
@@ -65,13 +64,11 @@ const RemainsController = new class RemainsController {
         for (let [key, value] of dictionary) {
             let group = new RemainGroupDTO_1.default(key, value[0].item?.name, shop, departament);
             for (let remainDTO of value) {
-                console.log("GROUP TO ADD:", remainDTO);
                 group.AddRemainToGroup(remainDTO);
             }
             result.push(group);
         }
         const paginator = (0, convert_1.CreatePaginatorFromRequest)(req, result.length);
-        console.log(`GET -> Remains -> PARAMS: shop:${shop} | departament: ${departament} | page: ${paginator.page} | page: ${filterText}`);
         if (result.length == 0) {
             return res.status(200).json(new apiResponse_1.default(200).SetMessage("Не найдено").SetContent({
                 pagination: paginator,
@@ -82,7 +79,6 @@ const RemainsController = new class RemainsController {
             timestamp: Date.now(),
             RemainGroups: result
         });
-        console.log("[OPTIMIZE] Hashed data is updated");
         return res.status(200).json(new apiResponse_1.default(200).SetContent({
             pagination: paginator,
             data: result.slice(paginator.page * paginator.offset, paginator.page * paginator.offset + paginator.offset)
@@ -97,7 +93,6 @@ const RemainsController = new class RemainsController {
             failedItems: []
         };
         for (let item of items) {
-            console.log(item);
             try {
                 await prisma_1.default.remain.create({
                     data: { shop: req.user.shopId, DepartamentId: req.user.departamentId, itemId: item.lm_code, userId: req.user.id, metadata: item.metadata }
@@ -105,7 +100,6 @@ const RemainsController = new class RemainsController {
                 result.success++;
             }
             catch (error) {
-                console.log(error);
                 result.errors++;
                 result.failedItems.push(item);
             }

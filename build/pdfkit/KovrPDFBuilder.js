@@ -3,9 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = require("./types/types");
 exports.default = new class KovrPDFBuilder {
     async generatePDF(remain, PDF, barPng, qr) {
-        console.log("RENDER KOVR+OVERL: ", remain.name);
         if (!remain.metadata.overlock) {
-            console.log("WARNING: Kovrolin overlock without overlock");
             return;
         }
         //console.log("GENERATING KOVROLIN");

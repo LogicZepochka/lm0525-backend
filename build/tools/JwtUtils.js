@@ -41,15 +41,12 @@ const JwtUtils = new class {
         return result;
     }
     async ValidateToken(token) {
-        console.log("[AUTH] Decrypting token...");
         try {
             let uncryptedToken = await (0, security_1.decryptAES)(token, config_1.default.security.password);
             var tokenizedUser = jsonwebtoken_1.default.verify(uncryptedToken, config_1.default.authorization.secret);
-            console.log("[AUTH] Token is valid");
             return tokenizedUser;
         }
         catch (e) {
-            console.log("[AUTH] Failed to decrypt: " + e);
             return null;
         }
     }
@@ -57,30 +54,24 @@ const JwtUtils = new class {
         let valided = await this.ValidateToken(refreshToken);
         if (!valided)
             return null;
-        console.log("[AUTH] Valided token: " + valided);
         const refreshTokenDecrypted = await (0, security_1.decryptAES)(refreshToken, config_1.default.security.password);
-        console.log("[AUTH] Decrypted token: " + refreshTokenDecrypted);
         let token = await prisma_1.default.refreshToken.findFirst({
             where: { token: refreshToken },
             include: {
                 forUser: true
             }
         });
-        console.log("[AUTH] Cleaning tokens...");
         if (token != null) {
             try {
                 await prisma_1.default.refreshToken.delete({
                     where: { userId: token.forUser.id }
                 });
-                console.log("[AUTH] Refresh token removed from DB");
             }
             catch {
-                console.log("[AUTH] Warning: Failed to remove refresh from DB");
             }
             return this.SignInUser(token.forUser);
         }
         else {
-            console.log("[AUTH] WARNING: Token was null");
         }
         return null;
     }

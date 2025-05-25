@@ -13,29 +13,29 @@ export declare const PrintParseSchema: z.ZodObject<{
             price: z.ZodNumber;
             meters: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            meters: number;
             price: number;
+            meters: number;
         }, {
-            meters: number;
             price: number;
+            meters: number;
         }>>>;
     }, "strip", z.ZodTypeAny, {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     }, {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     }>;
     itemId: z.ZodString;
@@ -44,35 +44,35 @@ export declare const PrintParseSchema: z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     name: string;
     id: string;
-    type: string;
     metadata: {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     };
-    price: number;
     itemId: string;
+    type: string;
+    price: number;
 }, {
     name: string;
     id: string;
-    type: string;
     metadata: {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     };
-    price: number;
     itemId: string;
+    type: string;
+    price: number;
 }>;
 export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
     id: z.ZodString;
@@ -86,29 +86,29 @@ export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
             price: z.ZodNumber;
             meters: z.ZodNumber;
         }, "strip", z.ZodTypeAny, {
-            meters: number;
             price: number;
+            meters: number;
         }, {
-            meters: number;
             price: number;
+            meters: number;
         }>>>;
     }, "strip", z.ZodTypeAny, {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     }, {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     }>;
     itemId: z.ZodString;
@@ -117,33 +117,33 @@ export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
 }, "strip", z.ZodTypeAny, {
     name: string;
     id: string;
-    type: string;
     metadata: {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     };
-    price: number;
     itemId: string;
+    type: string;
+    price: number;
 }, {
     name: string;
     id: string;
-    type: string;
     metadata: {
         type: string;
+        area: number;
         sizeX: number;
         sizeY: number;
-        area: number;
         overlock?: {
-            meters: number;
             price: number;
+            meters: number;
         } | null | undefined;
     };
-    price: number;
     itemId: string;
+    type: string;
+    price: number;
 }>, "many">;

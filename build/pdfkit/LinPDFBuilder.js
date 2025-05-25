@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const types_1 = require("./types/types");
 exports.default = new class LinPDFBuilder {
     async generatePDF(remain, PDF, barPng, qr) {
-        console.log("RENDER LIN: ", remain.name);
         PDF.save();
         PDF.fontSize(20);
         //PDF.image("./Generator/30.png",270,390, {fit: [150,150], align: 'center', valign: 'center'});
@@ -20,7 +19,7 @@ exports.default = new class LinPDFBuilder {
         PDF.fontSize(12);
         PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-regular.ttf");
         PDF.text("Наименование", 120, 100, {});
-        PDF.text((0, types_1.ConvertTypeToName)(remain.type), 250, 100, {});
+        PDF.text((0, types_1.ConvertTypeToName)(remain.type), 250, 100, { lineBreak: false });
         PDF.fontSize(10);
         PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-bold.ttf");
         PDF.text((remain.name).toUpperCase(), 75, 120, { align: 'center' });
@@ -40,7 +39,7 @@ exports.default = new class LinPDFBuilder {
         PDF.text(remain.metadata.sizeX.toFixed(2), 77, 200, { width: 250, align: "right" });
         PDF.text("м ", 350, 200);
         PDF.text("Длина: ", 77, 250);
-        PDF.text(remain.metadata.sizeX.toFixed(2), 77, 250, { width: 250, align: "right" });
+        PDF.text(remain.metadata.sizeY.toFixed(2), 77, 250, { width: 250, align: "right" });
         PDF.text("м ", 350, 250);
         PDF.moveTo(40, 250).lineTo(400, 250).stroke();
         PDF.moveTo(77, 300).lineTo(400, 300).stroke();
@@ -59,7 +58,7 @@ exports.default = new class LinPDFBuilder {
         PDF.moveTo(240, 411).lineTo(340, 411).stroke();
         PDF.font("./src/pdfkit/fonts/leroy-merlin-sans-bold.ttf");
         PDF.text(remain.price.toFixed(2), 85, 350, { width: 250, align: "right" });
-        PDF.text((remain.price * remain.metadata.area).toFixed(2), 85, 390, { width: 250, align: "right" });
+        PDF.text((remain.price * (remain.metadata.sizeX * remain.metadata.sizeY)).toFixed(2), 85, 390, { width: 250, align: "right" });
         PDF.text(S, 85, 320, { width: 250, align: "right" });
         PDF.fontSize(22);
         PDF.text("Итого со скидкой".toUpperCase(), 20, 439);
