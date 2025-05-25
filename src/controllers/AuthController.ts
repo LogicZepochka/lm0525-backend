@@ -12,6 +12,9 @@ import ConfirmUserThrowTelegram from "../telegramModule/messagePrefabs/ConfirmUs
 import RestoreUserMessage from "../telegramModule/messagePrefabs/RestoreUserMessage";
 import config from "../config/config";
 
+import {RegistrationMessageForManagers , RegistrationMessageForAdmins} from "../telegramModule/textMessages.json";
+import StringUtils from "../tools/StringUtils";
+
 function hashPassword(password: string) {
     return generate(password);
 }
@@ -113,13 +116,13 @@ export default new class AuthController {
             let dataToUpdate = [];
             for(let manager of managers) {
                 dataToUpdate.push(
-                    {userId: manager.id, message: `Зарегистрировался сотрудник ${user.name}.</br></br>Учетные данные:</br>Магазин: ${user.shopId}</br>Отдел:${user.departamentId}</br></br>Пожалуйста, проверьте и подтвердите его.`}
+                    {userId: manager.id, message: StringUtils.format(RegistrationMessageForManagers,user.name,user.shopId,user.departamentId,user.phone)}
                 )
                 await ConfirmUserThrowTelegram(manager,user);
             }
             for(let admin of admins) {
                 dataToUpdate.push(
-                    {userId: admin.id, message: `Зарегистрировался сотрудник ${user.name}.</br></br>Учетные данные:</br>Магазин: ${user.shopId}</br>Отдел:${user.departamentId}`}
+                    {userId: admin.id, message: StringUtils.format(RegistrationMessageForAdmins,user.name,user.shopId,user.departamentId,user.phone)}
                 )
                 await ConfirmUserThrowTelegram(admin,user);
             }
@@ -205,7 +208,6 @@ export default new class AuthController {
             return res.status(400).json(new ApiAnswer(400).SetError(ErrorCode.WrongData,"Введеный невалидные данные"));
         }
         try {
-        console.log(phone);
         res.sendStatus(201);
         let user = await Prisma.user.findFirst({where:{phone: phone}});
         if(!user) 

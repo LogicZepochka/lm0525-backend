@@ -7,6 +7,7 @@ import { Mocked } from "./pdfkit/types/types";
 
 const TelegramBot = Telegram;
 
+
 if(config.authorization.secret == "secret") {
     console.error("ERROR: JWT_SECRET is not set")
 }
