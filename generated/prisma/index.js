@@ -252,8 +252,7 @@ const config = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
-        "native": true
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -271,6 +270,7 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -279,8 +279,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id             Int                    @id @default(autoincrement())\n  name           String                 @unique\n  password       String\n  lastOnline     DateTime?\n  role           Role                   @default(NOTAPROVED)\n  shopId         Int?\n  departamentId  Int?\n  phone          String                 @unique\n  notifications  Notification[]\n  passwordResets PasswordResetRequest[]\n  refreshToken   RefreshToken?\n  createdRemains Remain[]\n  toolRequests   ToolRequest[]\n\n  ActivationRejection ActivationRejection?\n\n  telegramChat     String?\n  telegramSettings Json?\n}\n\nmodel PasswordResetRequest {\n  id        Int      @id @default(autoincrement())\n  ip        String\n  key       String\n  created   DateTime @default(now())\n  expiredAt DateTime // @default(dbgenerated(\"(now() + interval '5 minutes')\")) - почему бл не работает?\n  isUsed    Boolean  @default(false)\n  userId    Int\n  forUser   User     @relation(fields: [userId], references: [id])\n}\n\nmodel RefreshToken {\n  id      Int    @id @default(autoincrement())\n  token   String\n  userId  Int    @unique\n  forUser User   @relation(fields: [userId], references: [id])\n}\n\nmodel Item {\n  code          String   @id\n  name          String\n  type          ItemType\n  departamentId Int?\n  remains       Remain[]\n}\n\nmodel Remain {\n  id            String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt     DateTime  @default(now())\n  metadata      Json\n  shop          Int\n  userId        Int\n  itemId        String\n  SellDate      DateTime?\n  PrintedDate   DateTime?\n  DepartamentId Int?\n  item          Item      @relation(fields: [itemId], references: [code])\n  createdBy     User      @relation(fields: [userId], references: [id])\n  IsDeleted     Boolean   @default(false)\n}\n\nmodel Notification {\n  id        Int       @id @default(autoincrement())\n  createdAt DateTime  @default(now())\n  userId    Int\n  Readed    Boolean   @default(false)\n  message   String\n  showed    DateTime? @db.Timestamp(6)\n  ForUser   User      @relation(fields: [userId], references: [id])\n  IsDeleted Boolean   @default(false)\n}\n\nmodel ToolRequest {\n  id              Int           @id @default(autoincrement())\n  createdAt       DateTime      @default(now())\n  toolName        String\n  description     String\n  howToContact    String?\n  status          RequestStatus @default(CREATED)\n  userId          Int\n  ForUser         User          @relation(fields: [userId], references: [id])\n  departamentId   Int\n  RejectionReason String?\n  IsDeleted       Boolean       @default(false)\n}\n\nmodel ActivationRejection {\n  id     Int    @id @default(autoincrement())\n  userId Int    @unique\n  user   User   @relation(fields: [userId], references: [id])\n  reason String\n}\n\nenum Role {\n  BLOCKED\n  NOTAPROVED\n  USER\n  ADMIN\n  MANAGER\n}\n\nenum RequestStatus {\n  CREATED\n  APPROVED\n  DEVELOPING\n  FINISHED\n  REJECTED\n}\n\nenum ItemType {\n  Linoleym\n  Kovrolin\n  Dorozhka\n  Rezina\n  Trava\n  Rope\n}\n",
-  "inlineSchemaHash": "024779b4976debf9098f536a349daa0886364996329b1855c3ef26f40cce1370",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = \"debian-openssl-3.0.x\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id             Int                    @id @default(autoincrement())\n  name           String                 @unique\n  password       String\n  lastOnline     DateTime?\n  role           Role                   @default(NOTAPROVED)\n  shopId         Int?\n  departamentId  Int?\n  phone          String                 @unique\n  notifications  Notification[]\n  passwordResets PasswordResetRequest[]\n  refreshToken   RefreshToken?\n  createdRemains Remain[]\n  toolRequests   ToolRequest[]\n\n  ActivationRejection ActivationRejection?\n\n  telegramChat     String?\n  telegramSettings Json?\n}\n\nmodel PasswordResetRequest {\n  id        Int      @id @default(autoincrement())\n  ip        String\n  key       String\n  created   DateTime @default(now())\n  expiredAt DateTime // @default(dbgenerated(\"(now() + interval '5 minutes')\")) - почему бл не работает?\n  isUsed    Boolean  @default(false)\n  userId    Int\n  forUser   User     @relation(fields: [userId], references: [id])\n}\n\nmodel RefreshToken {\n  id      Int    @id @default(autoincrement())\n  token   String\n  userId  Int    @unique\n  forUser User   @relation(fields: [userId], references: [id])\n}\n\nmodel Item {\n  code          String   @id\n  name          String\n  type          ItemType\n  departamentId Int?\n  remains       Remain[]\n}\n\nmodel Remain {\n  id            String    @id @default(dbgenerated(\"gen_random_uuid()\")) @db.Uuid\n  createdAt     DateTime  @default(now())\n  metadata      Json\n  shop          Int\n  userId        Int\n  itemId        String\n  SellDate      DateTime?\n  PrintedDate   DateTime?\n  DepartamentId Int?\n  item          Item      @relation(fields: [itemId], references: [code])\n  createdBy     User      @relation(fields: [userId], references: [id])\n  IsDeleted     Boolean   @default(false)\n}\n\nmodel Notification {\n  id        Int       @id @default(autoincrement())\n  createdAt DateTime  @default(now())\n  userId    Int\n  Readed    Boolean   @default(false)\n  message   String\n  showed    DateTime? @db.Timestamp(6)\n  ForUser   User      @relation(fields: [userId], references: [id])\n  IsDeleted Boolean   @default(false)\n}\n\nmodel ToolRequest {\n  id              Int           @id @default(autoincrement())\n  createdAt       DateTime      @default(now())\n  toolName        String\n  description     String\n  howToContact    String?\n  status          RequestStatus @default(CREATED)\n  userId          Int\n  ForUser         User          @relation(fields: [userId], references: [id])\n  departamentId   Int\n  RejectionReason String?\n  IsDeleted       Boolean       @default(false)\n}\n\nmodel ActivationRejection {\n  id     Int    @id @default(autoincrement())\n  userId Int    @unique\n  user   User   @relation(fields: [userId], references: [id])\n  reason String\n}\n\nenum Role {\n  BLOCKED\n  NOTAPROVED\n  USER\n  ADMIN\n  MANAGER\n}\n\nenum RequestStatus {\n  CREATED\n  APPROVED\n  DEVELOPING\n  FINISHED\n  REJECTED\n}\n\nenum ItemType {\n  Linoleym\n  Kovrolin\n  Dorozhka\n  Rezina\n  Trava\n  Rope\n}\n",
+  "inlineSchemaHash": "03f5c21aa3a1e351a8f93bbbc5cb704823c0e1873a300e6357359cdadfe9ecdf",
   "copyEngine": true
 }
 
@@ -319,8 +319,8 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 // file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "generated/prisma/query_engine-windows.dll.node")
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/prisma/schema.prisma")
