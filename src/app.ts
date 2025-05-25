@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import AdminRouter from "./routers/admin/admin";
 import config from "./config/config";
 import AuthRouter from "./routers/auth/AuthorizationRouter";
@@ -24,9 +24,11 @@ app.use(cors({
   origin: allowedOrigins,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', "PATCH"],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true  // если нужны куки
+  credentials: true 
 }));
 app.use(express.json());
+
+
 
 app.use(apiPath+"/admin",AdminRouter);
 app.use(apiPath+"/auth",AuthRouter);
@@ -38,7 +40,10 @@ app.use(apiPath+"/tools/requests",RequestRouter);
 app.use(apiPath+"/notifications",NotificationRouter);
 app.use(apiPath+"/prints",PrintRouter);
 app.use(apiPath+"/system",SystemRouter);
-
 app.use(ErrorHandler);
+
+app.use("/",(req: Request, res: Response) => {
+    res.sendStatus(403);
+})
 
 export default app;

@@ -1,6 +1,7 @@
 import { User } from "../../../generated/prisma";
 import Telegram from "../telegramApp";
 
+import { RecievedRestorePassword } from "../textMessages.json";
 
 export default async function RestoreUserMessage(User: User, url: string) {
     if(!User.telegramChat) {
@@ -8,9 +9,9 @@ export default async function RestoreUserMessage(User: User, url: string) {
         return;
     }
     await Telegram.bot.sendMessage(User.telegramChat,
-`Получен запрос на восстановление пароля\n\n\
-Если это не Вы, проигнорируйте это сообщение.`,
+RecievedRestorePassword,
         {
+            parse_mode:'MarkdownV2',
             reply_markup: {
                 inline_keyboard: [
                     [{text:'Восстановить пароль',url:url}]
