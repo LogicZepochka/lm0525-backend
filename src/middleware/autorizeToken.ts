@@ -7,7 +7,6 @@ import moment from "moment";
 
 export async function validateToken(req: any, res: any, next: any) {
     try {
-    console.log("[AUTH] Validating token...")
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) {
@@ -17,7 +16,6 @@ export async function validateToken(req: any, res: any, next: any) {
     if(!user) {
         return res.status(403).json(new ApiAnswer(401).SetError(ErrorCode.AccessTokenExpired,"Неверный или неактуальный токен"));
     }
-    console.log("[Access-Contoll] Validated token for "+user.name);
     req.user = await Prisma.user.findFirst({where: {id: user.id}});
     await Prisma.user.update({
         where:{id:req.user.id},

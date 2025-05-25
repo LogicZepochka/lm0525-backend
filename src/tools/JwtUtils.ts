@@ -43,18 +43,13 @@ const JwtUtils = new class {
     }
 
     async ValidateToken(token: string): Promise<UserTokenized | null> {
-        
-        console.log("[AUTH] Decrypting token...")
-        
         try {
         let uncryptedToken = await decryptAES(token,config.security.password);
         
             var tokenizedUser: UserTokenized = Jwt.verify(uncryptedToken, config.authorization.secret) as UserTokenized;
-            console.log("[AUTH] Token is valid")
             return tokenizedUser;
         }
         catch(e) {
-            console.log("[AUTH] Failed to decrypt: "+e)
             return null;
         }
     }
@@ -62,30 +57,24 @@ const JwtUtils = new class {
     async RefreshToken(refreshToken: string): Promise<TokenPair | null> {
         let valided = await this.ValidateToken(refreshToken);
         if(!valided) return null;
-        console.log("[AUTH] Valided token: "+valided)
         const refreshTokenDecrypted = await decryptAES(refreshToken,config.security.password);
-        console.log("[AUTH] Decrypted token: "+refreshTokenDecrypted)
         let token = await Prisma.refreshToken.findFirst({
             where: {token: refreshToken},
             include: {
                 forUser: true
             }
         });
-        console.log("[AUTH] Cleaning tokens...")
         if(token != null) {
             try {
                 await Prisma.refreshToken.delete({
                     where: {userId: token.forUser.id}
                 })
-                console.log("[AUTH] Refresh token removed from DB")
             }
             catch {
-                console.log("[AUTH] Warning: Failed to remove refresh from DB")
             }
             return this.SignInUser(token.forUser);
         }
         else {
-            console.log("[AUTH] WARNING: Token was null")
         }
 
         return null;

@@ -6,7 +6,6 @@ import {RegistrationMessageForManagers , RegistrationMessageForAdmins} from "../
 
 export default async function ConfirmUserThrowTelegram(User: User, targetUser: User) {
     if(!User.telegramChat) {
-        console.log("[Telegram Notification] Skipped Telegram Notification: User is not cofirmed");
         return;
     }
     await Telegram.bot.sendMessage(User.telegramChat,

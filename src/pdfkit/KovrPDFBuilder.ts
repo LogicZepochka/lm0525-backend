@@ -10,11 +10,7 @@ export default new class KovrPDFBuilder implements PDFRemainVariant {
     
 
     async generatePDF(remain: PrintData, PDF: PDFKit.PDFDocument, barPng: any, qr: Buffer<ArrayBufferLike>): Promise<void> {
-            console.log("RENDER KOVR+OVERL: ",remain.name)
-
-
             if(!remain.metadata.overlock) {
-                console.log("WARNING: Kovrolin overlock without overlock")
                 return;
             }
         //console.log("GENERATING KOVROLIN");

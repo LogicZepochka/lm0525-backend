@@ -3,8 +3,10 @@ import ApiAnswer from "../response/apiResponse";
 import { ErrorCode } from "../response/types";
 import Telegram from "../telegramModule/telegramApp";
 import { NotificationLevel } from "../telegramModule/types";
+import CreateLogger from "../tools/Logger";
 import Prisma from "../tools/prisma";
 
+const Logger = CreateLogger("MANAGER-CONTROLLER")
 
 const ManagerController = new class ManagerController {
      
@@ -37,7 +39,7 @@ const ManagerController = new class ManagerController {
                 role: Role.USER
             }
         });
-
+        Logger(`Пользователь ${user.name} был подтвержден ${req.user.name}`)
         Telegram.SendNotification(user,
 `Твой аккаунт был подтвержден. Теперь ты можешь пользоваться приложением`, NotificationLevel.Security
         );

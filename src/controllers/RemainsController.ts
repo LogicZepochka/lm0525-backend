@@ -65,7 +65,6 @@ const RemainsController = new class RemainsController {
                 dictionary.get(remain.item.code)?.push(new RemainDTO(remain,remain.createdBy,remain.item,remain.metadata));
             }
             else {
-                console.log("GROUP TO DTO:",remain)
                 dictionary.set(remain.item.code,[]);
                 dictionary.get(remain.item.code)?.push(new RemainDTO(remain,remain.createdBy,remain.item,remain.metadata));
             }
@@ -73,7 +72,6 @@ const RemainsController = new class RemainsController {
         for(let [key,value] of dictionary) {
             let group = new RemainGroupDTO(key,value[0].item?.name as string,shop,departament);
             for(let remainDTO of value) {
-                console.log("GROUP TO ADD:",remainDTO)
                 group.AddRemainToGroup(remainDTO)
             }
             result.push(group);
@@ -81,7 +79,6 @@ const RemainsController = new class RemainsController {
         
         const paginator = CreatePaginatorFromRequest(req,result.length);
         
-        console.log(`GET -> Remains -> PARAMS: shop:${shop} | departament: ${departament} | page: ${paginator.page} | page: ${filterText}`)
         if(result.length == 0) {
             return res.status(200).json(
                 new ApiAnswer(200).SetMessage("Не найдено").SetContent({
@@ -94,7 +91,6 @@ const RemainsController = new class RemainsController {
             timestamp: Date.now(),
             RemainGroups: result
         })
-        console.log("[OPTIMIZE] Hashed data is updated")
         return res.status(200).json(
             new ApiAnswer(200).SetContent({
                 pagination: paginator,
@@ -112,7 +108,6 @@ const RemainsController = new class RemainsController {
             failedItems: [] as any
         }
         for(let item of items) {
-            console.log(item)
             try {
                 await Prisma.remain.create({
                     data: {shop: req.user.shopId, DepartamentId: req.user.departamentId, itemId: item.lm_code, userId: req.user.id, metadata: item.metadata}
@@ -120,7 +115,6 @@ const RemainsController = new class RemainsController {
                 result.success++;
             }
             catch(error) {
-                console.log(error)
                 result.errors++;
                 result.failedItems.push(item);
             }

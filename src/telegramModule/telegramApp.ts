@@ -4,6 +4,7 @@ import { ActivationPair, TelegramSettings, NotificationLevel } from "./types";
 import { User } from "../../generated/prisma";
 import Prisma from "../tools/prisma";
 import AddApproveCallback from "./callbacks";
+import CreateLogger from "../tools/Logger";
 
 function generateRandomFiveDigitNumber(): number {
   const min = 10000;
@@ -11,19 +12,22 @@ function generateRandomFiveDigitNumber(): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+const Logger = CreateLogger("TELEGRAM-BOT")
+
 const Telegram = new class Telegam {
 
     bot: TelegramBot
     activationPairs: Map<string,ActivationPair>
 
     constructor() {
+        Logger("Creating telegram bot...")
         this.bot = new TelegramBot(config.telegram.API,{polling: true});
         
         this.activationPairs = new Map<string,ActivationPair>();
-        console.log("TELEGRAM ENABLED")
         AddApproveCallback(this.bot);
-
+        
         this.bot.onText(/\/start/,async (msg) => {
+            Logger("Запуск комманды start для бота")
             const opts: TelegramBot.SendMessageOptions = {
                 reply_markup: {
                     keyboard: [
@@ -114,38 +118,37 @@ _Нажми на код, чтобы скопировать его в буфер 
                 console.log(e);
             }
         });
+        Logger("Бот готов к работе")
     }
 
     async SendNotification(User: User, message: string, Level: NotificationLevel = NotificationLevel.Normal) {
         try {
-            console.log("Sending notification");
+            Logger(`Отправляем оповещение пользователю ${User.name}`)
         if(!User.telegramChat) {
-            console.log("[Telegram Notification] Skipped Telegram Notification: User is not cofirmed");
+            Logger(`Пропускаем отправку пользователю ${User.name}: аккаунт не привязан к телеграму`)
             return;
         }
         let telegramSetting = User.telegramSettings as TelegramSettings;
 
         if(!telegramSetting.EnableNotifications && Level === NotificationLevel.Normal)  {
-            console.log("[Telegram Notification] Skipped Telegram Notification: User disable notification");
+            Logger(`Пропускаем отправку пользователю ${User.name}: отключены оповещения`)
             return;
         }
 
         await this.bot.sendMessage(User.telegramChat, message, {parse_mode:'MarkdownV2'});
         }
         catch(e) {
-            console.log("Failed to send notification: ",e);
+            Logger(`НЕ получилось отправить сообщение ${User.name}: ${e}`)
         }
     }
     
 
     async ActivateUserByCode(code: string): Promise<boolean> {
-        console.log("binding: code is ",code);
         if(this.activationPairs.has(code)) {
             let activator = this.activationPairs.get(code);
             if(!activator) return false;
 
             if(activator.ExpiredIn < Date.now()) {
-                console.log("failed binding: code is expired");
                 return false;
             }
             let settings: TelegramSettings = {
@@ -162,9 +165,9 @@ _Связанная учетная запись:_\n\
 
 Статус аккаунта: ${user.role == "NOTAPROVED" ? "🟠 Ожидает подтверждения менеджером" : "🟢 Подтвержден"}`,NotificationLevel.Security);
             this.activationPairs.delete(code);
+            Logger(`Успешная привязка пользователя ${user.name}`)
         }
         else {
-            console.log("failed binding: code not found");
             return false;
         }
 

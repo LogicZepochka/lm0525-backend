@@ -1,4 +1,5 @@
 import ApiAnswer from "../response/apiResponse";
+import CreateLogger from "../tools/Logger";
 import Prisma from "../tools/prisma";
 
 
@@ -9,7 +10,7 @@ export type Pagination = {
     next: boolean
 }
 
-
+const Logger = CreateLogger("ITEMS-CONTROLLER")
 
 export async function GetOneItem(req: any, res: any) {
     const lmcode = req.params.lmcode;
@@ -38,7 +39,6 @@ export async function GetList(req: any, res: any) {
     let items = await Prisma.item.findMany({skip: offset*page, take: offset, orderBy: {name: 'desc'}});
     
     if(items.length == 0) {
-        console.log("[Painator] Not found");
         return res.status(200).json(
             new ApiAnswer(200).SetMessage("Не найдено").SetContent({
                 pagination: paginationInfo,
@@ -69,6 +69,7 @@ export async function CreateNewItem(req: any, res: any) {
     const {Name, lm_code, metadata} = req.body.item;
     let item = await Prisma.item.findFirst({where: {code: lm_code}});
     if(item) {
+        Logger(`Не удалось создать новый товар: код ${lm_code} уже существует`)
         return res.status(400).json(
             new ApiAnswer(400).SetMessage("Такой код уже существует")
         )

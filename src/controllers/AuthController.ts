@@ -14,6 +14,7 @@ import config from "../config/config";
 
 import {RegistrationMessageForManagers , RegistrationMessageForAdmins} from "../telegramModule/textMessages.json";
 import StringUtils from "../tools/StringUtils";
+import CreateLogger, { LoggerMessageType } from "../tools/Logger";
 
 function hashPassword(password: string) {
     return generate(password);
@@ -37,8 +38,11 @@ function generateRandomBase64Url(length: number = 32): string {
         .replace(/\//g, '_')
         .replace(/=+$/, '');
 }
+const Logger =  CreateLogger("AUTH-CONTROLLER");
 
 export default new class AuthController {
+    
+
     async SignIn(req: any, res: any) {
         if(!req.body) {
             return res.status(400).json(new ApiAnswer(400).SetError(ErrorCode.WrongData,"Введеный невалидные данные"));
@@ -66,6 +70,7 @@ export default new class AuthController {
                 }
             }
         );
+        Logger(`Успешная авторизация для пользователя: ${user.name}`)
         var Result: AuthDataDTO = {
             user: {id: user.id, name: user.name, phone: user.phone, role: user.role, shop: user.shopId || 0, departament: user.departamentId || 0},
             tokens: tokens
@@ -129,13 +134,14 @@ export default new class AuthController {
             await Prisma.notification.createMany(
                 {data: dataToUpdate}
             )
-
+            Logger(`Успешная регистрация для пользователя: ${user.name}`)
             return res.status(201).json(
                 new ApiAnswer(201).SetMessage("Успешная регистрация")
             )
         }
         catch(e) {
             console.log(e);
+            Logger(`Регистрация провалилась: ${e}`,LoggerMessageType.Warning)
             return res.status(401).json(
                 new ApiAnswer(401).SetMessage("Не удалось зарегистрироваться")
             )
@@ -151,16 +157,14 @@ export default new class AuthController {
             return res.status(401).json(new ApiAnswer(401).SetError(ErrorCode.WrongData,"Введеный невалидные данные"));
         }
         try {
-        console.log("[AUTH] Refreshing tokens...")
         let tokens = await JwtUtils.RefreshToken(token);
         if(tokens == null) {
             return res.status(401).json(new ApiAnswer(401).SetError(ErrorCode.InvalidToken,"Невалидный токен"));
         }
-        console.log("[AUTH] Refreshing finished")
         return res.status(200).json(new ApiAnswer(200).SetContent(tokens));
         }
         catch(e) {
-            console.log("Failed to refresh: "+e)
+            Logger(`Обновление токена провалилась: ${e}`,LoggerMessageType.Warning)
             return res.status(401).json(new ApiAnswer(401).SetError(ErrorCode.InvalidToken,"Невалидный токен"));
         }
     }
@@ -197,6 +201,7 @@ export default new class AuthController {
             return res.status(400).json(new ApiAnswer(400).SetError(ErrorCode.WrongData,"Код не верный или истёк его скрок. Начните привязку заново."));
         }
         else {
+            Logger(`Успешная привязка токена: ${key}`)
             return res.status(200).json(new ApiAnswer(200).SetMessage("Успешное связывание"));
         }
         
@@ -209,10 +214,12 @@ export default new class AuthController {
         }
         try {
         res.sendStatus(201);
+        
         let user = await Prisma.user.findFirst({where:{phone: phone}});
         if(!user) 
             return;
         const ip = req.headers['x-forwarded-for'] || req.headers['x-real-ip'] || req.ip;
+        Logger(`Запущен процесс восстановления пароля для пользователя ${phone} | ${ip}`)
         let newRestorator = await Prisma.passwordResetRequest.create({
             data: {
                 userId: user.id,
@@ -282,8 +289,10 @@ export default new class AuthController {
                 password: hashPassword(password)
             }
         })
+        
+        Logger(`Изменение пароля для пользователя ${user.name} (${user.id}) прошло успешно`)
         await Telegram.SendNotification(user,
-`Ваш пароль успешно изменен.`,NotificationLevel.Security
+`Ваш пароль успешно изменен\\.`,NotificationLevel.Security
         );
         await Prisma.passwordResetRequest.update({
             where:{id: restore.id},

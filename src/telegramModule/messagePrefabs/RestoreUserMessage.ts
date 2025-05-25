@@ -5,7 +5,6 @@ import { RecievedRestorePassword } from "../textMessages.json";
 
 export default async function RestoreUserMessage(User: User, url: string) {
     if(!User.telegramChat) {
-        console.log("[Telegram Notification] Skipped Telegram Notification: User is not cofirmed");
         return;
     }
     await Telegram.bot.sendMessage(User.telegramChat,

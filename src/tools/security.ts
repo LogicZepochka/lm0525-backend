@@ -23,7 +23,6 @@ export async function encryptAES(text: string, password: string): Promise<string
 
 export async function decryptAES(encrypted: string, password: string): Promise<string> {
 
-    console.log("ENCRYPTED: ",encrypted);
     let parts = encrypted.split(":.:");
 
     // Преобразуем iv из base64 в Buffer
@@ -38,6 +37,5 @@ export async function decryptAES(encrypted: string, password: string): Promise<s
     // Дешифруем содержимое
     let decrypted = decipher.update(parts[1], 'base64url', 'utf8');
     decrypted += decipher.final('utf8');
-    console.log("DECRYPTED: ",decrypted);
     return decrypted;
 }

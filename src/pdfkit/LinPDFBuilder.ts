@@ -12,8 +12,6 @@ export default new class LinPDFBuilder implements PDFRemainVariant {
     
 
     async generatePDF(remain: PrintData, PDF: PDFKit.PDFDocument, barPng: any, qr: Buffer<ArrayBufferLike>): Promise<void> {
-            console.log("RENDER LIN: ",remain.name)    
-        
             PDF.save();
             PDF.fontSize(20);
             
