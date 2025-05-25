@@ -5,6 +5,7 @@ import { User } from "../../generated/prisma";
 import Prisma from "../tools/prisma";
 import AddApproveCallback from "./callbacks";
 import CreateLogger from "../tools/Logger";
+import cluster from "cluster";
 
 function generateRandomFiveDigitNumber(): number {
   const min = 10000;
@@ -21,8 +22,15 @@ const Telegram = new class Telegam {
 
     constructor() {
         Logger("Creating telegram bot...")
-        this.bot = new TelegramBot(config.telegram.API,{polling: true});
-        
+        this.bot = new TelegramBot(config.telegram.API,{polling: config.telegram.webhookURL == undefined, webHook: config.telegram.webhookURL != undefined});
+        if(config.telegram.webhookURL != undefined)
+        {    
+            Logger("FrontEndURL webhook is set. Enabled frontend webhook")
+            this.bot.setWebHook(config.telegram.webhookURL);
+        }
+        else {
+            Logger("FrontEndURL webhook not set. Enabled pooling...")
+        }
         this.activationPairs = new Map<string,ActivationPair>();
         AddApproveCallback(this.bot);
         
