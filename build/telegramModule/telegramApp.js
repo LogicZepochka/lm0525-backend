@@ -1,4 +1,37 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -8,17 +41,37 @@ const config_1 = __importDefault(require("../config/config"));
 const types_1 = require("./types");
 const prisma_1 = __importDefault(require("../tools/prisma"));
 const callbacks_1 = __importDefault(require("./callbacks"));
-const Logger_1 = __importDefault(require("../tools/Logger"));
+const Logger_1 = __importStar(require("../tools/Logger"));
+const cluster_1 = __importDefault(require("cluster"));
+const process_1 = require("process");
 function generateRandomFiveDigitNumber() {
     const min = 10000;
     const max = 99999;
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 const Logger = (0, Logger_1.default)("TELEGRAM-BOT");
-const Telegram = new class Telegam {
+const Telegram = class Telegam {
     constructor() {
+        if (cluster_1.default.isPrimary && config_1.default.nodeEnv != "dev") {
+            this.activationPairs = new Map();
+            this.bot = new node_telegram_bot_api_1.default("");
+            return;
+        }
         Logger("Creating telegram bot...");
-        this.bot = new node_telegram_bot_api_1.default(config_1.default.telegram.API, { polling: true });
+        try {
+            this.bot = new node_telegram_bot_api_1.default(config_1.default.telegram.API, { polling: config_1.default.telegram.webhookURL == undefined, webHook: config_1.default.telegram.webhookURL != undefined });
+            if (config_1.default.telegram.webhookURL != undefined && config_1.default.nodeEnv != "dev") {
+                Logger("FrontEndURL webhook is set. Enabled frontend webhook");
+                this.bot.setWebHook(config_1.default.telegram.webhookURL);
+            }
+            else {
+                Logger("FrontEndURL webhook not set. Enabled pooling...");
+            }
+        }
+        catch (e) {
+            Logger("Failed to start TelegramBot: " + e, Logger_1.LoggerMessageType.Error);
+            (0, process_1.exit)();
+        }
         this.activationPairs = new Map();
         (0, callbacks_1.default)(this.bot);
         this.bot.onText(/\/start/, async (msg) => {
@@ -142,4 +195,4 @@ _Связанная учетная запись:_\n\
         return true;
     }
 };
-exports.default = Telegram;
+exports.default = new Telegram();

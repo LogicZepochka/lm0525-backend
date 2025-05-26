@@ -18,6 +18,8 @@ const RequestRouter_1 = __importDefault(require("./routers/request/RequestRouter
 const PrintRouter_1 = __importDefault(require("./routers/print/PrintRouter"));
 const SystemRouter_1 = __importDefault(require("./routers/system/SystemRouter"));
 const Logger_1 = __importDefault(require("./tools/Logger"));
+const PaternosterRouter_1 = __importDefault(require("./routers/paternoster/PaternosterRouter"));
+const telegramApp_1 = __importDefault(require("./telegramModule/telegramApp"));
 const Logger = (0, Logger_1.default)("EXPRESS");
 Logger("Express created...");
 const app = (0, express_1.default)();
@@ -41,7 +43,13 @@ app.use(apiPath + "/tools/requests", RequestRouter_1.default);
 app.use(apiPath + "/notifications", NotificationRouter_1.default);
 app.use(apiPath + "/prints", PrintRouter_1.default);
 app.use(apiPath + "/system", SystemRouter_1.default);
+app.use(apiPath + "/paternoster", PaternosterRouter_1.default);
 app.use(ErrorHandler_1.default);
+app.post(apiPath + "/bot/webhook", (req, res) => {
+    console.log("Test");
+    telegramApp_1.default.bot.processUpdate(req.body);
+    res.sendStatus(200);
+});
 app.use("/", (req, res) => {
     res.sendStatus(403);
 });

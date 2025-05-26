@@ -42,7 +42,6 @@ export declare const PrintParseSchema: z.ZodObject<{
     price: z.ZodNumber;
     type: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    name: string;
     id: string;
     metadata: {
         type: string;
@@ -55,10 +54,10 @@ export declare const PrintParseSchema: z.ZodObject<{
         } | null | undefined;
     };
     itemId: string;
+    name: string;
     type: string;
     price: number;
 }, {
-    name: string;
     id: string;
     metadata: {
         type: string;
@@ -71,6 +70,7 @@ export declare const PrintParseSchema: z.ZodObject<{
         } | null | undefined;
     };
     itemId: string;
+    name: string;
     type: string;
     price: number;
 }>;
@@ -115,7 +115,6 @@ export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
     price: z.ZodNumber;
     type: z.ZodString;
 }, "strip", z.ZodTypeAny, {
-    name: string;
     id: string;
     metadata: {
         type: string;
@@ -128,10 +127,10 @@ export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
         } | null | undefined;
     };
     itemId: string;
+    name: string;
     type: string;
     price: number;
 }, {
-    name: string;
     id: string;
     metadata: {
         type: string;
@@ -144,6 +143,7 @@ export declare const PrintArraySchema: z.ZodArray<z.ZodObject<{
         } | null | undefined;
     };
     itemId: string;
+    name: string;
     type: string;
     price: number;
 }>, "many">;

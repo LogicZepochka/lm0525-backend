@@ -159,6 +159,7 @@ exports.default = new class AuthController {
         }
     }
     async Refresh(req, res) {
+        console.log("ara", req.body);
         if (!req.body) {
             return res.status(400).json(new apiResponse_1.default(400).SetError(types_1.ErrorCode.WrongData, "Введеный невалидные данные"));
         }

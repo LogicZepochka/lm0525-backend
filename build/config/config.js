@@ -25,7 +25,8 @@ const config = {
     },
     telegram: {
         API: process.env.TELEGRAM_API_KEY || "",
-        FrontEndURL: process.env.FRONTEND_URL || "127.0.0.1:3000"
+        FrontEndURL: process.env.FRONTEND_URL || "127.0.0.1:3000",
+        webhookURL: process.env.WEBHOOK_URL
     }
 };
 exports.default = config;

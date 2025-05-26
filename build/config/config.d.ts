@@ -15,6 +15,7 @@ interface Security {
 interface TelegramBot {
     API: string;
     FrontEndURL: string;
+    webhookURL?: string;
 }
 interface Config {
     port: number;

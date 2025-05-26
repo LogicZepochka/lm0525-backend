@@ -1,10 +1,10 @@
 import TelegramBot from "node-telegram-bot-api";
 import { ActivationPair, NotificationLevel } from "./types";
 import { User } from "../../generated/prisma";
-declare const Telegram: {
+declare const _default: {
     bot: TelegramBot;
     activationPairs: Map<string, ActivationPair>;
     SendNotification(User: User, message: string, Level?: NotificationLevel): Promise<void>;
     ActivateUserByCode(code: string): Promise<boolean>;
 };
-export default Telegram;
+export default _default;

@@ -47,6 +47,8 @@ const KovrPDFBuilder_1 = __importDefault(require("./KovrPDFBuilder"));
 const qrcode_1 = __importDefault(require("qrcode"));
 const prisma_2 = __importDefault(require("../tools/prisma"));
 const Logger_1 = __importStar(require("../tools/Logger"));
+const ReportPDFBuilder_1 = __importDefault(require("./ReportPDFBuilder"));
+const pdfkit_table_1 = __importDefault(require("pdfkit-table"));
 const Logger = (0, Logger_1.default)("PDFBUILDER");
 class PDFCreator {
     constructor() { }
@@ -68,6 +70,75 @@ class PDFCreator {
                 }
             });
         });
+    }
+    static async generatePaternosterReport(paternosters) {
+        const startTime = process.hrtime();
+        try {
+            var fileName = `debug.pdf`;
+            var doc = new pdfkit_table_1.default({ size: "A4" });
+            doc.registerFont('RussianFont', './src/pdfkit/fonts/leroy-merlin-sans-bold.ttf');
+            doc.font("RussianFont");
+            var stream = node_fs_1.default.createWriteStream(path.join(appDir, "public", `${fileName}`));
+            doc.pipe(stream);
+            Logger("Поток создан");
+            for (const [index, paternoster] of paternosters.entries()) {
+                let axises = await prisma_2.default.paternosterAxis.findMany({
+                    where: {
+                        PaternosterId: paternoster.id
+                    },
+                    include: {
+                        Placements: {
+                            select: {
+                                Item: {
+                                    select: {
+                                        name: true,
+                                        code: true
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    orderBy: {
+                        AxisNum: "asc"
+                    }
+                });
+                const tableData = [];
+                for (const axis of axises) {
+                    for (const item of axis.Placements) {
+                        tableData.push([axis.AxisNum.toString(), axis.AxisLetter, item.Item.name, item.Item.code]);
+                    }
+                    if (axis.Placements.length == 0) {
+                        tableData.push([axis.AxisNum.toString(), axis.AxisLetter, "", ""]);
+                    }
+                }
+                await ReportPDFBuilder_1.default.generatePDF(paternoster, doc, tableData);
+                if (index + 1 != paternosters.length) {
+                    doc.addPage();
+                }
+            }
+            stream.on('finish', () => {
+                /*setTimeout(() => {
+                    Logger(`Удаляю созданный PDF...`)
+                    fs.unlink(path.join(appDir,"public",`${fileName}`), (err) => {
+                        if(err) Logger(`Ошибка удаления PDF: ${err}`,LoggerMessageType.Error)
+                    });
+                }, 1000*10);*/
+                //resolve(path.join(appDir,"public",`${fileName}`));
+            });
+            stream.on('error', (err) => {
+                if (err)
+                    Logger(`Ошибка создания PDF: ${err}`, Logger_1.LoggerMessageType.Error);
+                //reject(err);
+            });
+            doc.end();
+        }
+        catch (e) {
+        }
+        finally {
+            const diffTime = process.hrtime(startTime);
+            Logger(`Время выполнения: ${diffTime[0]}s ${diffTime[1] / 1e6}ms`);
+        }
+        return "fuck";
     }
     static async generate(remains) {
         return new Promise(async (resolve, reject) => {
