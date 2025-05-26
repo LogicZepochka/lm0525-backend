@@ -272,9 +272,26 @@ const PaternosterController = new class PaternosterController {
                 Itemcode: item.code
             }
         })
+        let resultAxis = await Prisma.paternosterAxis.findFirst({
+            where: {
+                id: rollPlacement.AxisId
+            },
+            include: {
+                        Placements: {
+                            select: {
+                                Item: {
+                                    select: {
+                                        name: true,
+                                        code: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+        })
 
         return res.status(200).json(
-                new ApiAnswer(200).SetContent(rollPlacement)
+                new ApiAnswer(200).SetContent(resultAxis)
         )
     }
 
@@ -294,11 +311,15 @@ const PaternosterController = new class PaternosterController {
             }
         })
 
+        
+
         if(!rollPlacement) {
             return res.status(404).json(
                 new ApiAnswer(404).SetError(ErrorCode.NotFound,"Предмета нет на оси, либо ось не существует")
             )
         }
+
+        let axis_id = rollPlacement.AxisId;
 
         await Prisma.rollPlacement.delete({
             where: {
@@ -307,8 +328,26 @@ const PaternosterController = new class PaternosterController {
             }
         })
 
+        let resultAxis = await Prisma.paternosterAxis.findFirst({
+            where: {
+                id: axis_id
+            },
+            include: {
+                        Placements: {
+                            select: {
+                                Item: {
+                                    select: {
+                                        name: true,
+                                        code: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+        })
+
         return res.status(200).json(
-                new ApiAnswer(200).SetContent(rollPlacement)
+                new ApiAnswer(200).SetContent(resultAxis)
         )
     }
     
