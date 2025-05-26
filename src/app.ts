@@ -14,6 +14,7 @@ import PrintRouter from "./routers/print/PrintRouter";
 import SystemRouter from "./routers/system/SystemRouter";
 import CreateLogger from "./tools/Logger";
 import PaternosterRouter from "./routers/paternoster/PaternosterRouter";
+import Telegram from "./telegramModule/telegramApp";
 
 const Logger = CreateLogger("EXPRESS");
 
@@ -44,6 +45,12 @@ app.use(apiPath+"/prints",PrintRouter);
 app.use(apiPath+"/system",SystemRouter);
 app.use(apiPath+"/paternoster",PaternosterRouter);
 app.use(ErrorHandler);
+
+app.post(apiPath+"/bot/webhook",(req,res) => {
+    console.log("Test")
+    Telegram.bot.processUpdate(req.body);
+    res.sendStatus(200)
+});
 
 app.use("/",(req: Request, res: Response) => {
     res.sendStatus(403);

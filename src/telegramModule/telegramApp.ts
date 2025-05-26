@@ -4,8 +4,9 @@ import { ActivationPair, TelegramSettings, NotificationLevel } from "./types";
 import { User } from "../../generated/prisma";
 import Prisma from "../tools/prisma";
 import AddApproveCallback from "./callbacks";
-import CreateLogger from "../tools/Logger";
+import CreateLogger, { LoggerMessageType } from "../tools/Logger";
 import cluster from "cluster";
+import { exit } from "process";
 
 function generateRandomFiveDigitNumber(): number {
   const min = 10000;
@@ -15,21 +16,32 @@ function generateRandomFiveDigitNumber(): number {
 
 const Logger = CreateLogger("TELEGRAM-BOT")
 
-const Telegram = new class Telegam {
+const Telegram = class Telegam {
 
     bot: TelegramBot
     activationPairs: Map<string,ActivationPair>
 
     constructor() {
+        if(cluster.isPrimary && config.nodeEnv != "dev") {
+            this.activationPairs = new Map<string,ActivationPair>();
+            this.bot = new TelegramBot("")
+            return
+        }
         Logger("Creating telegram bot...")
+        try {
         this.bot = new TelegramBot(config.telegram.API,{polling: config.telegram.webhookURL == undefined, webHook: config.telegram.webhookURL != undefined});
-        if(config.telegram.webhookURL != undefined)
+        if(config.telegram.webhookURL != undefined && config.nodeEnv != "dev")
         {    
             Logger("FrontEndURL webhook is set. Enabled frontend webhook")
             this.bot.setWebHook(config.telegram.webhookURL);
         }
         else {
             Logger("FrontEndURL webhook not set. Enabled pooling...")
+        }
+        }
+        catch(e) {
+            Logger("Failed to start TelegramBot: "+e,LoggerMessageType.Error)
+            exit()
         }
         this.activationPairs = new Map<string,ActivationPair>();
         AddApproveCallback(this.bot);
@@ -184,4 +196,4 @@ _Связанная учетная запись:_\n\
 }
 
 
-export default Telegram;
+export default new Telegram();
