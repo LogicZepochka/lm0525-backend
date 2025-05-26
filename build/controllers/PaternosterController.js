@@ -92,6 +92,40 @@ const PaternosterController = new class PaternosterController {
     CreateReport(req, res) {
         throw new Error("Method not implemented.");
     }
+    async GetPaternosters(req, res) {
+        var { shop } = req.query;
+        console.log(shop);
+        if (!shop) {
+            shop = req.user.shopId;
+        }
+        else {
+            shop = Number(shop);
+        }
+        if (isNaN(shop))
+            return res.status(400).json(new apiResponse_1.default(400).SetError(types_1.ErrorCode.WrongData, "Невалидные данные"));
+        let result = await prisma_1.default.paternoster.findMany({
+            where: {
+                ShopId: shop
+            },
+            include: {
+                Axises: {
+                    include: {
+                        Placements: {
+                            select: {
+                                Item: {
+                                    select: {
+                                        name: true,
+                                        code: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return res.status(200).json(new apiResponse_1.default(200).SetContent(result));
+    }
     async CreatePaternoster(req, res) {
         let result = paternosterValidator_1.PaternosterSchema.safeParse(req.body);
         if (result.error) {
@@ -205,7 +239,24 @@ const PaternosterController = new class PaternosterController {
                 Itemcode: item.code
             }
         });
-        return res.status(200).json(new apiResponse_1.default(200).SetContent(rollPlacement));
+        let resultAxis = await prisma_1.default.paternosterAxis.findFirst({
+            where: {
+                id: rollPlacement.AxisId
+            },
+            include: {
+                Placements: {
+                    select: {
+                        Item: {
+                            select: {
+                                name: true,
+                                code: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return res.status(200).json(new apiResponse_1.default(200).SetContent(resultAxis));
     }
     async RemoveFromAxis(req, res) {
         const patern = Number(req.params.patern);
@@ -222,13 +273,31 @@ const PaternosterController = new class PaternosterController {
         if (!rollPlacement) {
             return res.status(404).json(new apiResponse_1.default(404).SetError(types_1.ErrorCode.NotFound, "Предмета нет на оси, либо ось не существует"));
         }
+        let axis_id = rollPlacement.AxisId;
         await prisma_1.default.rollPlacement.delete({
             where: {
                 id: rollPlacement.id,
                 AxisId: rollPlacement.AxisId
             }
         });
-        return res.status(200).json(new apiResponse_1.default(200).SetContent(rollPlacement));
+        let resultAxis = await prisma_1.default.paternosterAxis.findFirst({
+            where: {
+                id: axis_id
+            },
+            include: {
+                Placements: {
+                    select: {
+                        Item: {
+                            select: {
+                                name: true,
+                                code: true
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        return res.status(200).json(new apiResponse_1.default(200).SetContent(resultAxis));
     }
     async DeleteAxis(req, res) {
         const patern = Number(req.params.patern);
