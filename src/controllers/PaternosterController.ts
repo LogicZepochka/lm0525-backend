@@ -72,6 +72,47 @@ const PaternosterController = new class PaternosterController {
         throw new Error("Method not implemented.");
     }
 
+    async GetPaternosters(req: any, res: any) {
+        var {shop} = req.query;
+        console.log(shop)
+        if(!shop) {
+            shop = req.user.shopId
+        }
+        else {
+            shop = Number(shop)
+        }
+        if(isNaN(shop)) 
+            return res.status(400).json(
+                new ApiAnswer(400).SetError(ErrorCode.WrongData,"Невалидные данные")
+            )
+        
+        let result = await Prisma.paternoster.findMany({
+            where: {
+                ShopId: shop
+            },
+            include: {
+                Axises: {
+                    include: {
+                        Placements: {
+                            select: {
+                                Item: {
+                                    select: {
+                                        name: true,
+                                        code: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
+        return res.status(200).json(
+            new ApiAnswer(200).SetContent(result)
+        )
+    }
+
     async CreatePaternoster(req: any, res: any) {
         let result = PaternosterSchema.safeParse(req.body);
         if(result.error) {

@@ -9,6 +9,7 @@ import PaternosterController from "../../controllers/PaternosterController";
 const PaternosterRouter = Express.Router();
 
 PaternosterRouter.post("/create",validateToken,PaternosterController.CreatePaternoster)
+PaternosterRouter.get("/list",validateToken,PaternosterController.GetPaternosters)
 PaternosterRouter.post("/:patern/axis/create",validateToken,PaternosterController.CreateAxis)
 PaternosterRouter.post("/:patern/axis/:axis/insert",validateToken,PaternosterController.InstertToAxis)
 PaternosterRouter.delete("/:patern/axis/:axis/remove/:id",validateToken,PaternosterController.RemoveFromAxis)
