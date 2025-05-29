@@ -8,6 +8,7 @@ const AuthRouter = Express.Router();
 AuthRouter.post("/signin",AuthController.SignIn)
 //AuthRouter.post("/auth/signout",validateToken)
 AuthRouter.post("/signup",AuthController.Register)
+AuthRouter.get("/logout",validateToken,AuthController.Logout)
 AuthRouter.post("/refresh",AuthController.Refresh)
 AuthRouter.post("/telegramBind",AuthController.BindTelegramToAccount)
 AuthRouter.get("/checkAuth",validateToken,AuthController.CheckAuth)

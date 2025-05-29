@@ -78,6 +78,24 @@ export default new class AuthController {
         return res.status(200).json(new ApiAnswer(200).SetContent(Result));
     }
 
+    async Logout(req: any, res: any) {
+        try {
+            await Prisma.refreshToken.delete({
+                where: {
+                    userId: req.user.id
+                }
+            })
+        }
+        catch(e) {
+            Logger("Failed to logout: "+e,LoggerMessageType.Warning)
+        }
+        finally {
+            res.status(200).json(
+                new ApiAnswer(200).SetMessage("OK")
+            )
+        }
+    }
+
     async Register(req: any, res: any) {
         if(!req.body) {
             
