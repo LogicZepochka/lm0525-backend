@@ -272,7 +272,7 @@ export default new class AuthController {
 
         if(restore.expiredAt.getTime() < Date.now()) {
             console.log("Токен устарел")
-            return res.status(404).json(new ApiAnswer(401).SetError(ErrorCode.InvalidToken,"Срок действия ссылки истёк"));
+            return res.status(403).json(new ApiAnswer(403).SetError(ErrorCode.NotAllowed,"Срок действия ссылки истёк"));
         }
 
         if(restore.isUsed) {
